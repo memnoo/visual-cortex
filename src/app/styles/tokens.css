@@ -1,0 +1,58 @@
+:root {
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+  --color-warning-800: #92400e;
+  --color-warning-900: #78350f;
+  --color-warning-950: #451a03;
+
+  --color-info-50: #f0f9ff;
+  --color-info-100: #e0f2fe;
+  --color-info-200: #bae6fd;
+  --color-info-300: #7dd3fc;
+  --color-info-400: #38bdf8;
+  --color-info-500: #0ea5e9;
+  --color-info-600: #0284c7;
+  --color-info-700: #0369a1;
+  --color-info-800: #075985;
+  --color-info-900: #0c4a6e;
+  --color-info-950: #082f49;
+
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.06);
+  --shadow-card-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -2px rgb(0 0 0 / 0.05);
+  --shadow-sm-primary: 0 1px 2px 0 rgb(124 58 237 / 0.05);
+  --shadow-primary: 0 4px 6px -1px rgb(124 58 237 / 0.1),
+    0 2px 4px -1px rgb(124 58 237 / 0.06);
+  --shadow-md-primary: 0 10px 15px -3px rgb(124 58 237 / 0.1),
+    0 4px 6px -2px rgb(124 58 237 / 0.05);
+  --shadow-lg-primary: 0 20px 25px -5px rgb(124 58 237 / 0.1),
+    0 10px 10px -5px rgb(124 58 237 / 0.04);
+  --shadow-xl-primary: 0 25px 50px -12px rgb(124 58 237 / 0.25);
+
+  --spacing-18: 4.5rem;
+  --spacing-88: 22rem;
+  --spacing-128: 32rem;
+
+  --radius-card: 0.75rem;
+  --radius-button: 0.5rem;
+}
+
+@layer base {
+  body {
+    background-color: #f9fafb;
+    color: #111827;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial;
+  }
+}
+
+.card {
+  background: white;
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-card);
+  padding: 1.5rem;
+  transition: box-shadow 0.3s ease;
+}
+.card:hover {
+  box-shadow: var(--shadow-card-hover);
+}

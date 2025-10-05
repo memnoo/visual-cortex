@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/database/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import brandImg from "@/app/assets/img/brand-img.svg";
+import Image from "next/image";
 
 export default async function HomePage() {
   const supabase = await createClient();
@@ -17,9 +19,12 @@ export default async function HomePage() {
     <main className="min-h-screen flex flex-col items-center justify-center p-8 bg-gradient-to-br from-indigo-50 to-blue-100">
       <div className="max-w-4xl w-full text-center space-y-8">
         <div className="space-y-4">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900">
-            Memnō
-          </h1>
+          <Image
+            className="mx-auto"
+            src={brandImg}
+            alt="Brand image"
+            height="160"
+          />
           <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto">
             Apprenez plus vite avec des flashcards intelligentes générées par
             l'IA

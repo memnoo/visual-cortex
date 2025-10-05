@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { createClient } from "@/lib/database/client";
 import Link from "next/link";
+import brandImg from "@/app/assets/img/brand-img.svg";
+import Image from "next/image";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -51,7 +53,12 @@ export default function LoginPage() {
         {/* Header */}
         <div className="text-center">
           <Link href="/" className="inline-block mb-6">
-            <h1 className="text-3xl font-bold text-indigo-600">Memnō</h1>
+            <Image
+              className="mx-auto"
+              src={brandImg}
+              alt="Brand image"
+              height="160"
+            />
           </Link>
           <h2 className="text-2xl font-semibold text-gray-900">Connexion</h2>
           <p className="mt-2 text-gray-600">

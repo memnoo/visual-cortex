@@ -1,4 +1,3 @@
-// app/dashboard/page.tsx
 import { createClient } from "@/lib/database/server";
 import { redirect } from "next/navigation";
 import LogoutButton from "@/app/login/components/LogoutButton";

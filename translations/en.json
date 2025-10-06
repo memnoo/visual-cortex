@@ -1,5 +1,26 @@
 {
   "appName": "Memnō",
+  "auth": {
+    "login": {
+      "title": "Log in",
+      "subtitle": "Enter your email to receive a log-in link.",
+      "email": "Email",
+      "placeholder": "your@email.com",
+      "loginButton": "Send Log-in Link"
+    },
+    "register": {
+      "new": "You don't have an account yet? It'll be created automatically! 🎉",
+      "procedure": {
+        "title": "How does it work?",
+        "items": {
+          "1": "You enter your email address.",
+          "2": "We send you a magic link to log in.",
+          "3": "You click the link and you're logged in!"
+        }
+      },
+      "footer": "Passwordless secured login"
+    }
+  },
   "misc": {
     "status": {
       "loading": "Loading...",

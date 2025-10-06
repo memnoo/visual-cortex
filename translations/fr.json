@@ -1,0 +1,38 @@
+{
+  "appName": "Memnō",
+  "misc": {
+    "status": {
+      "loading": "Chargement...",
+      "notFound": "Aucun résultat"
+    },
+    "errors": {
+      "error": "Une erreur est survenue"
+    },
+    "actions": {
+      "back": "Retour",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "delete": "Supprimer",
+      "edit": "Editer",
+      "create": "Créer",
+      "update": "Mettre à jour",
+      "confirm": "Confirmer",
+      "close": "Fermer",
+      "search": "Recherche...",
+      "yes": "Oui",
+      "no": "Non"
+    },
+    "forms": {
+      "addFile": "Ajouter un fichier",
+      "addImage": "Ajouter une image",
+      "select": "Sélectionner",
+      "selectFile": "Choisir un fichier",
+      "selectImage": "Choisir une image"
+    },
+    "optional": "Optionel",
+    "none": "Aucun",
+    "all": "Tous",
+    "unknown": "Inconnu",
+    "welcome": "Bienvenue"
+  }
+}

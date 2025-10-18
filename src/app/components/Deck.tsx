@@ -14,7 +14,7 @@ interface DeckProps {
 
 export function Deck({ deck, cards, isSelected, onClick }: DeckProps) {
   return (
-    <div className="perspective-1000 w-full max-w-md mx-auto h-64">
+    <div className="perspective-1000 max-w-64 max-h-64">
       <button
         type="button"
         onClick={onClick}

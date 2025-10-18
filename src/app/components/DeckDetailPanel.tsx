@@ -24,7 +24,6 @@ export default function DeckDetailView({
 
   return (
     <div className="bg-white rounded-lg shadow-lg border border-gray-200 animate-in slide-in-from-right-4 fade-in duration-300">
-      {/* Header */}
       <div className="bg-gradient-to-br from-green-500 to-lime-600 text-white px-6 py-4 rounded-t-lg">
         <div>
           <h2 className="text-xl font-bold">{deck.topic}</h2>
@@ -33,8 +32,6 @@ export default function DeckDetailView({
           </p>
         </div>
       </div>
-
-      {/* Cards List */}
       <div className="p-6">
         {sortedCards.length === 0 ? (
           <div className="text-center py-12 text-gray-500">

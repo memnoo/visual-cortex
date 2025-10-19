@@ -59,7 +59,7 @@ export default async function HomePage() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">
           <Link
-            href="/login"
+            href="/waitlist"
             className="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-lg"
           >
             Commencer gratuitement

@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-
-import "../../styles/globals.css";
-import LogoutButton from "@/app/(site)/login/components/LogoutButton";
-import { createClient } from "@/lib/database/server";
 import { redirect } from "next/navigation";
+
+import { createClient } from "@/lib/database/server";
+
+import { Providers } from "../providers";
+import LogoutButton from "@/app/(site)/login/components/LogoutButton";
+
+import "../styles/globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,21 +44,25 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gray-50`}
       >
-        <header className="bg-white border-b border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex justify-between items-center">
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">Memnō</h1>
-                <p className="text-sm text-gray-600">Bienvenue, {user.email}</p>
+        <Providers>
+          <header className="bg-white border-b border-gray-200">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+              <div className="flex justify-between items-center">
+                <div>
+                  <h1 className="text-2xl font-bold text-gray-900">Memnō</h1>
+                  <p className="text-sm text-gray-600">
+                    Bienvenue, {user.email}
+                  </p>
+                </div>
+                <LogoutButton />
               </div>
-              <LogoutButton />
             </div>
-          </div>
-        </header>
+          </header>
 
-        <main className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {children}
-        </main>
+          <main className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {children}
+          </main>
+        </Providers>
       </body>
     </html>
   );

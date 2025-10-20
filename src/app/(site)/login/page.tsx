@@ -2,9 +2,6 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/database/client";
-import Link from "next/link";
-import brandImg from "@/assets/img/brand-img.svg";
-import Image from "next/image";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -15,51 +12,12 @@ export default function LoginPage() {
   } | null>(null);
   const supabase = createClient();
 
-  const checkWaitlistStatus = async (email: string) => {
-    try {
-      // Use server client for server-side database operations
-      const response = await fetch("/api/check-waitlist", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to check waitlist status");
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error checking waitlist:", error);
-      return { isPending: false };
-    }
-  };
-
   const handleMagicLink = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setMessage(null);
 
     try {
-      // Check waitlist status first
-      const waitlistCheck = await checkWaitlistStatus(email);
-
-      if (waitlistCheck.isPending) {
-        setMessage({
-          type: "error",
-          text: "⏳ Votre compte est en attente d'approbation. Vous serez notifié par email dès que vous pourrez accéder à la plateforme. Redirection automatique dans 3 secondes...",
-        });
-        // Redirect to home page after showing message
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 3000);
-        setLoading(false);
-        return;
-      }
-
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {

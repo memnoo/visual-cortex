@@ -36,19 +36,23 @@ export default function DecksManagement({
 
   return (
     <div className="flex flex-col gap-6">
-      <section id="decks-list" className="flex items-stretch gap-4">
+      <section
+        id="decks-list"
+        className="flex items-stretch gap-4 overflow-x-auto snap-x snap-proximity snap-center scrollbar-hide pb-4"
+      >
         {(decks ?? []).map((deck) => {
           const deckCards = getCardsForDeck(deck.uuid);
           const isSelected = selectedDeck?.deck.uuid === deck.uuid;
 
           return (
-            <Deck
-              key={deck.uuid}
-              deck={deck}
-              cards={deckCards}
-              isSelected={isSelected}
-              onClick={() => handleDeckClick(deck)}
-            />
+            <div key={deck.uuid} className="snap-center flex-shrink-0">
+              <Deck
+                deck={deck}
+                cards={deckCards}
+                isSelected={isSelected}
+                onClick={() => handleDeckClick(deck)}
+              />
+            </div>
           );
         })}
       </section>

@@ -21,7 +21,7 @@ export default function Footer() {
   //   .then((res) => res.count ?? 0);
 
   return (
-    <footer className="bg-white border-t border-gray-200 py-4 mt-20">
+    <footer className="bg-white border-t border-gray-200 py-4">
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-3 gap-8 text-center">
           <div>

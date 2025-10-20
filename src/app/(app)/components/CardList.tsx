@@ -1,6 +1,6 @@
 "use client";
 
-import FlashCard from "./FlashCard";
+import FlashCard from "../components/FlashCard";
 
 interface CardListProps {
   cards: any[];

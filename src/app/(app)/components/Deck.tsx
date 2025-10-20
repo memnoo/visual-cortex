@@ -27,7 +27,7 @@ export function Deck({ deck, cards, isSelected, onClick }: DeckProps) {
       >
         <div className="flex flex-col items-center space-y-2">
           {deck.lang && (
-            <span className="absolute top-2 right-2 rounded w-6 h-4 overflow-hidden">
+            <span className="absolute top-2 right-2 rounded w-6 h-4 overflow-hidden border border-white shadow-lg">
               <img
                 src={`https://www.worldometers.info/img/flags/${deck.lang.toLowerCase()}-flag.gif`}
                 alt={deck.lang}

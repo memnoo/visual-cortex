@@ -1,54 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import { Deck } from "../../components/Deck";
 import CardListView from "../../components/CardListView";
+import { Deck as DeckModel } from "../../types/types";
+import { Deck } from "../../components/Deck";
 
 interface DecksManagementProps {
-  decks: any[];
-  cards: any[];
-  deckCardAssociations: any[];
+  decks: DeckModel[];
 }
 
-export default function DecksManagement({
-  decks,
-  cards,
-  deckCardAssociations,
-}: DecksManagementProps) {
-  const [selectedDeck, setSelectedDeck] = useState<{
-    deck: any;
-    cards: any[];
-  } | null>(null);
-
-  const getCardsForDeck = (deckUuid: string) => {
-    return (
-      deckCardAssociations
-        ?.filter((assoc) => assoc.deck_uuid === deckUuid)
-        .map((assoc) => cards?.find((card) => card.uuid === assoc.card_uuid))
-        .filter(Boolean) ?? []
-    );
-  };
+export default function DecksManagement({ decks }: DecksManagementProps) {
+  const [selectedDeck, setSelectedDeck] = useState<DeckModel | null>(null);
 
   const handleDeckClick = (deck: any) => {
-    const deckCards = getCardsForDeck(deck.uuid);
-    setSelectedDeck({ deck, cards: deckCards });
+    setSelectedDeck(deck);
   };
 
   return (
     <div className="flex flex-col gap-6">
       <section
-        id="decks-list"
+        id="decks"
         className="flex items-stretch gap-4 overflow-x-auto snap-x snap-proximity snap-center scrollbar-hide pb-4"
       >
         {(decks ?? []).map((deck) => {
-          const deckCards = getCardsForDeck(deck.uuid);
-          const isSelected = selectedDeck?.deck.uuid === deck.uuid;
+          const isSelected = selectedDeck?.uuid === deck.uuid;
 
           return (
             <div key={deck.uuid} className="snap-center flex-shrink-0">
               <Deck
                 deck={deck}
-                cards={deckCards}
                 isSelected={isSelected}
                 onClick={() => handleDeckClick(deck)}
               />
@@ -56,9 +36,9 @@ export default function DecksManagement({
           );
         })}
       </section>
-      <section id="card-list-view">
+      <section id="deck-cards">
         {selectedDeck ? (
-          <CardListView cards={selectedDeck.cards} isVisible={true} />
+          <CardListView cards={[]} isVisible={true} />
         ) : (
           <div className="bg-gray-50 rounded-lg border-2 border-dashed border-gray-300 p-8 text-center">
             <svg

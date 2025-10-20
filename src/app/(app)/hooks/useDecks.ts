@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@/lib/database/client";
 import { Deck } from "../types/types";
-import { useUser } from "@/app/(app)/hooks/useUser";
 
 export const useDecks = () =>
   useQuery({
@@ -9,16 +8,20 @@ export const useDecks = () =>
     queryFn: async (): Promise<Deck[]> => {
       const supabase = await createClient();
 
-      const { data: user } = useUser();
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
 
-      if (!user) {
-        throw new Error("User not authenticated");
+      if (error || !user) {
+        console.error("Error fetching user:", error);
+        return [];
       }
 
       const { data: decks } = await supabase
         .from("Deck")
         .select("*")
-        .eq("userUuid", user.id);
+        .eq("user_uuid", user.id);
 
       if (!decks) {
         return [];

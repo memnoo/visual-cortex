@@ -1,49 +1,31 @@
-import { createClient } from "@/lib/database/server";
-import { redirect } from "next/navigation";
+"use client";
+
+import { useDecks } from "../hooks/useDecks";
 import DecksManagement from "./components/DecksManagement";
 
-export default async function DashboardPage() {
-  const supabase = await createClient();
+export default function DashboardPage() {
+  const { data: decks, isLoading } = useDecks();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect("/login");
+  if (isLoading) {
+    return (
+      <div className="bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-indigo-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading your decks...</p>
+        </div>
+      </div>
+    );
   }
 
-  const { data: decks } = await supabase
-    .from("Deck")
-    .select("*")
-    .eq("user_id", user.id);
-
-  const deckUuids = decks?.map((d) => d.uuid) ?? [];
-  const { data: deck_card_associations } = await supabase
-    .from("deck_card_association")
-    .select("*")
-    .in("deck_uuid", deckUuids);
-
-  const { data: cards } = await supabase
-    .from("Card")
-    .select("*")
-    .eq("user_id", user.id);
-
-  const cardsByDeck =
-    decks?.map((deck) => ({
-      deck,
-      cards:
-        deck_card_associations
-          ?.filter((assoc) => assoc.deck_uuid === deck.uuid)
-          .map((assoc) => cards?.find((card) => card.uuid === assoc.card_uuid))
-          .filter(Boolean) ?? [],
-    })) ?? [];
-
-  return (
-    <DecksManagement
-      decks={decks ?? []}
-      cards={cards ?? []}
-      deckCardAssociations={deck_card_associations ?? []}
-    />
+  return !decks || decks.length === 0 ? (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="text-center">
+        <p className="text-gray-600">No data available</p>
+      </div>
+    </div>
+  ) : (
+    <section className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+      <DecksManagement decks={decks} />
+    </section>
   );
 }

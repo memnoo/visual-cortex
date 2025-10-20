@@ -1,18 +1,13 @@
 import classNames from "classnames";
+import { Deck as DeckModel } from "../types/types";
 
 interface DeckProps {
-  deck: {
-    uuid: string;
-    topic: string;
-    count: number;
-    lang?: string;
-  };
-  cards: any[];
+  deck: DeckModel;
   isSelected?: boolean;
   onClick?: () => void;
 }
 
-export function Deck({ deck, cards, isSelected, onClick }: DeckProps) {
+export function Deck({ deck, isSelected, onClick }: DeckProps) {
   return (
     <div className="perspective-1000 max-w-64 max-h-64">
       <button
@@ -35,7 +30,7 @@ export function Deck({ deck, cards, isSelected, onClick }: DeckProps) {
             </span>
           )}
           <p className="text-2xl font-bold">{deck.topic}</p>
-          <p className="text-lg font-bold">{cards.length}</p>
+          <p className="text-lg font-bold">{deck.count}</p>
         </div>
       </button>
     </div>

@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import CardListView from "../../components/CardListView";
 import { Deck as DeckModel } from "../../types/types";
 import { Deck } from "../../components/Deck";
+import { useCards } from "../../hooks/useCards";
+import Flashcard from "../../components/FlashCard";
 
 interface DecksManagementProps {
   decks: DeckModel[];
@@ -15,6 +16,10 @@ export default function DecksManagement({ decks }: DecksManagementProps) {
   const handleDeckClick = (deck: any) => {
     setSelectedDeck(deck);
   };
+
+  const { data: cards } = useCards(selectedDeck?.uuid ?? "", {
+    isEnabled: !!selectedDeck,
+  });
 
   return (
     <div className="flex flex-col gap-6">
@@ -38,7 +43,11 @@ export default function DecksManagement({ decks }: DecksManagementProps) {
       </section>
       <section id="deck-cards">
         {selectedDeck ? (
-          <CardListView cards={[]} isVisible={true} />
+          <div className="grid grid-cols-5 gap-4">
+            {cards?.map((c) => (
+              <Flashcard key={c.uuid} card={c} isRevealed />
+            ))}
+          </div>
         ) : (
           <div className="bg-gray-50 rounded-lg border-2 border-dashed border-gray-300 p-8 text-center">
             <svg

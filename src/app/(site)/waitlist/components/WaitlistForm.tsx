@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
+import { format } from "date-fns/format";
 
 import { useJoinWaitlist, useCheckWaitlist } from "../../hooks/useWaitlist";
 
@@ -7,7 +8,7 @@ import { isValidEmail } from "@/app/utils/validation/email";
 import { WaitlistEntry } from "../../types/types";
 
 export const WaitlistForm = () => {
-  const [email, setEmail] = useState("test@test.com");
+  const [email, setEmail] = useState("");
   const [interests, setInterests] = useState<string[]>([]);
 
   const [status, setStatus] = useState<"idle" | "checking" | "adding">("idle");
@@ -44,12 +45,18 @@ export const WaitlistForm = () => {
         if (joinedAt && status === "joined") {
           setResult({
             type: "success",
-            message: `Vous avez déjà accès à Memnō depuis le ${joinedAt}`,
+            message: `Vous avez déjà accès à Memnō depuis le ${format(
+              joinedAt,
+              "dd/MM/yyyy"
+            )}`,
           });
         } else if (status === "pending") {
           setResult({
             type: "success",
-            message: `Vous êtes déjà dans la liste d'attente depuis le ${createdAt}`,
+            message: `Vous êtes déjà dans la liste d'attente depuis le ${format(
+              createdAt,
+              "dd/MM/yyyy"
+            )}`,
           });
         }
         setStatus("idle");

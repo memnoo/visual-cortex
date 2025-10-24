@@ -31,7 +31,7 @@ export const useCards = (
           front: c.front,
           back: c.back,
           extraFields: c.content,
-          createdAt: new Date(c.createdAt),
+          createdAt: new Date(c.created_at),
           userUuid: c.userUuid,
         } satisfies Card;
       });

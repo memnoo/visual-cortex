@@ -209,11 +209,11 @@ export const WaitlistForm = () => {
                 </div>
               )}
 
-              <div className="flex items-stretch gap-2">
+              <div className="flex flex-wrap items-stretch gap-2">
                 <button
                   type="submit"
                   disabled={status !== "idle"}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg hover:from-indigo-700 hover:to-purple-700 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl cursor-pointer"
+                  className="w-full px-6 py-3 bg-purple-600 text-white font-semibold rounded-lg hover:from-indigo-700 hover:to-purple-700 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl cursor-pointer"
                 >
                   {status !== "idle" ? (
                     <span className="flex items-center justify-center gap-1">
@@ -227,7 +227,7 @@ export const WaitlistForm = () => {
                 </button>
                 <button
                   type="button"
-                  className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-400 text-white font-semibold rounded-lg hover:from-indigo-700 hover:to-purple-700 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl cursor-pointer"
+                  className="w-full px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:from-indigo-700 hover:to-purple-700 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl cursor-pointer"
                   onClick={() => router.push("/login")}
                 >
                   J'ai déjà un compte

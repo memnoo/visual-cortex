@@ -6,6 +6,8 @@ import { createClient } from "@/lib/database/client";
 import { Callout } from "@/app/components/atoms/Callout";
 import { useAuth } from "@/app/(app)/hooks/useUser";
 import { Loader } from "@/app/components/atoms/Loader";
+import { useCheckWaitlist } from "../hooks/useWaitlist";
+import Link from "next/link";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -30,12 +32,28 @@ export default function LoginPage() {
   }, []);
 
   const supabase = createClient();
+  const checkWaitlist = useCheckWaitlist();
   const handleMagicLink = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setMessage(null);
 
     try {
+      const checkResult = await checkWaitlist.mutateAsync(email);
+      if (!checkResult) {
+        setMessage({
+          type: "error",
+          text: "L'adresse email saisie est invalide",
+        });
+        return;
+      } else if (checkResult.status !== "joined") {
+        setMessage({
+          type: "error",
+          text: "Vous êtes toujours en liste d'attente",
+        });
+        return;
+      }
+
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
@@ -148,9 +166,9 @@ export default function LoginPage() {
       <div className="text-center text-sm text-gray-600">
         <p>
           Pas encore de compte ?{" "}
-          <span className="text-indigo-600 font-semibold">
-            Il sera créé automatiquement ! 🎉
-          </span>
+          <Link className="text-indigo-600 font-semibold" href="/waitlist">
+            Inscrivez-vous sur la liste d'attente !
+          </Link>
         </p>
       </div>
     </div>

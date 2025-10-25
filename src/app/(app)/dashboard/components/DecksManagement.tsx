@@ -30,7 +30,7 @@ export default function DecksManagement({ decks }: DecksManagementProps) {
     <div className="flex flex-col gap-6">
       <section
         id="decks"
-        className="flex items-stretch gap-4 overflow-x-auto snap-x snap-proximity snap-center scrollbar-hide pb-4"
+        className="flex items-stretch gap-4 overflow-x-auto snap-x snap-proximity snap-center scrollbar-hide"
       >
         {(decks ?? []).map((deck) => {
           const isSelected = selectedDeck?.uuid === deck.uuid;
@@ -50,7 +50,7 @@ export default function DecksManagement({ decks }: DecksManagementProps) {
         {selectedDeck ? (
           <>
             {isFetchingCards ? (
-              <Loader text="Récupération des cartes..." />
+              <Loader text="Récupération des cartes..." hasAccentColor />
             ) : (
               <DeckDetailsView cards={cards ?? []} />
             )}

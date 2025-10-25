@@ -10,7 +10,7 @@ export default function DashboardPage() {
   if (isLoading) {
     return (
       <div className="bg-gray-50 flex items-center justify-center">
-        <Loader text="Chargement de vos decks..." />
+        <Loader text="Chargement de vos decks..." hasAccentColor />
       </div>
     );
   }

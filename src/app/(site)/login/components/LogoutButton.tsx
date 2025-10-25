@@ -29,9 +29,9 @@ export default function LogoutButton() {
           Déconnexion...
         </div>
       ) : (
-        <>
+        <div className="flex items-center gap-2">
           <svg
-            className="mr-2 h-4 w-4"
+            className="h-4 w-4"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -43,8 +43,8 @@ export default function LogoutButton() {
               d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
             />
           </svg>
-          Déconnexion
-        </>
+          <span className="hidden md:inline-block">Déconnexion</span>
+        </div>
       )}
     </button>
   );

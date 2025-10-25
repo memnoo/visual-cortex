@@ -1,3 +1,5 @@
+import { BrandName } from "@/app/components/BrandName";
+
 export const WaitlistIncentive = () => (
   <div className="space-y-6">
     <h1 className="text-5xl font-bold text-gray-900 leading-tight">
@@ -11,12 +13,8 @@ export const WaitlistIncentive = () => (
     </h1>
 
     <p className="text-xl text-gray-600 leading-relaxed">
-      Soyez parmi les premiers à découvrir{" "}
-      <strong className="text-2xl text-gray-500">
-        Mem
-        <span className="text-[#7C3AED]">nō</span>
-      </strong>{" "}
-      : la plateforme d'apprentissage intelligent qui s'adapte à votre rythme.
+      Soyez parmi les premiers à rejoindre <BrandName /> : la plateforme
+      d'apprentissage intelligent qui s'adapte à votre rythme.
     </p>
 
     <div className="space-y-4 pt-4">

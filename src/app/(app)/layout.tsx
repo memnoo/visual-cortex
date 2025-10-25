@@ -9,6 +9,7 @@ import LogoutButton from "@/app/(site)/login/components/LogoutButton";
 import "../styles/globals.css";
 import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
+import { BrandName } from "../components/BrandName";
 
 export default function RootLayout({
   children,
@@ -38,9 +39,9 @@ export default function RootLayout({
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div className="flex justify-between items-center">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Memnō</h1>
+                <BrandName />
                 <p className="text-sm text-gray-600">
-                  Bienvenue, {user?.email}
+                  Bienvenue, {user?.email ?? "..."}
                 </p>
               </div>
               <LogoutButton />

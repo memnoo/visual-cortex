@@ -3,15 +3,24 @@
 import { useState } from "react";
 import { createClient } from "@/lib/database/client";
 import { Callout } from "@/app/components/atoms/Callout";
+import { redirect } from "next/navigation";
 
-export default function LoginPage() {
+export default async function LoginPage() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{
     type: "success" | "error";
     text: string;
   } | null>(null);
+
   const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect("/dashboard");
+  }
 
   const handleMagicLink = async (e: React.FormEvent) => {
     e.preventDefault();

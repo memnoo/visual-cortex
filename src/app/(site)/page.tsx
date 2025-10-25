@@ -1,8 +1,6 @@
 import { createClient } from "@/lib/database/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import brandImg from "@/assets/img/brand-img.svg";
-import Image from "next/image";
 
 export default async function HomePage() {
   const supabase = await createClient();
@@ -51,8 +49,15 @@ export default async function HomePage() {
 
       <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">
         <Link
-          href="/waitlist"
+          href="/login"
           className="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-lg"
+        >
+          Se connecter
+        </Link>
+
+        <Link
+          href="/waitlist"
+          className="px-8 py-3 bg-purple-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-lg"
         >
           Rejoindre la liste d'attente
         </Link>

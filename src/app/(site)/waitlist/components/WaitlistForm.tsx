@@ -6,6 +6,8 @@ import { useJoinWaitlist, useCheckWaitlist } from "../../hooks/useWaitlist";
 
 import { isValidEmail } from "@/app/utils/validation/email";
 import { WaitlistEntry } from "../../types/types";
+import { Callout } from "@/app/components/atoms/Callout";
+import { Select } from "@/app/components/atoms/Select";
 
 export const WaitlistForm = () => {
   const [email, setEmail] = useState("");
@@ -22,7 +24,7 @@ export const WaitlistForm = () => {
   const checkWaitlist = useCheckWaitlist();
   const joinWaitlist = useJoinWaitlist();
   const [result, setResult] = useState<{
-    type: "success" | "error";
+    type: "success" | "error" | "warning";
     message: string;
   } | null>(null);
 
@@ -44,7 +46,7 @@ export const WaitlistForm = () => {
         const { status, createdAt, joinedAt } = checkResult;
         if (joinedAt && status === "joined") {
           setResult({
-            type: "success",
+            type: "warning",
             message: `Vous avez déjà accès à Memnō depuis le ${format(
               joinedAt,
               "dd/MM/yyyy"
@@ -52,7 +54,7 @@ export const WaitlistForm = () => {
           });
         } else if (status === "pending") {
           setResult({
-            type: "success",
+            type: "warning",
             message: `Vous êtes déjà dans la liste d'attente depuis le ${format(
               createdAt,
               "dd/MM/yyyy"
@@ -105,7 +107,7 @@ export const WaitlistForm = () => {
   return (
     <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
       <div className="flex flex-col content-stretch gap-3">
-        {result?.type === "success" ? (
+        {result && result?.type !== "error" ? (
           <>
             <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg
@@ -128,13 +130,12 @@ export const WaitlistForm = () => {
             </h2>
 
             <div className="flex flex-col content-stretch gap-1 text-gray-600 text-left">
-              <p>{result.message}</p>
+              {result && <Callout type={result.type}>{result.message}</Callout>}
 
               <p>
                 Nous vous enverrons un email dès que vous pourrez accéder à la
                 plateforme.
               </p>
-
               {createdInvitation && (
                 <div className="flex flex-col content-stretch gap-1">
                   {createdInvitation.interest && (
@@ -186,25 +187,19 @@ export const WaitlistForm = () => {
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Qu'aimeriez-vous apprendre ?
-                </label>
-                <select
-                  value={interests}
-                  multiple
-                  onChange={handleInterestsChange}
-                  disabled={status !== "idle"}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
-                >
-                  <option defaultValue="">Sélectionner...</option>
-                  <option value="Langues">Langues</option>
-                  <option value="Sciences">Sciences</option>
-                  <option value="Médecine">Médecine</option>
-                  <option value="Histoire">Histoire</option>
-                  <option value="Autre">Autre</option>
-                </select>
-              </div>
+              <Select
+                label="Qu'aimeriez-vous apprendre ?"
+                values={[
+                  { value: "Langues", label: "Langues" },
+                  { value: "Sciences", label: "Sciences" },
+                  { value: "Médecine", label: "Médecine" },
+                  { value: "Histoire", label: "Histoire" },
+                  { value: "Autre", label: "Autre" },
+                ]}
+                isMultiple
+                isDisabled={status !== "idle"}
+                onChange={(newValue) => setInterests(newValue as string[])}
+              />
 
               {result?.type === "error" && (
                 <div className="p-4 bg-red-50 border border-red-200 rounded-lg">

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/database/client";
+import { Callout } from "@/app/components/atoms/Callout";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -109,17 +110,10 @@ export default function LoginPage() {
             )}
           </button>
 
-          {/* Message de retour */}
           {message && (
-            <div
-              className={`p-4 rounded-lg ${
-                message.type === "success"
-                  ? "bg-green-50 text-green-800 border border-green-200"
-                  : "bg-red-50 text-red-800 border border-red-200"
-              }`}
-            >
-              <p className="text-sm">{message.text}</p>
-            </div>
+            <Callout type={message.type}>
+              <p>{message.text}</p>
+            </Callout>
           )}
         </form>
 

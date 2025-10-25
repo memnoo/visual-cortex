@@ -1,54 +1,55 @@
-import React, { JSX } from "react";
-
-export function Icon({
-  name,
-  className = "",
-}: {
-  name: string;
-  className?: string;
-}) {
-  // small inline icon map — swap for lucide/react or heroicons in real project
-  const map: Record<string, JSX.Element> = {
-    sun: (
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden
-      >
-        <path
+export const Icon = ({ name }: { name: string }) => {
+  switch (name) {
+    case "file":
+      return (
+        <svg
+          className="w-16 h-16 mb-4"
+          fill="none"
           stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-6.364l-1.414 1.414M7.05 16.95l-1.414 1.414M16.95 16.95l1.414 1.414M6.05 7.05L4.636 5.636"
-        />
-      </svg>
-    ),
-    moon: (
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden
-      >
-        <path
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1}
+            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+          />
+        </svg>
+      );
+    case "menu":
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-12 w-12 text-gray-400 mx-auto mb-4"
+          fill="none"
+          viewBox="0 0 24 24"
           stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
-        />
-      </svg>
-    ),
-  };
-  return (
-    <span className={`inline-flex ${className}`} aria-hidden>
-      {map[name] ?? null}
-    </span>
-  );
-}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1}
+            d="M19 11H5m14-7H5m14 14H5"
+          />
+        </svg>
+      );
+    case "checked":
+      return (
+        <svg
+          className="w-5 h-5 text-blue-500"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+      );
+    default:
+      return null;
+  }
+};

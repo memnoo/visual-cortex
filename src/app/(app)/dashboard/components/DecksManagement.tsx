@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Deck as DeckModel } from "../../types/types";
 import { Deck } from "../../components/Deck";
 import { useCards } from "../../hooks/useCards";
-import Flashcard from "../../components/FlashCard";
+import DeckDetailsView from "./DeckDetailsView";
 import { EmptyState } from "@/app/components/atoms/EmptyState";
 import { Loader } from "@/app/components/atoms/Loader";
 
@@ -49,15 +49,17 @@ export default function DecksManagement({ decks }: DecksManagementProps) {
       <section id="deck-cards">
         {selectedDeck ? (
           <>
-            {isFetchingCards && <Loader text="Récupération des cartes..." />}
-            <div className="grid grid-cols-5 gap-4">
-              {cards?.map((c) => (
-                <Flashcard key={c.uuid} card={c} isRevealed />
-              ))}
-            </div>
+            {isFetchingCards ? (
+              <Loader text="Récupération des cartes..." />
+            ) : (
+              <DeckDetailsView cards={cards ?? []} />
+            )}
           </>
         ) : (
-          <EmptyState label="Sélectionner un deck pour voir les cartes" />
+          <EmptyState
+            label="Sélectionner un deck pour voir les cartes"
+            icon="menu"
+          />
         )}
       </section>
     </div>

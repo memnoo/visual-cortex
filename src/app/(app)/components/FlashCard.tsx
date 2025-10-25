@@ -48,25 +48,19 @@ export default function Flashcard({
               )}
               <p className="text-3xl font-bold capitalize">{card.back}</p>
             </div>
-            {extraFields.length - 2 <= 0 ? (
-              <div className="flex flex-col content-stretch gap-1 overflow-x-auto">
-                {extraFields.map(([key, value]) => (
-                  <p key={key} className="capitalize text-small">
-                    <span className="text-xs text-gray-300">
-                      {key.replaceAll("_", " ")}
-                    </span>
-                    :{" "}
-                    <span className="capitalize text-white font-bold">
-                      {value}
-                    </span>
-                  </p>
-                ))}
-              </div>
-            ) : (
-              <p className="capitalize text-small bg-white text-gray-500 font-semibold rounded-lg px-3 py-1 mt-2">
-                + {extraFields.length} extra fields
-              </p>
-            )}
+            <div className="flex flex-col content-stretch gap-1 overflow-x-auto">
+              {extraFields.map(([key, value]) => (
+                <p key={key} className="capitalize text-small">
+                  <span className="text-xs text-gray-300">
+                    {key.replaceAll("_", " ")}
+                  </span>
+                  :{" "}
+                  <span className="capitalize text-white font-bold">
+                    {value}
+                  </span>
+                </p>
+              ))}
+            </div>
           </div>
         </div>
       </div>

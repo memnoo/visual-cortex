@@ -4,8 +4,8 @@ export type SelectProps = {
   label?: string;
   values: { label: string | number; value: string | number }[];
   onChange: (newValue: (string | number) | (string | number)[]) => void;
-  isDisabled: boolean;
-  isMultiple: boolean;
+  isDisabled?: boolean;
+  isMultiple?: boolean;
   defaultValue?: string | number;
 };
 

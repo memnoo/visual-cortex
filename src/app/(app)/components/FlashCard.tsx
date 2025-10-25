@@ -5,13 +5,13 @@ import { Card } from "../types/types";
 
 interface FlashcardProps {
   card: Card;
-  isRevealed: boolean;
+  isRevealed?: boolean;
   onFlip?: () => void;
 }
 
 export default function Flashcard({
   card,
-  isRevealed,
+  isRevealed = false,
   onFlip,
 }: FlashcardProps) {
   const [isFlipped, setIsFlipped] = useState(false);

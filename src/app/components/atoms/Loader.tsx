@@ -1,10 +1,12 @@
 type LoaderProps = {
+  fit?: "content" | "parent";
   size?: "xsmall" | "small" | "medium" | "large";
   text?: string;
   hasAccentColor?: boolean;
 };
 
 export const Loader = ({
+  fit = "parent",
   text,
   size = "medium",
   hasAccentColor = false,
@@ -17,7 +19,11 @@ export const Loader = ({
   };
 
   return (
-    <div className="flex flex-col gap-4 w-full content-stretch items-center space-around">
+    <div
+      className={`flex flex-col gap-4 ${
+        fit === "parent" && "w-full"
+      } content-stretch items-center space-around`}
+    >
       <svg
         className={`animate-spin -ml-1 mr-2 h-${TW_SIZES[size]} w-${TW_SIZES[size]}`}
         xmlns="http://www.w3.org/2000/svg"

@@ -54,7 +54,7 @@ export const useCheckWaitlist = () => {
         throw error;
       }
 
-      return getWaitlistEntry(data);
+      return data && getWaitlistEntry(data);
     },
   });
 };

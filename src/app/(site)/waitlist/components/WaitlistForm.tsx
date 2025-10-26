@@ -156,7 +156,7 @@ export const WaitlistForm = () => {
 
             <button
               type="button"
-              className="inline-block text-indigo-600 hover:text-indigo-700 font-medium cursor-pointer mt-4"
+              className="cursor-pointer px-8 py-3 text-indigo-600 hover:text-indigo-700 font-semibold rounded-lg hover:bg-gray-50 self-center"
               onClick={() => {
                 resetForm();
                 setStatus("idle");

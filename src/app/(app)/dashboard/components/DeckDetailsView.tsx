@@ -21,8 +21,8 @@ export default function DeckDetailsView({ cards }: DeckDetailsViewProps) {
   }
 
   return (
-    <div className="grid grid-cols-5 gap-6 h-full">
-      <div className="space-y-2 col-span-2 max-h-96 overflow-y-auto">
+    <div className="grid grid-rows-1 sm:grid-rows-2 md:grid-cols-5 gap-6">
+      <div className="space-y-2 md:col-span-2 max-h-96 overflow-y-auto">
         {cards.map((card) => (
           <div
             key={card.uuid}
@@ -47,7 +47,7 @@ export default function DeckDetailsView({ cards }: DeckDetailsViewProps) {
         ))}
       </div>
 
-      <div className="flex items-start justify-center col-span-3">
+      <div className="flex items-start justify-center md:col-span-3">
         {selectedCard ? (
           <div className="w-full max-w-md">
             <Flashcard card={selectedCard} />

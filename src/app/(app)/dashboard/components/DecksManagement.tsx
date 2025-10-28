@@ -2,11 +2,17 @@
 
 import { useState } from "react";
 import { Deck as DeckModel } from "../../types/types";
+
 import { Deck } from "../../components/Deck";
 import { useCards } from "../../hooks/useCards";
+
 import DeckDetailsView from "./DeckDetailsView";
+
 import { EmptyState } from "@/app/components/atoms/EmptyState";
 import { Loader } from "@/app/components/atoms/Loader";
+
+import { AddDeckButton } from "../../components/AddDeckButton";
+import AddDeckModal from "../../components/AddDeckModal";
 
 interface DecksManagementProps {
   decks: DeckModel[];
@@ -14,6 +20,7 @@ interface DecksManagementProps {
 
 export default function DecksManagement({ decks }: DecksManagementProps) {
   const [selectedDeck, setSelectedDeck] = useState<DeckModel | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDeckClick = (deck: any) => {
     setSelectedDeck(deck);
@@ -32,19 +39,18 @@ export default function DecksManagement({ decks }: DecksManagementProps) {
         id="decks"
         className="flex items-stretch gap-4 overflow-x-auto snap-x snap-proximity snap-center scrollbar-hide"
       >
-        {(decks ?? []).map((deck) => {
-          const isSelected = selectedDeck?.uuid === deck.uuid;
-
-          return (
-            <div key={deck.uuid} className="snap-center flex-shrink-0">
-              <Deck
-                deck={deck}
-                isSelected={isSelected}
-                onClick={() => handleDeckClick(deck)}
-              />
-            </div>
-          );
-        })}
+        {(decks ?? []).map((deck) => (
+          <div key={deck.uuid} className="snap-center flex-shrink-0">
+            <Deck
+              deck={deck}
+              isSelected={selectedDeck?.uuid === deck.uuid}
+              onClick={() => handleDeckClick(deck)}
+            />
+          </div>
+        ))}
+        <div key="add-deck-button" className="snap-center flex-shrink-0">
+          <AddDeckButton onClick={() => setIsModalOpen(true)} />
+        </div>
       </section>
       <section id="deck-cards">
         {selectedDeck ? (
@@ -62,6 +68,11 @@ export default function DecksManagement({ decks }: DecksManagementProps) {
           />
         )}
       </section>
+
+      <AddDeckModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }

@@ -40,7 +40,7 @@ export default function DecksManagement({ decks }: DecksManagementProps) {
         className="flex items-stretch gap-4 overflow-x-auto snap-x snap-proximity snap-center scrollbar-hide"
       >
         {(decks ?? []).map((deck) => (
-          <div key={deck.uuid} className="snap-center flex-shrink-0">
+          <div key={deck.uuid} className="snap-center flex-shrink-0 w-52 h-24">
             <Deck
               deck={deck}
               isSelected={selectedDeck?.uuid === deck.uuid}
@@ -48,7 +48,10 @@ export default function DecksManagement({ decks }: DecksManagementProps) {
             />
           </div>
         ))}
-        <div key="add-deck-button" className="snap-center flex-shrink-0">
+        <div
+          key="add-deck-button"
+          className="snap-center flex-shrink-0 w-52 h-24"
+        >
           <AddDeckButton onClick={() => setIsModalOpen(true)} />
         </div>
       </section>

@@ -68,7 +68,7 @@ export default function AddDeckModal({ isOpen, onClose }: AddDeckModalProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!topic.trim() || !domain.trim()) {
+    if (!topic.trim() || Boolean(domain)) {
       setError("Le titre et le domaine sont requis");
       return;
     }
@@ -150,7 +150,7 @@ export default function AddDeckModal({ isOpen, onClose }: AddDeckModalProps) {
             />
           </div>
 
-          <Select
+          {/* <Select
             label="Domaine *"
             values={[
               { value: "Langues", label: "Langues" },
@@ -161,7 +161,7 @@ export default function AddDeckModal({ isOpen, onClose }: AddDeckModalProps) {
             ]}
             isDisabled={loading}
             onChange={(values) => setDomain(String(values))}
-          />
+          /> */}
 
           {/* Language Input */}
           <div>
@@ -204,7 +204,7 @@ export default function AddDeckModal({ isOpen, onClose }: AddDeckModalProps) {
             </Button>
             <Button
               type="submit"
-              variant="secondary"
+              variant="primary"
               disabled={loading}
               className="flex-1"
             >

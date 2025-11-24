@@ -30,7 +30,7 @@ export function Deck({ deck, isSelected, onClick }: DeckProps) {
             </span>
           )}
           <p className="text-xl md:text-2xl font-bold">{deck.topic}</p>
-          <p className="md:text-lg font-bold">{deck.count} cards</p>
+          <p className="md:text-lg font-medium">{deck.count} cards</p>
         </div>
       </button>
     </div>

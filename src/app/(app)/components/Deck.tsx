@@ -1,8 +1,8 @@
 import classNames from "classnames";
-import { Deck as DeckModel } from "../types/types";
+import { DeckWithCount } from "../types/types";
 
 interface DeckProps {
-  deck: DeckModel;
+  deck: DeckWithCount;
   isSelected?: boolean;
   onClick?: () => void;
 }

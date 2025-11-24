@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Deck as DeckModel } from "../../types/types";
+import { DeckWithCount } from "../../types/types";
 
 import { Deck } from "../../components/Deck";
 import { useCards } from "../../hooks/useCards";
@@ -15,11 +15,11 @@ import { AddDeckButton } from "../../components/AddDeckButton";
 import AddDeckModal from "../../components/AddDeckModal";
 
 interface DecksManagementProps {
-  decks: DeckModel[];
+  decks: DeckWithCount[];
 }
 
 export default function DecksManagement({ decks }: DecksManagementProps) {
-  const [selectedDeck, setSelectedDeck] = useState<DeckModel | null>(null);
+  const [selectedDeck, setSelectedDeck] = useState<DeckWithCount | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDeckClick = (deck: any) => {

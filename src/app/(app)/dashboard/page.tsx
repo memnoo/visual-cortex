@@ -1,11 +1,11 @@
 "use client";
 
 import { Loader } from "@/app/components/atoms/Loader";
-import { useDecks } from "../hooks/useDecks";
 import DecksManagement from "./components/DecksManagement";
+import { useDecksWithCount } from "../hooks/useDeckNew";
 
 export default function DashboardPage() {
-  const { data: decks, isLoading } = useDecks();
+  const { data: decks, isLoading } = useDecksWithCount();
 
   if (isLoading) {
     return (

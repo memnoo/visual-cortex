@@ -11,7 +11,7 @@ import DeckDetailsView from "./DeckDetailsView";
 import { EmptyState } from "@/app/components/atoms/EmptyState";
 import { Loader } from "@/app/components/atoms/Loader";
 
-import { AddDeckButton } from "../../components/AddDeckButton";
+import { EmptyStateButton } from "../../components/EmptyStateButton";
 import AddDeckModal from "../../components/AddDeckModal";
 
 interface DecksManagementProps {
@@ -52,7 +52,10 @@ export default function DecksManagement({ decks }: DecksManagementProps) {
           key="add-deck-button"
           className="snap-center flex-shrink-0 w-52 h-24"
         >
-          <AddDeckButton onClick={() => setIsModalOpen(true)} />
+          <EmptyStateButton
+            label="Créer un deck"
+            onClick={() => setIsModalOpen(true)}
+          />
         </div>
       </section>
       <section id="deck-cards">
@@ -61,7 +64,7 @@ export default function DecksManagement({ decks }: DecksManagementProps) {
             {isFetchingCards ? (
               <Loader text="Récupération des cartes..." hasAccentColor />
             ) : (
-              <DeckDetailsView cards={cards ?? []} />
+              <DeckDetailsView deck={selectedDeck} cards={cards ?? []} />
             )}
           </>
         ) : (

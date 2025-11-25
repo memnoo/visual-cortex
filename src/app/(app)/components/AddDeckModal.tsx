@@ -68,7 +68,7 @@ export default function AddDeckModal({ isOpen, onClose }: AddDeckModalProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!topic.trim() || Boolean(domain)) {
+    if (!topic.trim() || !domain.trim()) {
       setError("Le titre et le domaine sont requis");
       return;
     }
@@ -150,7 +150,7 @@ export default function AddDeckModal({ isOpen, onClose }: AddDeckModalProps) {
             />
           </div>
 
-          {/* <Select
+          <Select
             label="Domaine *"
             values={[
               { value: "Langues", label: "Langues" },
@@ -159,9 +159,10 @@ export default function AddDeckModal({ isOpen, onClose }: AddDeckModalProps) {
               { value: "Histoire", label: "Histoire" },
               { value: "Autre", label: "Autre" },
             ]}
+            isMultiple
             isDisabled={loading}
             onChange={(values) => setDomain(String(values))}
-          /> */}
+          />
 
           {/* Language Input */}
           <div>

@@ -1,10 +1,11 @@
 import classNames from "classnames";
 
 type Props = {
+  label: string;
   onClick: () => void;
 };
 
-export const AddDeckButton = ({ onClick }: Props) => {
+export const EmptyStateButton = ({ label, onClick }: Props) => {
   return (
     <button
       type="button"
@@ -14,9 +15,7 @@ export const AddDeckButton = ({ onClick }: Props) => {
       )}
     >
       <div className="flex flex-col items-center gap-2">
-        <p className="text-xl md:text-2xl font-bold text-gray-400">
-          Créer un deck
-        </p>
+        <p className="text-xl md:text-2xl font-bold text-gray-400">{label}</p>
       </div>
     </button>
   );

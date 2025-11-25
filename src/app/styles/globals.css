@@ -6,15 +6,6 @@
 
 @import "./tokens.css";
 
-.btn {
-  @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded text-sm font-medium;
-}
-
-/** TOFIX needs to provide all bg-* classes */
-.bg-primary-500 {
-  background-color: var(--color-warning-600);
-}
-
 .perspective-1000 {
   perspective: 1000px;
 }

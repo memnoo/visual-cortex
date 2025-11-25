@@ -196,7 +196,7 @@ export default function AddDeckModal({ isOpen, onClose }: AddDeckModalProps) {
           <div className="flex gap-3 pt-4">
             <Button
               type="button"
-              variant="ghost"
+              variant="secondary"
               onClick={onClose}
               disabled={loading}
               className="flex-1"

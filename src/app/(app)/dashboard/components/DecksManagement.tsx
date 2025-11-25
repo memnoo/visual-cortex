@@ -12,7 +12,7 @@ import { EmptyState } from "@/app/components/atoms/EmptyState";
 import { Loader } from "@/app/components/atoms/Loader";
 
 import { EmptyStateButton } from "../../components/EmptyStateButton";
-import AddDeckModal from "../../components/AddDeckModal";
+import DeckModal from "../../components/DeckModal";
 
 interface DecksManagementProps {
   decks: DeckWithCount[];
@@ -24,6 +24,22 @@ export default function DecksManagement({ decks }: DecksManagementProps) {
 
   const handleDeckClick = (deck: any) => {
     setSelectedDeck(deck);
+  };
+
+  const [deckOperation, setDeckOperation] = useState<{
+    operation: "ADD" | "UPDATE" | "DELETE";
+    deck?: DeckWithCount;
+  }>({ operation: "ADD" });
+  const onDeckOperationClicked = (
+    deckUuid: string,
+    operation: "UPDATE" | "DELETE"
+  ) => {
+    const deck = decks.find((d) => d.uuid === deckUuid);
+
+    if (deck) {
+      setDeckOperation({ deck, operation });
+      setIsModalOpen(true);
+    }
   };
 
   const { data: cards, isLoading: isFetchingCards } = useCards(
@@ -54,7 +70,10 @@ export default function DecksManagement({ decks }: DecksManagementProps) {
         >
           <EmptyStateButton
             label="Créer un deck"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => {
+              setIsModalOpen(true);
+              setDeckOperation({ operation: "ADD" });
+            }}
           />
         </div>
       </section>
@@ -64,7 +83,11 @@ export default function DecksManagement({ decks }: DecksManagementProps) {
             {isFetchingCards ? (
               <Loader text="Récupération des cartes..." hasAccentColor />
             ) : (
-              <DeckDetailsView deck={selectedDeck} cards={cards ?? []} />
+              <DeckDetailsView
+                deck={selectedDeck}
+                cards={cards ?? []}
+                onDeckOperationClicked={onDeckOperationClicked}
+              />
             )}
           </>
         ) : (
@@ -75,9 +98,13 @@ export default function DecksManagement({ decks }: DecksManagementProps) {
         )}
       </section>
 
-      <AddDeckModal
+      <DeckModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          setIsModalOpen(false);
+          setDeckOperation({ operation: "ADD" });
+        }}
+        deckOperation={deckOperation}
       />
     </div>
   );

@@ -21,6 +21,8 @@ export default function AddCardModal({
 }: AddCardModalProps) {
   const [front, setFront] = useState("");
   const [back, setBack] = useState("");
+  const [content, setContent] = useState("{}");
+  const [jsonError, setJsonError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -28,7 +30,11 @@ export default function AddCardModal({
   const supabase = createClient();
 
   const createCardMutation = useMutation({
-    mutationFn: async (data: { front: string; back: string }) => {
+    mutationFn: async (data: {
+      front: string;
+      back: string;
+      content: string;
+    }) => {
       // Get current user
       const {
         data: { user },
@@ -39,8 +45,9 @@ export default function AddCardModal({
       const cardUuid = crypto.randomUUID();
       const { error: cardError } = await supabase.from("Card").insert({
         uuid: cardUuid,
-        ...data,
-        content: "",
+        front: data.front,
+        back: data.back,
+        content: data.content,
         user_uuid: user.id,
       });
 
@@ -64,6 +71,8 @@ export default function AddCardModal({
       // Reset form and close modal
       setFront("");
       setBack("");
+      setContent("{}");
+      setJsonError(null);
       setError(null);
       onClose();
     },
@@ -72,6 +81,18 @@ export default function AddCardModal({
     },
   });
 
+  const handleContentChange = (value: string) => {
+    setContent(value);
+
+    // Validate JSON
+    try {
+      JSON.parse(value);
+      setJsonError(null);
+    } catch (e) {
+      setJsonError("JSON invalide");
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!front.trim() || !back.trim()) {
@@ -79,14 +100,19 @@ export default function AddCardModal({
       return;
     }
 
+    // Validate JSON before submitting
+    try {
+      JSON.parse(content);
+    } catch (e) {
+      setError("Le contenu JSON est invalide");
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
     try {
-      await createCardMutation.mutateAsync({
-        front,
-        back,
-      });
+      await createCardMutation.mutateAsync({ front, back, content });
     } catch (error) {
       // Error is handled by onError callback
     } finally {
@@ -176,6 +202,27 @@ export default function AddCardModal({
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
             />
           </div>
+          {/* JSON Content Editor */}
+          <div>
+            <label
+              htmlFor="content"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Contenu (JSON)
+            </label>
+            <textarea
+              id="content"
+              value={content}
+              onChange={(e) => handleContentChange(e.target.value)}
+              placeholder='{"key": "value"}'
+              disabled={loading}
+              rows={8}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100 font-mono text-sm"
+            />
+            {jsonError && (
+              <p className="text-sm text-red-600 mt-1">{jsonError}</p>
+            )}
+          </div>
 
           {/* Error Message */}
           {error && (
@@ -198,7 +245,7 @@ export default function AddCardModal({
             <Button
               type="submit"
               variant="primary"
-              disabled={loading}
+              disabled={loading || !!jsonError}
               className="flex-1"
             >
               {loading ? (

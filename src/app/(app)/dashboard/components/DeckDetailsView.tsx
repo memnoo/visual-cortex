@@ -11,9 +11,17 @@ import AddCardModal from "../../components/AddCardModal";
 interface DeckDetailsViewProps {
   deck: Deck;
   cards: Card[];
+  onDeckOperationClicked: (
+    deckUuid: string,
+    operation: "UPDATE" | "DELETE"
+  ) => void;
 }
 
-export default function DeckDetailsView({ deck, cards }: DeckDetailsViewProps) {
+export default function DeckDetailsView({
+  deck,
+  cards,
+  onDeckOperationClicked,
+}: DeckDetailsViewProps) {
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -25,10 +33,20 @@ export default function DeckDetailsView({ deck, cards }: DeckDetailsViewProps) {
     <>
       <div className="grid grid-rows-1 sm:grid-rows-2 md:grid-cols-5 gap-6">
         <div className="flex gap-3">
-          <Button type="button" variant="secondary" className="flex-1">
+          <Button
+            type="button"
+            variant="secondary"
+            className="flex-1"
+            onClick={() => onDeckOperationClicked(deck.uuid, "UPDATE")}
+          >
             Modifier
           </Button>
-          <Button type="button" variant="danger" className="flex-1">
+          <Button
+            type="button"
+            variant="danger"
+            className="flex-1"
+            onClick={() => onDeckOperationClicked(deck.uuid, "DELETE")}
+          >
             Supprimer
           </Button>
         </div>

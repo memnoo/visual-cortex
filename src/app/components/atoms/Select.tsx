@@ -17,21 +17,24 @@ export const Select = ({
   isMultiple = false,
   defaultValue = undefined,
 }: SelectProps) => {
-  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+  const [selectedValues, setSelectedValues] = useState<(string | number)[]>([]);
 
   const onValuesChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newValue = e.target.value;
+    const selectedOptions = Array.from(e.target.selectedOptions);
+    const newValues = selectedOptions.map((option) => {
+      const originalValue = values.find(
+        (v) => String(v.value) === option.value
+      )?.value;
+      return originalValue ?? option.value;
+    });
 
     if (isMultiple) {
-      if (selectedValues.includes(newValue)) {
-        setSelectedValues(selectedValues.filter((v) => v !== newValue));
-      } else {
-        setSelectedValues([...selectedValues, newValue]);
-      }
-      onChange(selectedValues);
+      setSelectedValues(newValues);
+      onChange(newValues);
     } else {
+      const newValue = newValues[0];
       setSelectedValues([newValue]);
-      onChange(selectedValues[0]);
+      onChange(newValue);
     }
   };
 
@@ -43,15 +46,17 @@ export const Select = ({
         </label>
       )}
       <select
-        value={selectedValues}
+        value={
+          isMultiple
+            ? selectedValues.map(String)
+            : String(selectedValues[0] || "")
+        }
         multiple={isMultiple}
         onChange={onValuesChange}
         disabled={isDisabled}
         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
       >
-        {defaultValue && (
-          <option defaultValue={defaultValue}>Sélectionner...</option>
-        )}
+        {defaultValue && <option value="">Sélectionner...</option>}
         {values &&
           values.map(({ label, value }) => (
             <option key={value} value={value}>

@@ -1,29 +1,23 @@
 "use client";
 
-import { Loader } from "@/app/components/atoms/Loader";
-import DecksManagement from "./components/DecksManagement";
-import { useDecksWithCount } from "../hooks/useDeckNew";
+import Link from "next/link";
+import Button from "@/app/components/atoms/Button";
+import { ICON_NAME } from "@/app/components/atoms/Icon";
 
 export default function DashboardPage() {
-  const { data: decks, isLoading } = useDecksWithCount();
-
-  if (isLoading) {
-    return (
-      <div className="bg-gray-50 flex items-center justify-center">
-        <Loader text="Chargement de vos decks..." hasAccentColor />
-      </div>
-    );
-  }
-
-  return !decks || decks.length === 0 ? (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="text-center">
-        <p className="text-gray-600">No data available</p>
-      </div>
-    </div>
-  ) : (
+  return (
     <section className="max-w-8xl mx-auto p-2">
-      <DecksManagement decks={decks} />
+      <Link href="/decks">
+        <Button
+          type="button"
+          variant="transparent"
+          iconName={ICON_NAME.CHEVRON_RIGHT}
+          iconPosition="right"
+          className="w-full h-full text-left"
+        >
+          Voir mes decks
+        </Button>
+      </Link>
     </section>
   );
 }

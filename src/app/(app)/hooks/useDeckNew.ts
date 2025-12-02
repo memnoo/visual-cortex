@@ -6,7 +6,9 @@ import {
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   Deck,
+  DeckWithCards,
   DeckWithCount,
+  transformCard,
   transformDeck,
   transformDeckWithCount,
 } from "../types/types";
@@ -52,7 +54,18 @@ export const useDecksWithCount = () =>
 export const useDeckWithCards = (uuid: string) =>
   useQuery({
     queryKey: deckKeys.withCards(uuid),
-    queryFn: () => getWithCards(uuid),
+    queryFn: async (): Promise<DeckWithCards> => {
+      const { cards, ...deck } = await getWithCards(uuid);
+
+      const data = {
+        ...transformDeck(deck),
+        cards: cards.map(transformCard),
+      } satisfies DeckWithCards;
+
+      console.log(data);
+
+      return data;
+    },
     enabled: !!uuid,
   });
 

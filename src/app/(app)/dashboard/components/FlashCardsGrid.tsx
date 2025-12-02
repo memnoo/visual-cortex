@@ -1,29 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { Card, Deck } from "../../types/types";
+import classNames from "classnames";
+import { Card } from "../../types/types";
 import Flashcard from "../../components/FlashCard";
 import { EmptyState } from "@/app/components/atoms/EmptyState";
-import Button from "@/app/components/atoms/Button";
-import { EmptyStateButton } from "../../components/EmptyStateButton";
-import AddCardModal from "../../components/AddCardModal";
 
 interface DeckDetailsViewProps {
-  deck: Deck;
   cards: Card[];
-  onDeckOperationClicked: (
-    deckUuid: string,
-    operation: "UPDATE" | "DELETE"
-  ) => void;
 }
 
-export default function DeckDetailsView({
-  deck,
-  cards,
-  onDeckOperationClicked,
-}: DeckDetailsViewProps) {
+export const FlashCardsGrid = ({ cards }: DeckDetailsViewProps) => {
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCardSelect = (card: Card) => {
     setSelectedCard(card);
@@ -32,35 +20,16 @@ export default function DeckDetailsView({
   return (
     <>
       <div className="grid grid-rows-1 sm:grid-rows-2 md:grid-cols-5 gap-6">
-        <div className="flex gap-3">
-          <Button
-            type="button"
-            variant="secondary"
-            className="flex-1"
-            onClick={() => onDeckOperationClicked(deck.uuid, "UPDATE")}
-          >
-            Modifier
-          </Button>
-          <Button
-            type="button"
-            variant="danger"
-            className="flex-1"
-            onClick={() => onDeckOperationClicked(deck.uuid, "DELETE")}
-          >
-            Supprimer
-          </Button>
-        </div>
-
-        <EmptyStateButton
-          label="Ajouter une flash card"
-          onClick={() => setIsModalOpen(true)}
-        />
-
         {!cards || cards.length === 0 ? (
           <EmptyState label="No cards in this deck" />
         ) : (
           <>
-            <div className="space-y-2 md:col-span-2 max-h-96 overflow-y-auto">
+            <div
+              className={classNames(
+                "space-y-2 md:col-span-2 overflow-y-auto",
+                selectedCard ? "max-h-58" : "max-h-90"
+              )}
+            >
               {cards.map((card) => (
                 <div
                   key={card.uuid}
@@ -74,7 +43,16 @@ export default function DeckDetailsView({
                   <div className="flex items-center justify-between">
                     <div className="flex-1 min-w-0">
                       <div className="text-sm font-medium text-gray-900 truncate">
-                        {card.front}
+                        <div className="flex flex-wrap gap-2 items-center">
+                          <p>{card.front}</p>
+                          {Object.keys(card.extraFields ?? {}).includes(
+                            "kind"
+                          ) && (
+                            <small className="text-gray-400">
+                              ({(card.extraFields ?? {}).kind})
+                            </small>
+                          )}
+                        </div>
                       </div>
                       <div className="text-sm text-gray-500 truncate">
                         {card.back}
@@ -100,11 +78,6 @@ export default function DeckDetailsView({
           </>
         )}
       </div>
-      <AddCardModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        deckUuid={deck.uuid}
-      />
     </>
   );
-}
+};

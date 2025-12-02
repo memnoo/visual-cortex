@@ -57,7 +57,14 @@ export const getWithCards = async (
 ): Promise<Deck & { cards: Card[] }> => {
   const { data, error } = await supabase
     .from("Deck")
-    .select(`*, cards (*)`)
+    .select(
+      `
+    *,
+    cards:deck_card_association!inner (
+      ...Card (*)
+    )
+  `
+    )
     .eq("uuid", uuid)
     .single();
 

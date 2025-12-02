@@ -35,13 +35,13 @@ export default function DeckPage() {
   if (isLoading) {
     return (
       <div className="bg-gray-50 flex items-center justify-center">
-        <Loader text="Chargement du deck..." hasAccentColor />
+        <Loader text="Loading the deck and its cards..." hasAccentColor />
       </div>
     );
   }
 
   if (!deckWithCards) {
-    return <ErrorCallout label="Pas de données disponible" />;
+    return <ErrorCallout label="No data available" />;
   }
 
   const { cards, ...deck } = deckWithCards;

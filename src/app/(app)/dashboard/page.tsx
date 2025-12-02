@@ -15,7 +15,7 @@ export default function DashboardPage() {
           iconPosition="right"
           className="w-full h-full text-left"
         >
-          Voir mes decks
+          Go to decks
         </Button>
       </Link>
     </section>

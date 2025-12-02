@@ -26,15 +26,15 @@ export default function Footer() {
         <div className="grid grid-cols-3 gap-8 text-center">
           <div>
             <p className="text-3xl font-bold text-indigo-600">{1}</p>
-            <p className="text-sm text-gray-600">Inscrits</p>
+            <p className="text-sm text-gray-600">Enrolled</p>
           </div>
           <div>
             <p className="text-3xl font-bold text-purple-600">{3}</p>
-            <p className="text-sm text-gray-600">Domaines</p>
+            <p className="text-sm text-gray-600">Domains</p>
           </div>
           <div>
             <p className="text-3xl font-bold text-pink-600">{31}</p>
-            <p className="text-sm text-gray-600">Cartes générées</p>
+            <p className="text-sm text-gray-600">Cards generated</p>
           </div>
         </div>
       </div>

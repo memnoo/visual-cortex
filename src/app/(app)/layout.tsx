@@ -41,7 +41,7 @@ export default function RootLayout({
               <div>
                 <BrandName />
                 <p className="text-sm text-gray-600">
-                  Bienvenue, {user?.email ?? "..."}
+                  Welcome, {user?.email ?? "..."}
                 </p>
               </div>
               <LogoutButton />

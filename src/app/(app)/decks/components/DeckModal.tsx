@@ -17,19 +17,19 @@ interface AddDeckModalProps {
 
 const LABELS = {
   ADD: {
-    title: "Créer un nouveau deck",
-    loading: "Création",
-    cta: "Créer le deck",
+    title: "Add a new deck",
+    loading: "Adding",
+    cta: "Add the deck",
   },
   UPDATE: {
-    title: "Modifier un deck",
-    loading: "Modification",
-    cta: "Modifier le deck",
+    title: "Edit a deck",
+    loading: "Editing",
+    cta: "Edit the deck",
   },
   DELETE: {
-    title: "Supprimer un deck",
-    loading: "Suppression",
-    cta: "Supprimer un deck",
+    title: "Delete a deck",
+    loading: "Deletion",
+    cta: "Delete a deck",
   },
 } as const;
 
@@ -86,7 +86,7 @@ export const DeckModal = ({
       onClose();
     },
     onError: (error: any) => {
-      setError(error.message || "Une erreur est survenue");
+      setError(error.message || "An error occurred");
     },
   });
 
@@ -115,14 +115,14 @@ export const DeckModal = ({
       onClose();
     },
     onError: (error: any) => {
-      setError(error.message || "Une erreur est survenue");
+      setError(error.message || "An error occurred");
     },
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (operation !== "DELETE" && (!topic.trim() || !domain.trim())) {
-      setError("Le titre et le domaine sont requis");
+      setError("Title and domain are required");
       return;
     }
 
@@ -187,7 +187,7 @@ export const DeckModal = ({
         <form onSubmit={handleSubmit} className="space-y-4">
           {operation === "DELETE" && (
             <p>
-              Voulez-vous supprimer le deck : <br />
+              Would you like to delete the deck : <br />
               <strong>{deck?.topic}</strong>
             </p>
           )}
@@ -199,7 +199,7 @@ export const DeckModal = ({
                   htmlFor="topic"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Titre du deck *
+                  Title *
                 </label>
                 <Input
                   id="topic"
@@ -208,7 +208,7 @@ export const DeckModal = ({
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setTopic(e.target.value)
                   }
-                  placeholder="Ex: Mathématiques, Histoire, Langues..."
+                  placeholder="Ex: Maths, History, Language..."
                   required
                   disabled={loading}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
@@ -216,13 +216,13 @@ export const DeckModal = ({
               </div>
 
               <Select
-                label="Domaine *"
+                label="Domain *"
                 values={[
-                  { value: "Langues", label: "Langues" },
+                  { value: "Languages", label: "Languages" },
                   { value: "Sciences", label: "Sciences" },
-                  { value: "Médecine", label: "Médecine" },
-                  { value: "Histoire", label: "Histoire" },
-                  { value: "Autre", label: "Autre" },
+                  { value: "Health", label: "Health" },
+                  { value: "History", label: "History" },
+                  { value: "Other", label: "Other" },
                 ]}
                 isMultiple
                 isDisabled={loading}
@@ -234,7 +234,7 @@ export const DeckModal = ({
                   htmlFor="lang"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Langue (optionnel)
+                  Language (optional)
                 </label>
                 <Input
                   id="lang"
@@ -265,7 +265,7 @@ export const DeckModal = ({
               disabled={loading}
               className="flex-1"
             >
-              Annuler
+              Cancel
             </Button>
             <Button
               type="submit"

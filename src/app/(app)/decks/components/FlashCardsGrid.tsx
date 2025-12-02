@@ -28,7 +28,7 @@ export const FlashCardsGrid = ({
         {!cards || cards.length === 0 ? (
           <EmptyState label="No cards in this deck">
             <Button variant="ghost" onClick={onAddFlashCardClicked}>
-              Ajouter votre 1ère flashcard
+              Add your first flash-card
             </Button>
           </EmptyState>
         ) : (
@@ -79,7 +79,7 @@ export const FlashCardsGrid = ({
                 </div>
               ) : (
                 <EmptyState
-                  label="Sélectionner une carte pour voir son contenu"
+                  label="Select a card to see its content"
                   icon="file"
                 />
               )}

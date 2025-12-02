@@ -3,18 +3,18 @@ import { BrandName } from "@/app/components/BrandName";
 export const WaitlistIncentive = () => (
   <div className="space-y-6">
     <h1 className="text-5xl font-bold text-gray-900 leading-tight">
-      Rejoignez la
+      Join the
       <br />
       <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
-        révolution
+        Learning
       </span>
       <br />
-      de l'apprentissage
+      revolution
     </h1>
 
     <p className="text-xl text-gray-600 leading-relaxed">
-      Soyez parmi les premiers à rejoindre <BrandName /> : la plateforme
-      d'apprentissage intelligent qui s'adapte à votre rythme.
+      Be the first to join <BrandName /> : the new smart learning platform which
+      adapts to your pace.
     </p>
 
     <div className="space-y-4 pt-4">
@@ -33,9 +33,9 @@ export const WaitlistIncentive = () => (
           </svg>
         </div>
         <div>
-          <h3 className="font-semibold text-gray-900">IA Personnalisée</h3>
+          <h3 className="font-semibold text-gray-900">Customized AI</h3>
           <p className="text-gray-600 text-sm">
-            Génération automatique de flashcards adaptées
+            Automatic customized flash-cards generation
           </p>
         </div>
       </div>
@@ -55,9 +55,9 @@ export const WaitlistIncentive = () => (
           </svg>
         </div>
         <div>
-          <h3 className="font-semibold text-gray-900">Multi-domaines</h3>
+          <h3 className="font-semibold text-gray-900">Multi-domains</h3>
           <p className="text-gray-600 text-sm">
-            Langues, sciences, médecine et plus
+            Languages, sciences, health and many more
           </p>
         </div>
       </div>
@@ -77,11 +77,9 @@ export const WaitlistIncentive = () => (
           </svg>
         </div>
         <div>
-          <h3 className="font-semibold text-gray-900">
-            Algorithme intelligent
-          </h3>
+          <h3 className="font-semibold text-gray-900">Smart algorithm</h3>
           <p className="text-gray-600 text-sm">
-            Espacement répété optimisé par l'IA
+            AI-optimised spaced repetition learning
           </p>
         </div>
       </div>

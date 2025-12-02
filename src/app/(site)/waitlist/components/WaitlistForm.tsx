@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Link from "next/link";
 import { format } from "date-fns/format";
 
 import { useJoinWaitlist, useCheckWaitlist } from "../../hooks/useWaitlist";
@@ -54,7 +53,7 @@ export const WaitlistForm = () => {
         if (joinedAt && status === "joined") {
           setResult({
             type: "warning",
-            message: `Vous avez déjà accès à Memnō depuis le ${format(
+            message: `Your access has been granted on the ${format(
               joinedAt,
               "dd/MM/yyyy"
             )}`,
@@ -62,7 +61,7 @@ export const WaitlistForm = () => {
         } else if (status === "pending") {
           setResult({
             type: "warning",
-            message: `Vous êtes déjà dans la liste d'attente depuis le ${format(
+            message: `You joined the waiting list on the ${format(
               createdAt,
               "dd/MM/yyyy"
             )}`,
@@ -79,7 +78,7 @@ export const WaitlistForm = () => {
           onSuccess: (data) => {
             setResult({
               type: "success",
-              message: "Inscription réussie !",
+              message: "Waiting list joined!",
             });
             setCreatedInvitation(data);
           },
@@ -94,7 +93,7 @@ export const WaitlistForm = () => {
     } catch (error: any) {
       setResult({
         type: "error",
-        message: error.message || "Une erreur est survenue.",
+        message: error.message || "An error occurred.",
       });
     } finally {
       resetForm();
@@ -123,26 +122,26 @@ export const WaitlistForm = () => {
             </div>
 
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              🎉 Vous êtes inscrit !
+              🎉 You joined the waiting list!
             </h2>
 
             <div className="flex flex-col content-stretch gap-1 text-gray-600 text-left">
               {result && <Callout type={result.type}>{result.message}</Callout>}
 
               <p>
-                Nous vous enverrons un email dès que vous pourrez accéder à la
-                plateforme.
+                We will send you an email as soon as the access to Memnō will be
+                granted.
               </p>
               {createdInvitation && (
                 <div className="flex flex-col content-stretch gap-1">
                   {createdInvitation.interest && (
                     <p>
-                      Nous avons bien noté votre intérêt pour{" "}
+                      We registered your interests for{" "}
                       {createdInvitation.interest}
                     </p>
                   )}
                   <p>
-                    Vous recevrez un email à l'adresse{" "}
+                    You will receive an email at{" "}
                     <a
                       href={`mailto:${createdInvitation.email}`}
                       className="text-indigo-600"
@@ -163,26 +162,28 @@ export const WaitlistForm = () => {
                 setResult(null);
               }}
             >
-              ← Retour
+              ← Back
             </button>
           </>
         ) : (
           <>
             <h2 className="text-2xl font-bold text-gray-900">
-              Inscrivez-vous maintenant
+              Enroll right now
             </h2>
-            <p className="text-gray-500 italic">Obtenez un accès prioritaire</p>
+            <p className="text-gray-500 italic">
+              Be the first to get an access
+            </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Email *
+                  Email address *
                 </label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="votre@email.com"
+                  placeholder="your@email.com"
                   required
                   disabled={status !== "idle"}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
@@ -190,13 +191,13 @@ export const WaitlistForm = () => {
               </div>
 
               <Select
-                label="Qu'aimeriez-vous apprendre ?"
+                label="What would you like to learn?"
                 values={[
-                  { value: "Langues", label: "Langues" },
+                  { value: "Languages", label: "Languages" },
                   { value: "Sciences", label: "Sciences" },
-                  { value: "Médecine", label: "Médecine" },
-                  { value: "Histoire", label: "Histoire" },
-                  { value: "Autre", label: "Autre" },
+                  { value: "Health", label: "Health" },
+                  { value: "History", label: "History" },
+                  { value: "Other", label: "Other" },
                 ]}
                 isMultiple
                 isDisabled={status !== "idle"}
@@ -218,11 +219,11 @@ export const WaitlistForm = () => {
                   {status !== "idle" ? (
                     <span className="flex items-center justify-center gap-1">
                       <Loader size="xsmall" fit="content" />
-                      {status === "checking" && "Vérification..."}
-                      {status === "adding" && "Inscription..."}
+                      {status === "checking" && "Checking..."}
+                      {status === "adding" && "Enrolling..."}
                     </span>
                   ) : (
-                    "Rejoindre la waiting list"
+                    "Join the waiting list"
                   )}
                 </button>
                 <button
@@ -230,14 +231,13 @@ export const WaitlistForm = () => {
                   className="w-full px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:from-indigo-700 hover:to-purple-700 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl cursor-pointer"
                   onClick={() => router.push("/login")}
                 >
-                  J'ai déjà un compte
+                  I already have an account
                 </button>
               </div>
             </form>
 
             <p className="text-xs text-gray-500 text-center mt-3">
-              En vous inscrivant, vous acceptez de recevoir des mises à jour sur
-              le lancement
+              By enrolling, you accept to receive updates about the launch
             </p>
           </>
         )}

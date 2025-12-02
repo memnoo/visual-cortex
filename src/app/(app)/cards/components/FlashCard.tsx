@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Card } from "../types/types";
+import { Card } from "../../types/types";
 
 interface FlashcardProps {
   card: Card;

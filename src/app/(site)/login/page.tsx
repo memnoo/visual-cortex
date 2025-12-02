@@ -43,13 +43,13 @@ export default function LoginPage() {
       if (!checkResult) {
         setMessage({
           type: "error",
-          text: "L'adresse email saisie est invalide",
+          text: "Email address is invalid",
         });
         return;
       } else if (checkResult.status !== "joined") {
         setMessage({
           type: "error",
-          text: "Vous êtes toujours en liste d'attente",
+          text: "You are still in the waiting list",
         });
         return;
       }
@@ -66,14 +66,14 @@ export default function LoginPage() {
       } else {
         setMessage({
           type: "success",
-          text: "✉️ Magic link envoyé ! Vérifiez votre boîte email.",
+          text: "✉️ Magic link has been sent ! Check your mailbox.",
         });
         setEmail("");
       }
     } catch (error) {
       setMessage({
         type: "error",
-        text: "Une erreur est survenue. Réessayez.",
+        text: "An error occurred. Try again!",
       });
     } finally {
       setLoading(false);
@@ -84,7 +84,7 @@ export default function LoginPage() {
     <div className="max-w-md w-full space-y-2">
       {/* Header */}
       <div className="text-center">
-        <h2 className="text-2xl font-semibold text-gray-900">Connexion</h2>
+        <h2 className="text-2xl font-semibold text-gray-900">Login</h2>
       </div>
 
       {/* Card */}
@@ -96,14 +96,14 @@ export default function LoginPage() {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
-              Adresse email
+              Email
             </label>
             <input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="votre@email.com"
+              placeholder="your@email.com"
               required
               disabled={loading}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100 disabled:cursor-not-allowed"
@@ -119,10 +119,10 @@ export default function LoginPage() {
             {loading ? (
               <span className="flex items-center justify-center">
                 <Loader size="xsmall" fit="content" />
-                Envoi en cours...
+                Sending...
               </span>
             ) : (
-              "Envoyer le magic link"
+              "Send magic link"
             )}
           </button>
 
@@ -140,7 +140,7 @@ export default function LoginPage() {
           </div>
           <div className="relative flex justify-center text-sm">
             <span className="px-4 bg-white text-gray-500">
-              Comment ça marche ?
+              How does it work?
             </span>
           </div>
         </div>
@@ -149,15 +149,15 @@ export default function LoginPage() {
         <div className="mt-6 space-y-3 text-sm text-gray-600">
           <div className="flex items-start">
             <span className="text-indigo-600 font-bold mr-2">1.</span>
-            <p>Entrez votre adresse email ci-dessus</p>
+            <p>Input your email address above</p>
           </div>
           <div className="flex items-start">
             <span className="text-indigo-600 font-bold mr-2">2.</span>
-            <p>Recevez un lien de connexion sécurisé par email</p>
+            <p>Receive a secured login magic link by email</p>
           </div>
           <div className="flex items-start">
             <span className="text-indigo-600 font-bold mr-2">3.</span>
-            <p>Cliquez sur le lien pour vous connecter automatiquement</p>
+            <p>Click on the link to log in automatically</p>
           </div>
         </div>
       </div>
@@ -165,9 +165,9 @@ export default function LoginPage() {
       {/* Footer */}
       <div className="text-center text-sm text-gray-600">
         <p>
-          Pas encore de compte ?{" "}
+          No yet enrolled?{" "}
           <Link className="text-indigo-600 font-semibold" href="/waitlist">
-            Inscrivez-vous sur la liste d'attente !
+            Join the waiting list!
           </Link>
         </p>
       </div>

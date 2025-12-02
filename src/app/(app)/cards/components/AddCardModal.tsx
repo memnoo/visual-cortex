@@ -76,7 +76,7 @@ export const AddCardModal = ({
       onClose();
     },
     onError: (error: any) => {
-      setError(error.message || "Une erreur est survenue");
+      setError(error.message || "An error occurred");
     },
   });
 
@@ -88,14 +88,14 @@ export const AddCardModal = ({
       JSON.parse(value);
       setJsonError(null);
     } catch (e) {
-      setJsonError("JSON invalide");
+      setJsonError("Invalid JSON");
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!front.trim() || !back.trim()) {
-      setError("Le recto et le verso de la carte sont requis");
+      setError("Front and back of the card are required");
       return;
     }
 
@@ -103,7 +103,7 @@ export const AddCardModal = ({
     try {
       JSON.parse(content);
     } catch (e) {
-      setError("Le contenu JSON est invalide");
+      setError("The JSON content is invalid");
       return;
     }
 
@@ -134,7 +134,7 @@ export const AddCardModal = ({
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-semibold text-gray-900">
-            Créer une nouvelle flash card
+            Add a new flash-card
           </h2>
           <button
             onClick={onClose}
@@ -173,7 +173,7 @@ export const AddCardModal = ({
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setFront(e.target.value)
               }
-              placeholder="Recto de la carte"
+              placeholder="Front of the card"
               required
               disabled={loading}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
@@ -195,7 +195,7 @@ export const AddCardModal = ({
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setBack(e.target.value)
               }
-              placeholder="Ce qui est au recto de la carte"
+              placeholder="What is at the back of the card"
               required
               disabled={loading}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
@@ -207,7 +207,7 @@ export const AddCardModal = ({
               htmlFor="content"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
-              Contenu (JSON)
+              Content (JSON format)
             </label>
             <textarea
               id="content"
@@ -239,7 +239,7 @@ export const AddCardModal = ({
               disabled={loading}
               className="flex-1"
             >
-              Annuler
+              Cancel
             </Button>
             <Button
               type="submit"
@@ -250,10 +250,10 @@ export const AddCardModal = ({
               {loading ? (
                 <div className="flex items-center justify-center gap-2">
                   <Loader size="xsmall" fit="content" />
-                  Création...
+                  Adding the card...
                 </div>
               ) : (
-                "Créer la flash card"
+                "Add flash-card"
               )}
             </Button>
           </div>

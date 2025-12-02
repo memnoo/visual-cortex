@@ -4,7 +4,6 @@ import { Loader } from "@/app/components/atoms/Loader";
 import { useDecksWithCount } from "../hooks/useDeckNew";
 import { EmptyStateButton } from "../components/EmptyStateButton";
 import { useState } from "react";
-import { DeckWithCount } from "../types/types";
 import { ErrorCallout } from "@/app/components/atoms/ErrorCallout";
 import { useRouter } from "next/navigation";
 import { DeckModal } from "./components/DeckModal";
@@ -19,13 +18,13 @@ export default function DecksPage() {
   if (isLoading) {
     return (
       <div className="bg-gray-50 flex items-center justify-center">
-        <Loader text="Chargement de vos decks..." hasAccentColor />
+        <Loader text="Loading your decks..." hasAccentColor />
       </div>
     );
   }
 
   if (!decks) {
-    return <ErrorCallout label="Pas de données disponible" />;
+    return <ErrorCallout label="No data available" />;
   }
 
   return (
@@ -34,7 +33,7 @@ export default function DecksPage() {
         <div className="grid grid-cols-2 gap-3">
           <div key="add-deck-button" className="w-full h-full">
             <EmptyStateButton
-              label="Créer un deck"
+              label="Add a deck"
               onClick={() => setIsModalOpen(true)}
             />
           </div>

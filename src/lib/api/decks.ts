@@ -60,7 +60,7 @@ export const getWithCards = async (
     .select(
       `
     *,
-    cards:deck_card_association!inner (
+    cards:deck_card_association (
       ...Card (*)
     )
   `
@@ -69,7 +69,10 @@ export const getWithCards = async (
     .single();
 
   if (error) throw error;
-  return data satisfies Deck & { cards: Card[] };
+  return {
+    ...data,
+    cards: data.cards || [],
+  } satisfies Deck & { cards: Card[] };
 };
 
 //   // CREATE deck

@@ -62,8 +62,6 @@ export const useDeckWithCards = (uuid: string) =>
         cards: cards.map(transformCard),
       } satisfies DeckWithCards;
 
-      console.log(data);
-
       return data;
     },
     enabled: !!uuid,

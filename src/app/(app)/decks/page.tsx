@@ -2,31 +2,19 @@
 
 import { Loader } from "@/app/components/atoms/Loader";
 import { useDecksWithCount } from "../hooks/useDeckNew";
-import { Deck } from "../components/Deck";
 import { EmptyStateButton } from "../components/EmptyStateButton";
 import { useState } from "react";
 import { DeckWithCount } from "../types/types";
-import DeckModal from "../components/DeckModal";
 import { ErrorCallout } from "@/app/components/atoms/ErrorCallout";
 import { useRouter } from "next/navigation";
+import { DeckModal } from "./components/DeckModal";
+import { Deck } from "./components/Deck";
 
 export default function DecksPage() {
   const router = useRouter();
   const { data: decks = [], isLoading } = useDecksWithCount();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [deckOperation, setDeckOperation] = useState<{
-    operation: "ADD" | "UPDATE" | "DELETE";
-    deck?: DeckWithCount;
-  }>({ operation: "ADD" });
-
-  const toggleDeckOperation = (
-    operation: "ADD" | "UPDATE" | "DELETE",
-    closeModal: boolean = false
-  ) => {
-    setDeckOperation({ operation });
-    setIsModalOpen(closeModal ? false : true);
-  };
 
   if (isLoading) {
     return (
@@ -47,7 +35,7 @@ export default function DecksPage() {
           <div key="add-deck-button" className="w-full h-full">
             <EmptyStateButton
               label="Créer un deck"
-              onClick={() => toggleDeckOperation("ADD")}
+              onClick={() => setIsModalOpen(true)}
             />
           </div>
           {decks.map((d) => (
@@ -61,8 +49,8 @@ export default function DecksPage() {
       </section>
       <DeckModal
         isOpen={isModalOpen}
-        onClose={() => toggleDeckOperation("ADD", true)}
-        deckOperation={deckOperation}
+        onClose={() => setIsModalOpen(false)}
+        deckOperation={{ operation: "ADD" }}
       />
     </>
   );

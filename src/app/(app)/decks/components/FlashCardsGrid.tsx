@@ -3,14 +3,19 @@
 import { useState } from "react";
 import classNames from "classnames";
 import { Card } from "../../types/types";
-import Flashcard from "../../components/FlashCard";
 import { EmptyState } from "@/app/components/atoms/EmptyState";
+import Button from "@/app/components/atoms/Button";
+import FlashCard from "../../cards/components/FlashCard";
 
 interface DeckDetailsViewProps {
   cards: Card[];
+  onAddFlashCardClicked: () => void;
 }
 
-export const FlashCardsGrid = ({ cards }: DeckDetailsViewProps) => {
+export const FlashCardsGrid = ({
+  cards,
+  onAddFlashCardClicked,
+}: DeckDetailsViewProps) => {
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 
   const handleCardSelect = (card: Card) => {
@@ -21,7 +26,11 @@ export const FlashCardsGrid = ({ cards }: DeckDetailsViewProps) => {
     <>
       <div className="grid grid-rows-1 sm:grid-rows-2 md:grid-cols-5 gap-6">
         {!cards || cards.length === 0 ? (
-          <EmptyState label="No cards in this deck" />
+          <EmptyState label="No cards in this deck">
+            <Button variant="ghost" onClick={onAddFlashCardClicked}>
+              Ajouter votre 1ère flashcard
+            </Button>
+          </EmptyState>
         ) : (
           <>
             <div
@@ -66,7 +75,7 @@ export const FlashCardsGrid = ({ cards }: DeckDetailsViewProps) => {
             <div className="flex items-start justify-center md:col-span-3">
               {selectedCard ? (
                 <div className="w-full max-w-md">
-                  <Flashcard card={selectedCard} />
+                  <FlashCard card={selectedCard} />
                 </div>
               ) : (
                 <EmptyState

@@ -6,7 +6,6 @@ import { createClient } from "@/lib/database/client";
 import Button from "@/app/components/atoms/Button";
 import Input from "@/app/components/atoms/Input";
 import { Loader } from "@/app/components/atoms/Loader";
-import { Select } from "@/app/components/atoms/Select";
 
 interface AddCardModalProps {
   isOpen: boolean;
@@ -14,11 +13,11 @@ interface AddCardModalProps {
   deckUuid: string;
 }
 
-export default function AddCardModal({
+export const AddCardModal = ({
   isOpen,
   onClose,
   deckUuid,
-}: AddCardModalProps) {
+}: AddCardModalProps) => {
   const [front, setFront] = useState("");
   const [back, setBack] = useState("");
   const [content, setContent] = useState("{}");
@@ -262,4 +261,4 @@ export default function AddCardModal({
       </div>
     </div>
   );
-}
+};

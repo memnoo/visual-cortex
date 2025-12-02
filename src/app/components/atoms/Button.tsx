@@ -7,7 +7,7 @@ type IconPosition = "left" | "right";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant;
-  iconName: ICON_NAME;
+  iconName?: ICON_NAME;
   iconPosition?: IconPosition;
 }
 

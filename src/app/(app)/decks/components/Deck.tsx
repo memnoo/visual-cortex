@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { DeckWithCount } from "../types/types";
+import { DeckWithCount } from "../../types/types";
 
 interface DeckProps {
   deck: DeckWithCount;
@@ -7,7 +7,7 @@ interface DeckProps {
   onClick?: () => void;
 }
 
-export function Deck({ deck, isSelected, onClick }: DeckProps) {
+export const Deck = ({ deck, isSelected, onClick }: DeckProps) => {
   return (
     <div className="perspective-1000 w-full h-full">
       <button
@@ -35,4 +35,4 @@ export function Deck({ deck, isSelected, onClick }: DeckProps) {
       </button>
     </div>
   );
-}
+};

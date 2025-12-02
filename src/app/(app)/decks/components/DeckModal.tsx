@@ -7,7 +7,7 @@ import Button from "@/app/components/atoms/Button";
 import Input from "@/app/components/atoms/Input";
 import { Loader } from "@/app/components/atoms/Loader";
 import { Select } from "@/app/components/atoms/Select";
-import { Deck } from "../types/types";
+import { Deck } from "../../types/types";
 
 interface AddDeckModalProps {
   isOpen: boolean;
@@ -33,11 +33,11 @@ const LABELS = {
   },
 } as const;
 
-export default function DeckModal({
+export const DeckModal = ({
   isOpen,
   onClose,
   deckOperation,
-}: AddDeckModalProps) {
+}: AddDeckModalProps) => {
   const { deck, operation } = deckOperation;
 
   const [topic, setTopic] = useState(deck?.topic ?? "");
@@ -287,4 +287,4 @@ export default function DeckModal({
       </div>
     </div>
   );
-}
+};

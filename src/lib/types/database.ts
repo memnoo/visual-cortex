@@ -38,7 +38,7 @@ export type Card = {
   created_at: number;
   front: string;
   back: string;
-  content: string;
+  content: JSON;
   user_uuid: string;
 };
 

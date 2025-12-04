@@ -8,7 +8,7 @@ export type Card = {
   uuid: string;
   front: string;
   back: string;
-  extraFields?: Record<string, string | number | boolean>;
+  extraFields?: JSON;
   createdAt: Date;
   userUuid: string;
 };
@@ -34,7 +34,7 @@ export const transformCard = (rawCard: RawCard): Card => ({
   uuid: rawCard.uuid,
   front: rawCard.front,
   back: rawCard.back,
-  extraFields: JSON.parse(rawCard.content),
+  extraFields: rawCard.content,
   createdAt: new Date(rawCard.created_at),
   userUuid: rawCard.user_uuid,
 });

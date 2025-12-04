@@ -20,8 +20,8 @@ export const deckKeys = {
   withCount: () => [...deckKeys.all, "list", "count"] as const,
   list: (filters: string) => [...deckKeys.lists(), { filters }] as const,
   details: () => [...deckKeys.all, "detail"] as const,
-  detail: (id: string) => [...deckKeys.details(), id] as const,
-  withCards: (id: string) => [...deckKeys.detail(id), "cards"] as const,
+  detail: (uuid: string) => [...deckKeys.details(), uuid] as const,
+  withCards: (uuid: string) => [...deckKeys.detail(uuid), "cards"] as const,
 };
 
 export const useDecks = () =>
@@ -57,12 +57,10 @@ export const useDeckWithCards = (uuid: string) =>
     queryFn: async (): Promise<DeckWithCards> => {
       const { cards, ...deck } = await getWithCards(uuid);
 
-      const data = {
+      return {
         ...transformDeck(deck),
         cards: cards.map(transformCard),
       } satisfies DeckWithCards;
-
-      return data;
     },
     enabled: !!uuid,
   });

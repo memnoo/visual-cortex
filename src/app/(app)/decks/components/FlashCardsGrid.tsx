@@ -22,6 +22,14 @@ export const FlashCardsGrid = ({
     setSelectedCard(card);
   };
 
+  const renderKindProperty = (card: Card) => {
+    if (!card.extraFields || !("kind" in card.extraFields)) return null;
+
+    return (
+      <small className="text-gray-400">({String(card.extraFields.kind)})</small>
+    );
+  };
+
   return (
     <>
       <div className="grid grid-rows-1 sm:grid-rows-2 md:grid-cols-5 gap-6">
@@ -54,13 +62,7 @@ export const FlashCardsGrid = ({
                       <div className="text-sm font-medium text-gray-900 truncate">
                         <div className="flex flex-wrap gap-2 items-center">
                           <p>{card.front}</p>
-                          {Object.keys(card.extraFields ?? {}).includes(
-                            "kind"
-                          ) && (
-                            <small className="text-gray-400">
-                              ({(card.extraFields ?? {}).kind})
-                            </small>
-                          )}
+                          {renderKindProperty(card)}
                         </div>
                       </div>
                       <div className="text-sm text-gray-500 truncate">

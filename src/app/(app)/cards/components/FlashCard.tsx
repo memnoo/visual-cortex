@@ -23,6 +23,16 @@ export default function Flashcard({
 
   const extraFields = Object.entries(card.extraFields ?? {});
 
+  const renderKindProperty = (card: Card) => {
+    if (!card.extraFields || !("kind" in card.extraFields)) return null;
+
+    return (
+      <small className="text-xl text-gray-200 font-semibold">
+        ({String(card.extraFields.kind)})
+      </small>
+    );
+  };
+
   return (
     <div className="perspective-1000 w-full max-w-md mx-auto">
       <div
@@ -32,8 +42,11 @@ export default function Flashcard({
         }`}
       >
         <div className="absolute inset-0 backface-hidden">
-          <div className="w-full h-full bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-2xl p-6 flex flex-col items-center justify-center text-white">
-            <p className="text-4xl font-bold mb-4">{card.front}</p>
+          <div className="w-full h-full bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-2xl p-6 flex flex-col items-center justify-center text-white text-center">
+            <div className="flex flex-col content-stretch justify-center gap-2">
+              <p className="text-4xl font-bold">{card.front}</p>
+              {renderKindProperty(card)}
+            </div>
           </div>
         </div>
 

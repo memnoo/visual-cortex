@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import classNames from "classnames";
+
 import { Card } from "../../types/types";
+
+import { FlashCard } from "../../cards/components/FlashCard";
 import { EmptyState } from "@/app/components/atoms/EmptyState";
 import Button from "@/app/components/atoms/Button";
-import FlashCard from "../../cards/components/FlashCard";
 
 interface DeckDetailsViewProps {
   cards: Card[];

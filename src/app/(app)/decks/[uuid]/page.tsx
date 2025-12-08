@@ -6,11 +6,11 @@ import { useDeckWithCards } from "../../hooks/useDeckNew";
 import { Loader } from "@/app/components/atoms/Loader";
 import { FlashCardsGrid } from "../components/FlashCardsGrid";
 import Button from "@/app/components/atoms/Button";
-import Link from "next/link";
 import { ICON_NAME } from "@/app/components/atoms/Icon";
 import { useState } from "react";
 import { AddCardModal } from "../../cards/components/AddCardModal";
 import { DeckModal } from "../components/DeckModal";
+import { BreadcrumbButton } from "../../components/BreadcrumbButton";
 
 export default function DeckPage() {
   const { uuid } = useParams();

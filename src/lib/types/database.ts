@@ -1,3 +1,5 @@
+export type JsonObject = Record<string, unknown>;
+
 /**
  * DECKS
  */
@@ -38,7 +40,7 @@ export type Card = {
   created_at: number;
   front: string;
   back: string;
-  content: JSON;
+  content: JsonObject;
   user_uuid: string;
 };
 

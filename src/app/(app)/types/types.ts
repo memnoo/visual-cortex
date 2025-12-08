@@ -2,13 +2,14 @@ import {
   Deck as RawDeck,
   DeckWithCount as RawDeckWithCount,
   Card as RawCard,
+  JsonObject,
 } from "@/lib/types/database";
 
 export type Card = {
   uuid: string;
   front: string;
   back: string;
-  extraFields?: JSON;
+  extraFields?: JsonObject;
   createdAt: Date;
   userUuid: string;
 };

@@ -1,82 +1,51 @@
 "use client";
 
-import { useState } from "react";
+import classNames from "classnames";
+
+import { PropsWithChildren } from "react";
 import { Card } from "../../types/types";
+import { Divider } from "@/app/components/atoms/Divider";
+import { useCardExtraFields } from "../hooks/useCardExtraFields";
+import { CardVisibleExtraFieldList } from "./fields/CardVisibleExtraFieldList";
+import { CardExceptionFieldList } from "./fields/CardExceptionFieldList";
 
-interface FlashcardProps {
+type FlashCardProps = {
   card: Card;
-  isRevealed?: boolean;
-  onFlip?: () => void;
-}
+} & PropsWithChildren;
 
-export default function Flashcard({
-  card,
-  isRevealed = false,
-  onFlip,
-}: FlashcardProps) {
-  const [isFlipped, setIsFlipped] = useState(false);
+export const FlashCard = ({ card, children }: FlashCardProps) => {
+  const theme = "bg-gradient-to-br from-indigo-500 to-purple-600 text-white";
 
-  const handleFlip = () => {
-    setIsFlipped(!isFlipped);
-    onFlip?.();
-  };
-
-  const extraFields = Object.entries(card.extraFields ?? {});
-
-  const renderKindProperty = (card: Card) => {
-    if (!card.extraFields || !("kind" in card.extraFields)) return null;
-
-    return (
-      <small className="text-xl text-gray-200 font-semibold">
-        ({String(card.extraFields.kind)})
-      </small>
-    );
-  };
+  const { exceptionValueFields, hasOnlyExceptionProperties, visibleFields } =
+    useCardExtraFields(card);
 
   return (
-    <div className="perspective-1000 w-full max-w-md mx-auto">
-      <div
-        onClick={handleFlip}
-        className={`relative w-full h-64 cursor-pointer transition-transform duration-500 transform-style-3d ${
-          isFlipped || isRevealed ? "rotate-y-180" : ""
-        }`}
-      >
-        <div className="absolute inset-0 backface-hidden">
-          <div className="w-full h-full bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-2xl p-6 flex flex-col items-center justify-center text-white text-center">
-            <div className="flex flex-col content-stretch justify-center gap-2">
-              <p className="text-4xl font-bold">{card.front}</p>
-              {renderKindProperty(card)}
-            </div>
-          </div>
-        </div>
-
-        <div className="absolute inset-0 backface-hidden rotate-y-180">
-          <div className="w-full h-full bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl shadow-2xl py-8 px-4 flex flex-col content-stretch items-center justify-center text-white">
-            <div className="flex flex-col items-center content-stretch gap-1 mb-3 text-center">
-              {isRevealed && (
+    <div className="w-full max-w-md mx-auto">
+      <div className="relative w-full">
+        <div className="w-full h-full absolute inset-0 backface-hidden">
+          <div
+            className={classNames(
+              "flex flex-col content-stretch rounded-2xl shadow-2xl p-4 text-center",
+              theme
+            )}
+          >
+            <div className="flex flex-col content-stretch justify-center">
+              <h2 className="text-4xl text-white font-bold">{card.front}</h2>
+              <CardExceptionFieldList values={exceptionValueFields} />
+              <h3 className="text-2xl text-red-300 font-semibold mt-2">
+                {card.back}
+              </h3>
+              {!hasOnlyExceptionProperties && visibleFields.length > 0 && (
                 <>
-                  <p className="text-4xl font-bold capitalize">{card.front}</p>
-                  <span className="font-bold">&#8595;</span>
+                  <Divider horizontal />
+                  <CardVisibleExtraFieldList values={visibleFields} />
                 </>
               )}
-              <p className="text-3xl font-bold capitalize">{card.back}</p>
-            </div>
-            <div className="flex flex-col content-stretch gap-1 overflow-x-auto">
-              {extraFields.map(([key, value]) => (
-                <p key={key} className="capitalize text-small">
-                  <span className="text-xs text-gray-300">
-                    {key.replaceAll("_", " ")}
-                  </span>
-                  :{" "}
-                  <span className="capitalize text-white font-bold">
-                    {value}
-                  </span>
-                </p>
-              ))}
+              {children}
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};

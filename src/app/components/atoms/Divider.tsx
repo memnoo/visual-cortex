@@ -8,8 +8,8 @@ export const Divider = ({
   vertical = false,
 }: DividerProps) => {
   if (vertical) {
-    return <div className="h-full mx-1 border-[1px]" />;
+    return <div className="h-full mx-2 border-[1px]" />;
   }
 
-  return horizontal && <hr className="w-full my-1" />;
+  return horizontal && <hr className="w-full my-2" />;
 };

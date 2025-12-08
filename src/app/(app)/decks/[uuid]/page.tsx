@@ -50,15 +50,7 @@ export default function DeckPage() {
     <>
       <section className="max-w-8xl mx-auto p-2 flex flex-col gap-2 content-stretch text-left">
         <div className="flex items-center align-stretch gap-2">
-          <Link href="/decks">
-            <Button
-              type="button"
-              variant="transparent"
-              iconName={ICON_NAME.CHEVRON_LEFT}
-            >
-              {deck.topic}
-            </Button>
-          </Link>
+          <BreadcrumbButton path="/decks" label="Decks" />
           <div className="ml-auto">
             <div className="flex gap-1">
               <Button

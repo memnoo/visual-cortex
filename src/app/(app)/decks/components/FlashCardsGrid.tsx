@@ -9,7 +9,7 @@ import FlashCard from "../../cards/components/FlashCard";
 
 interface DeckDetailsViewProps {
   cards: Card[];
-  onAddFlashCardClicked: () => void;
+  onAddFlashCardClicked?: () => void;
 }
 
 export const FlashCardsGrid = ({

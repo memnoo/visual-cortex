@@ -37,7 +37,11 @@ export default function Button({
 
   return (
     <button className={`${base} ${variants[variant]} ${className}`} {...props}>
-      {iconName && <Icon name={iconName} />}
+      {iconName && (
+        <span className="ml-auto">
+          <Icon name={iconName} />
+        </span>
+      )}
       {children}
     </button>
   );

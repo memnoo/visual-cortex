@@ -2,7 +2,7 @@
 
 import { ErrorCallout } from "@/app/components/atoms/ErrorCallout";
 import { useParams } from "next/navigation";
-import { useDeckWithCards } from "../../hooks/useDeckNew";
+import { useDeckWithCards } from "../../hooks/useDecks";
 import { Loader } from "@/app/components/atoms/Loader";
 import { FlashCardsGrid } from "../components/FlashCardsGrid";
 import Button from "@/app/components/atoms/Button";
@@ -68,6 +68,12 @@ export default function DeckPage() {
             </div>
           </div>
         </div>
+        <h2 className="text-xl text-center font-bold my-2">
+          {deck.topic}{" "}
+          <small className="text-medium font-semibold text-gray-400">
+            ({cards.length} cards)
+          </small>
+        </h2>
         <FlashCardsGrid
           cards={cards}
           onAddFlashCardClicked={() => setIsCardModalOpen(true)}

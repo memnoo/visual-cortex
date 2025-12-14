@@ -6,7 +6,6 @@ import { useDeckWithCards } from "../../hooks/useDecks";
 import { Loader } from "@/app/components/atoms/Loader";
 import { FlashCardsGrid } from "../components/FlashCardsGrid";
 import Button from "@/app/components/atoms/Button";
-import { ICON_NAME } from "@/app/components/atoms/Icon";
 import { useState } from "react";
 import { AddCardModal } from "../../cards/components/AddCardModal";
 import { DeckModal } from "../components/DeckModal";
@@ -56,13 +55,13 @@ export default function DeckPage() {
               <Button
                 type="button"
                 variant="secondary"
-                iconName={ICON_NAME.EDIT}
+                iconName="edit"
                 onClick={() => toggleDeckOperation("UPDATE")}
               />
               <Button
                 type="button"
                 variant="danger"
-                iconName={ICON_NAME.DELETE}
+                iconName="delete"
                 onClick={() => toggleDeckOperation("DELETE")}
               />
             </div>

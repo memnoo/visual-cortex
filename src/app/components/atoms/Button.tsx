@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon, ICON_NAME } from "./Icon";
+import { Icon, type IconName } from "./Icon";
 
 type Variant = "primary" | "secondary" | "ghost" | "danger" | "transparent";
 
@@ -7,7 +7,7 @@ type IconPosition = "left" | "right";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant;
-  iconName?: ICON_NAME;
+  iconName?: IconName;
   iconPosition?: IconPosition;
 }
 

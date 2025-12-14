@@ -2,16 +2,15 @@
 
 import Link from "next/link";
 import Button from "@/app/components/atoms/Button";
-import { ICON_NAME } from "@/app/components/atoms/Icon";
 
 export default function DashboardPage() {
   return (
-    <section className="max-w-8xl mx-auto p-2">
+    <section className="max-w-8xl mx-auto p-2 flex flex-col gap-2 content-stretch">
       <Link href="/decks">
         <Button
           type="button"
           variant="transparent"
-          iconName={ICON_NAME.CHEVRON_RIGHT}
+          iconName="chevron_right"
           iconPosition="right"
           className="w-full h-full text-left"
         >

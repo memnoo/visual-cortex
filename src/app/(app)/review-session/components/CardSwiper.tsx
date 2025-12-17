@@ -9,13 +9,12 @@ export type ReviewSessionState = {
   correct: number;
   incorrect: number;
   hintUsed: number;
-  skipped: number;
   remaining: number;
 };
 
 type CardSwiperProps = {
   cards: Card[];
-  onActionPerformed?: (
+  onActionPerformed: (
     action: SwipeDirection,
     reviewSessionState: ReviewSessionState
   ) => void;
@@ -28,7 +27,6 @@ export const CardSwiper = ({ cards, onActionPerformed }: CardSwiperProps) => {
     correct: 0,
     incorrect: 0,
     hintUsed: 0,
-    skipped: 0,
     remaining: cards.length,
   });
 
@@ -36,28 +34,41 @@ export const CardSwiper = ({ cards, onActionPerformed }: CardSwiperProps) => {
   const [reviewedCards, setReviewedCards] = useState<Card[]>([]);
 
   const handleSwipe = (direction: SwipeDirection) => {
+    const newStats = { ...stats };
+
     switch (direction) {
-      // Remove card from stack
-      case "right":
+      case "right": {
+        const currentCard = remainingCards[0];
+        setReviewedCards([currentCard, ...reviewedCards]);
+        const newRemainingCards = remainingCards.slice(1);
+        setRemainingCards(newRemainingCards);
+
+        newStats.correct = stats.correct + 1;
+        newStats.remaining = newRemainingCards.length;
+        setStats(newStats);
+
+        onActionPerformed(direction, newStats);
+        break;
+      }
+
       case "left": {
         const currentCard = remainingCards[0];
         setReviewedCards([currentCard, ...reviewedCards]);
         const newRemainingCards = remainingCards.slice(1);
         setRemainingCards(newRemainingCards);
-        setStats((prevStats) => ({
-          ...prevStats,
-          correct:
-            direction === "right" ? prevStats.correct + 1 : prevStats.correct,
-          incorrect:
-            direction === "left"
-              ? prevStats.incorrect + 1
-              : prevStats.incorrect,
-          remaining: newRemainingCards.length,
-        }));
+
+        newStats.incorrect = stats.incorrect + 1;
+        newStats.remaining = newRemainingCards.length;
+        setStats(newStats);
+
+        onActionPerformed(direction, newStats);
         break;
       }
-      // Move card to the back of the stack
+
       case "up":
+        alert("Swipe up action not implemented yet.");
+        break;
+
       case "down": {
         const currentCard = remainingCards[0];
         const newRemainingCards = remainingCards.slice(1);
@@ -65,10 +76,6 @@ export const CardSwiper = ({ cards, onActionPerformed }: CardSwiperProps) => {
         setRemainingCards(newRemainingCards);
         break;
       }
-    }
-
-    if (onActionPerformed) {
-      onActionPerformed(direction, stats);
     }
   };
 

@@ -22,7 +22,6 @@ export default function ReviewDeckPage() {
     correct: 0,
     incorrect: 0,
     hintUsed: 0,
-    skipped: 0,
     remaining: (cards ?? []).length,
   });
 

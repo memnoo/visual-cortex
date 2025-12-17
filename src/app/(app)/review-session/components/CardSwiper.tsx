@@ -44,6 +44,15 @@ export const CardSwiper = ({ cards, onActionPerformed }: CardSwiperProps) => {
         setReviewedCards([currentCard, ...reviewedCards]);
         const newRemainingCards = remainingCards.slice(1);
         setRemainingCards(newRemainingCards);
+        setStats((prevStats) => ({
+          ...prevStats,
+          correct:
+            direction === "right" ? prevStats.correct + 1 : prevStats.correct,
+          incorrect:
+            direction === "left"
+              ? prevStats.incorrect + 1
+              : prevStats.incorrect,
+        }));
         break;
       }
       // Move card to the back of the stack

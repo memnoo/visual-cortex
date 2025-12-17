@@ -17,6 +17,17 @@ export default function DashboardPage() {
           Go to decks
         </Button>
       </Link>
+      <Link href="/review-session">
+        <Button
+          type="button"
+          variant="transparent"
+          iconName="chevron_right"
+          iconPosition="right"
+          className="w-full h-full text-left"
+        >
+          Review decks
+        </Button>
+      </Link>
     </section>
   );
 }

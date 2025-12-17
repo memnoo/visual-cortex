@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import classNames from "classnames";
 
 import { useDeckWithCards } from "../../hooks/useDecks";
 import { Loader } from "@/app/components/atoms/Loader";
@@ -63,15 +64,38 @@ export default function ReviewDeckPage() {
       </div>
 
       <div className="bg-white rounded-lg border border-gray-300 shadow-sm hover:shadow-md transition-shadow">
-        <div className="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-6 w-full">
+        <div className="px-4 py-2 flex items-center">
+          <div className="flex items-center justify-between gap-6 w-full">
             <div className="text-center">
               <div className="text-2xl font-bold text-gray-900">
                 {stats?.remaining ?? cards.length}
               </div>
               <div className="text-xs text-gray-600">Remaining</div>
             </div>
-            <div className="text-center ml-auto">
+            <div className="flex flex-col content-stretch text-left">
+              <p
+                className={classNames("text-sm text-gray-600", {
+                  "font-bold text-green-700": stats.correct > 0,
+                })}
+              >
+                {stats.correct} Correct
+              </p>
+              <p
+                className={classNames("text-sm text-gray-600", {
+                  "font-bold text-red-800": stats.incorrect > 0,
+                })}
+              >
+                {stats.incorrect} Incorrect
+              </p>
+              <p
+                className={classNames("text-sm text-gray-600", {
+                  "font-bold text-yellow-600": stats.hintUsed > 0,
+                })}
+              >
+                {stats.hintUsed} Hints Used
+              </p>
+            </div>
+            <div className="text-center">
               <Button variant="ghost" iconName="back" />
               <div className="text-xs text-gray-600">Restart</div>
             </div>

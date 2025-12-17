@@ -51,7 +51,7 @@ export default function ReviewDeckPage() {
   }
 
   return (
-    <div className="flex flex-col content-stretch gap-2">
+    <div className="flex flex-col content-stretch gap-2 w-full">
       <div className="flex items-center justify-stretch gap-4">
         <BreadcrumbButton path="/review-session" label="Back" />
         <div className="flex flex-col text-end ml-auto">

@@ -10,23 +10,21 @@ export default function ReviewSessionPage() {
   const { data = [] } = useDecksWithCount();
 
   return (
-    <section className="max-w-8xl mx-auto p-2">
-      <div className="flex flex-col gap-2 content-stretch">
-        <BreadcrumbButton path="/dashboard" label="Dashboard" />
+    <section className="flex flex-col gap-2 content-stretch">
+      <BreadcrumbButton path="/dashboard" label="Dashboard" />
 
-        <h2 className="text-xl text-center font-bold my-2">
-          Which deck would you like to review?
-        </h2>
+      <h2 className="text-xl text-center font-bold my-2">
+        Which deck would you like to review?
+      </h2>
 
-        <div className="grid grid-cols-2 gap-3">
-          {data.map((d) => (
-            <Deck
-              key={d.uuid}
-              deck={d}
-              onClick={() => router.push(`/review-session/${d.uuid}`)}
-            />
-          ))}
-        </div>
+      <div className="grid grid-cols-2 gap-3">
+        {data.map((d) => (
+          <Deck
+            key={d.uuid}
+            deck={d}
+            onClick={() => router.push(`/review-session/${d.uuid}`)}
+          />
+        ))}
       </div>
     </section>
   );

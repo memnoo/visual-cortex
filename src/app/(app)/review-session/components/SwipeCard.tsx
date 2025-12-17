@@ -112,12 +112,12 @@ export const SwipeCard = ({
       onPointerUp={handlePointerUp}
       data-attribute={card.front}
     >
-      {isTopCard && <SwipeIndicators dragOffset={dragOffset} />}
-
       <RevealableFlashCard
         card={card}
         onFlip={() => setIsFlipped(!isFlipped)}
       />
+
+      {isTopCard && <SwipeIndicators dragOffset={dragOffset} />}
     </div>
   );
 };
@@ -135,28 +135,28 @@ const SwipeIndicators = ({
   return (
     <>
       <div
-        className="absolute bottom-4 left-1/4 bg-green-500 text-white px-6 py-3 rounded-xl font-bold text-2xl rotate-12 pointer-events-none"
+        className="absolute left-1/2 -translate-x-1/2 translate-y-8 bg-green-500 text-white px-6 py-3 rounded-xl font-bold text-2xl rotate-12 pointer-events-none"
         style={{ opacity: rightOpacity }}
       >
         ✓ LEARNT
       </div>
 
       <div
-        className="absolute bottom-4 left-1/2 bg-red-500 text-white px-6 py-3 rounded-xl font-bold text-2xl -rotate-12 pointer-events-none"
+        className="absolute left-1/2 -translate-x-1/2 translate-y-8 bg-red-500 text-white px-6 py-3 rounded-xl font-bold text-2xl -rotate-12 pointer-events-none"
         style={{ opacity: leftOpacity }}
       >
         ✗ DUNNO
       </div>
 
       <div
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-yellow-500 text-white px-6 py-3 rounded-xl font-bold text-xl pointer-events-none"
+        className="absolute left-1/2 -translate-x-1/2 translate-y-6 bg-yellow-500 text-white px-6 py-3 rounded-xl font-bold text-xl pointer-events-none"
         style={{ opacity: upOpacity }}
       >
         💡 HINT
       </div>
 
       <div
-        className="absolute bottom-[-4px] left-1/2 -translate-x-1/2 bg-gray-500 text-white px-6 py-3 rounded-xl font-bold text-xl pointer-events-none"
+        className="absolute left-1/2 -translate-x-1/2 translate-y-6 bg-gray-500 text-white px-6 py-3 rounded-xl font-bold text-xl pointer-events-none"
         style={{ opacity: downOpacity }}
       >
         ↓ PASS

@@ -52,6 +52,7 @@ export const CardSwiper = ({ cards, onActionPerformed }: CardSwiperProps) => {
             direction === "left"
               ? prevStats.incorrect + 1
               : prevStats.incorrect,
+          remaining: newRemainingCards.length,
         }));
         break;
       }
@@ -72,7 +73,7 @@ export const CardSwiper = ({ cards, onActionPerformed }: CardSwiperProps) => {
   };
 
   return (
-    <div className="mx-auto pb-2 relative w-full h-full">
+    <div className="mx-auto relative w-full h-full">
       {remainingCards.slice(0, PREVIEW_STACK_SIZE).map((card, index) => (
         <SwipeCard
           key={card.uuid}

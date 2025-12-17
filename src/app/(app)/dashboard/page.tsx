@@ -5,7 +5,7 @@ import Button from "@/app/components/atoms/Button";
 
 export default function DashboardPage() {
   return (
-    <section className="max-w-8xl mx-auto p-2 flex flex-col gap-2 content-stretch">
+    <section className="flex flex-col gap-2 content-stretch w-full">
       <Link href="/decks">
         <Button
           type="button"

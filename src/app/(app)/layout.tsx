@@ -49,7 +49,7 @@ export default function RootLayout({
           </div>
         </header>
 
-        <main className="max-w-8xl p-4 flex-1">{children}</main>
+        <main className="max-w-8xl p-4 flex flex-1">{children}</main>
       </Providers>
     </div>
   );

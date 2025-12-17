@@ -20,30 +20,26 @@ export const FlashCard = ({ card, children }: FlashCardProps) => {
     useCardExtraFields(card);
 
   return (
-    <div className="w-full max-w-md mx-auto">
-      <div className="relative w-full">
-        <div className="w-full h-full absolute inset-0 backface-hidden">
-          <div
-            className={classNames(
-              "flex flex-col content-stretch rounded-2xl shadow-2xl p-4 text-center",
-              theme
-            )}
-          >
-            <div className="flex flex-col content-stretch justify-center">
-              <h2 className="text-4xl text-white font-bold">{card.front}</h2>
-              <CardExceptionFieldList values={exceptionValueFields} />
-              <h3 className="text-2xl text-red-300 font-semibold mt-2">
-                {card.back}
-              </h3>
-              {!hasOnlyExceptionProperties && visibleFields.length > 0 && (
-                <>
-                  <Divider horizontal />
-                  <CardVisibleExtraFieldList values={visibleFields} />
-                </>
-              )}
-              {children}
-            </div>
-          </div>
+    <div className="w-full h-full">
+      <div
+        className={classNames(
+          "flex flex-col content-stretch rounded-2xl shadow-2xl p-4 text-center h-full",
+          theme
+        )}
+      >
+        <div className="flex flex-col content-stretch justify-center">
+          <h2 className="text-4xl text-white font-bold">{card.front}</h2>
+          <CardExceptionFieldList values={exceptionValueFields} />
+          <h3 className="text-2xl text-red-300 font-semibold mt-2">
+            {card.back}
+          </h3>
+          {!hasOnlyExceptionProperties && visibleFields.length > 0 && (
+            <>
+              <Divider horizontal />
+              <CardVisibleExtraFieldList values={visibleFields} />
+            </>
+          )}
+          {children}
         </div>
       </div>
     </div>

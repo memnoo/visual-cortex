@@ -33,7 +33,7 @@ export default function DeckPage() {
 
   if (isLoading) {
     return (
-      <div className="bg-gray-50 flex items-center justify-center">
+      <div className="bg-gray-50 flex items-center justify-center w-full">
         <Loader text="Loading the deck and its cards..." hasAccentColor />
       </div>
     );
@@ -47,7 +47,7 @@ export default function DeckPage() {
 
   return (
     <>
-      <section className="max-w-8xl mx-auto p-2 flex flex-col gap-2 content-stretch text-left">
+      <section className="flex flex-col gap-2 content-stretch text-left w-full">
         <div className="flex items-center align-stretch gap-2">
           <BreadcrumbButton path="/decks" label="Decks" />
           <div className="ml-auto">

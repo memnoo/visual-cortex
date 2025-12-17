@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import classNames from "classnames";
 
 import { Card } from "../../types/types";
 
@@ -34,7 +33,7 @@ export const FlashCardsGrid = ({
 
   return (
     <>
-      <div className="grid grid-rows-1 sm:grid-rows-2 md:grid-cols-5 gap-6">
+      <div className="flex flex-col content-stretch gap-6 flex-1">
         {!cards || cards.length === 0 ? (
           <EmptyState label="No cards in this deck">
             <Button variant="ghost" onClick={onAddFlashCardClicked}>
@@ -43,12 +42,7 @@ export const FlashCardsGrid = ({
           </EmptyState>
         ) : (
           <>
-            <div
-              className={classNames(
-                "space-y-2 md:col-span-2 overflow-y-auto",
-                selectedCard ? "max-h-58" : "max-h-90"
-              )}
-            >
+            <div className="space-y-2 md:col-span-2 overflow-y-auto max-h-100">
               {cards.map((card) => (
                 <div
                   key={card.uuid}
@@ -76,9 +70,9 @@ export const FlashCardsGrid = ({
               ))}
             </div>
 
-            <div className="flex items-start justify-center md:col-span-3">
+            <div className="flex items-start justify-center md:col-span-3 mt-auto h-[40%]">
               {selectedCard ? (
-                <div className="w-full max-w-md">
+                <div className="w-full h-full max-w-md">
                   <FlashCard card={selectedCard} />
                 </div>
               ) : (

@@ -18,7 +18,7 @@ export default function DecksPage() {
 
   if (isLoading) {
     return (
-      <div className="bg-gray-50 flex items-center justify-center">
+      <div className="bg-gray-50 flex items-center justify-center w-full">
         <Loader text="Loading your decks..." hasAccentColor />
       </div>
     );
@@ -30,24 +30,22 @@ export default function DecksPage() {
 
   return (
     <>
-      <section className="max-w-8xl mx-auto p-2">
-        <div className="flex flex-col gap-2 content-stretch">
-          <BreadcrumbButton path="/dashboard" label="Dashboard" />
-          <div className="grid grid-cols-2 gap-3">
-            <div key="add-deck-button" className="w-full h-full">
-              <EmptyStateButton
-                label="Add a deck"
-                onClick={() => setIsModalOpen(true)}
-              />
-            </div>
-            {decks.map((d) => (
-              <Deck
-                key={d.uuid}
-                deck={d}
-                onClick={() => router.push(`/decks/${d.uuid}`)}
-              />
-            ))}
+      <section className="flex flex-col gap-2 content-stretch w-full">
+        <BreadcrumbButton path="/dashboard" label="Dashboard" />
+        <div className="grid grid-cols-2 gap-3">
+          <div key="add-deck-button" className="w-full h-full">
+            <EmptyStateButton
+              label="Add a deck"
+              onClick={() => setIsModalOpen(true)}
+            />
           </div>
+          {decks.map((d) => (
+            <Deck
+              key={d.uuid}
+              deck={d}
+              onClick={() => router.push(`/decks/${d.uuid}`)}
+            />
+          ))}
         </div>
       </section>
       <DeckModal

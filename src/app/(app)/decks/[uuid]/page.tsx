@@ -54,6 +54,12 @@ export default function DeckPage() {
             <div className="flex gap-1">
               <Button
                 type="button"
+                variant="primary"
+                iconName="plus"
+                onClick={() => setIsCardModalOpen(true)}
+              />
+              <Button
+                type="button"
                 variant="secondary"
                 iconName="edit"
                 onClick={() => toggleDeckOperation("UPDATE")}

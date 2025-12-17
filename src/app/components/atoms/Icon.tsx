@@ -6,7 +6,8 @@ export type IconName =
   | "delete"
   | "edit"
   | "file"
-  | "menu";
+  | "menu"
+  | "plus";
 
 export const Icon = ({ name }: { name: string }) => {
   switch (name) {
@@ -136,6 +137,22 @@ export const Icon = ({ name }: { name: string }) => {
             strokeLinejoin="round"
             strokeWidth={2}
             d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
+          />
+        </svg>
+      );
+    case "plus":
+      return (
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M12 4v16m8-8H4"
           />
         </svg>
       );

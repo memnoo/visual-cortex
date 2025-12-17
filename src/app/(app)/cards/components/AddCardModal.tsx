@@ -32,7 +32,7 @@ export const AddCardModal = ({
     mutationFn: async (data: {
       front: string;
       back: string;
-      content: string;
+      content: Record<string, unknown>;
     }) => {
       // Get current user
       const {
@@ -99,9 +99,9 @@ export const AddCardModal = ({
       return;
     }
 
-    // Validate JSON before submitting
+    let json: Record<string, unknown>;
     try {
-      JSON.parse(content);
+      json = JSON.parse(content);
     } catch (e) {
       setError("The JSON content is invalid");
       return;
@@ -111,7 +111,7 @@ export const AddCardModal = ({
     setError(null);
 
     try {
-      await createCardMutation.mutateAsync({ front, back, content });
+      await createCardMutation.mutateAsync({ front, back, content: json });
     } catch (error) {
       // Error is handled by onError callback
     } finally {

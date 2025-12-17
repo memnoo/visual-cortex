@@ -28,7 +28,7 @@ export default function ReviewDeckPage() {
 
   if (isLoading) {
     return (
-      <div className="bg-gray-50 flex items-center justify-center">
+      <div className="bg-gray-50 flex items-center justify-center w-full">
         <Loader text="Loading cards to review..." hasAccentColor />
       </div>
     );

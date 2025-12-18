@@ -30,9 +30,9 @@ export default function DecksPage() {
 
   return (
     <>
-      <section className="flex flex-col gap-2 content-stretch w-full">
+      <section className="flex flex-col gap-3 content-stretch w-full">
         <BreadcrumbButton path="/dashboard" label="Dashboard" />
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 auto-rows-fr">
           <div key="add-deck-button" className="w-full h-full">
             <EmptyStateButton
               label="Add a deck"

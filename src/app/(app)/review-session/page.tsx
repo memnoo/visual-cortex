@@ -10,14 +10,14 @@ export default function ReviewSessionPage() {
   const { data = [] } = useDecksWithCount();
 
   return (
-    <section className="flex flex-col gap-2 content-stretch">
+    <section className="flex flex-col gap-3 content-stretch">
       <BreadcrumbButton path="/dashboard" label="Dashboard" />
 
-      <h2 className="text-xl text-center font-bold my-2">
+      <h2 className="text-xl text-center font-bold">
         Which deck would you like to review?
       </h2>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-3 auto-rows-fr">
         {data.map((d) => (
           <Deck
             key={d.uuid}

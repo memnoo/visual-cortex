@@ -22,8 +22,9 @@ export default function ReviewDeckPage() {
     correct: 0,
     incorrect: 0,
     hintUsed: 0,
-    remaining: (cards ?? []).length,
   });
+  const [remainingCount, setRemainingCount] = useState((cards ?? []).length);
+  const [isComplete, setIsComplete] = useState(false);
 
   if (isLoading) {
     return (
@@ -47,7 +48,7 @@ export default function ReviewDeckPage() {
   }
 
   if (!cards || cards.length === 0) {
-    return <EmptyStateReview />;
+    return <PlaceholderStateReview label="No card to review for now" />;
   }
 
   return (
@@ -67,7 +68,7 @@ export default function ReviewDeckPage() {
           <div className="flex items-center justify-between gap-6 w-full">
             <div className="text-center">
               <div className="text-2xl font-bold text-gray-900">
-                {stats?.remaining ?? cards.length}
+                {isComplete ? 0 : remainingCount || cards.length}
               </div>
               <div className="text-xs text-gray-600">Remaining</div>
             </div>
@@ -103,23 +104,29 @@ export default function ReviewDeckPage() {
       </div>
 
       <div className="w-full flex-1 mt-12">
-        <CardSwiper
-          cards={cards}
-          onActionPerformed={(action, reviewSessionState) => {
-            setStats(reviewSessionState);
-          }}
-        />
+        {isComplete ? (
+          <PlaceholderStateReview label="Review session complete! 🎉" />
+        ) : (
+          <CardSwiper
+            cards={cards}
+            onActionPerformed={(action, reviewSessionState, remaining) => {
+              setStats(reviewSessionState);
+              setRemainingCount(remaining);
+              if (remaining === 0) {
+                setIsComplete(true);
+              }
+            }}
+          />
+        )}
       </div>
     </div>
   );
 }
 
-const EmptyStateReview = () => (
+const PlaceholderStateReview = ({ label }: { label: string }) => (
   <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 flex items-center justify-center">
     <div className="text-center">
-      <p className="text-2xl font-semibold text-gray-700 mb-4">
-        No card to review for now
-      </p>
+      <p className="text-2xl font-semibold text-gray-700 mb-4">{label}</p>
       <Link
         href="/review-session"
         className="text-indigo-600 hover:text-indigo-700 font-medium"

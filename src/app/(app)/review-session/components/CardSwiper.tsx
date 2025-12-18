@@ -9,14 +9,14 @@ export type ReviewSessionState = {
   correct: number;
   incorrect: number;
   hintUsed: number;
-  remaining: number;
 };
 
 type CardSwiperProps = {
   cards: Card[];
   onActionPerformed: (
     action: SwipeDirection,
-    reviewSessionState: ReviewSessionState
+    reviewSessionState: ReviewSessionState,
+    remaining: number
   ) => void;
 };
 
@@ -27,7 +27,6 @@ export const CardSwiper = ({ cards, onActionPerformed }: CardSwiperProps) => {
     correct: 0,
     incorrect: 0,
     hintUsed: 0,
-    remaining: cards.length,
   });
 
   const [remainingCards, setRemainingCards] = useState<Card[]>(cards);
@@ -44,10 +43,9 @@ export const CardSwiper = ({ cards, onActionPerformed }: CardSwiperProps) => {
         setRemainingCards(newRemainingCards);
 
         newStats.correct = stats.correct + 1;
-        newStats.remaining = newRemainingCards.length;
         setStats(newStats);
 
-        onActionPerformed(direction, newStats);
+        onActionPerformed(direction, newStats, newRemainingCards.length);
         break;
       }
 
@@ -58,10 +56,9 @@ export const CardSwiper = ({ cards, onActionPerformed }: CardSwiperProps) => {
         setRemainingCards(newRemainingCards);
 
         newStats.incorrect = stats.incorrect + 1;
-        newStats.remaining = newRemainingCards.length;
         setStats(newStats);
 
-        onActionPerformed(direction, newStats);
+        onActionPerformed(direction, newStats, newRemainingCards.length);
         break;
       }
 

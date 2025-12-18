@@ -8,6 +8,8 @@ import Input from "@/app/components/atoms/Input";
 import { Loader } from "@/app/components/atoms/Loader";
 import { Select } from "@/app/components/atoms/Select";
 import { Deck } from "../../types/types";
+import { useAuth } from "../../hooks/useUser";
+import { useRouter } from "next/navigation";
 
 interface AddDeckModalProps {
   isOpen: boolean;
@@ -38,7 +40,9 @@ export const DeckModal = ({
   onClose,
   deckOperation,
 }: AddDeckModalProps) => {
+  const authentication = useAuth();
   const { deck, operation } = deckOperation;
+  const router = useRouter();
 
   const [topic, setTopic] = useState(deck?.topic ?? "");
   const [domain, setDomain] = useState(deck?.domain ?? "");
@@ -55,10 +59,7 @@ export const DeckModal = ({
       domain: string;
       lang?: string;
     }) => {
-      // Get current user
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      const user = await authentication.getCurrentUser();
       if (!user) throw new Error("User not authenticated");
 
       // Generate UUID for the new deck
@@ -92,27 +93,51 @@ export const DeckModal = ({
 
   const deleteDeckMutation = useMutation({
     mutationFn: async (data: { deckUuid: string }) => {
-      // Get current user
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      const user = await authentication.getCurrentUser();
       if (!user) throw new Error("User not authenticated");
 
-      const { error } = await supabase
+      // TOFIX Make transactional
+
+      // Fetch cards associated with the deck
+      const { data: cardResults, error: deckCardsError } = await supabase
+        .from("deck_card_association")
+        .select("card_uuid")
+        .eq("deck_uuid", data.deckUuid);
+      if (deckCardsError) throw deckCardsError;
+
+      const cardUuids = cardResults?.map((r) => r.card_uuid) || [];
+
+      // Delete associations
+      const { error: cardDeckAssociationError } = await supabase
+        .from("deck_card_association")
+        .delete()
+        .eq("deck_uuid", data.deckUuid);
+      if (cardDeckAssociationError) throw cardDeckAssociationError;
+
+      // Delete cards
+      const { error: cardsError } = await supabase
+        .from("Card")
+        .delete()
+        .eq("uuid", cardUuids);
+      if (cardsError) throw cardsError;
+
+      // Delete the deck
+      const { error: deckError } = await supabase
         .from("Deck")
         .delete()
         .eq("uuid", data.deckUuid);
-      if (error) throw error;
+      if (deckError) throw deckError;
     },
     onSuccess: () => {
-      // Invalidate queries to refresh data
-      queryClient.invalidateQueries({ queryKey: ["decks"] });
-      // Reset form and close modal
+      queryClient.removeQueries({ queryKey: ["decks", deck?.uuid] });
+
       setTopic("");
       setDomain("");
       setLang("");
       setError(null);
       onClose();
+
+      router.push("/decks");
     },
     onError: (error: any) => {
       setError(error.message || "An error occurred");

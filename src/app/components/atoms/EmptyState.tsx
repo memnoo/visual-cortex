@@ -1,7 +1,10 @@
 import { PropsWithChildren } from "react";
-import { Icon } from "./Icon";
+import { Icon, IconName } from "./Icon";
 
-type EmptyStateProps = { label: string; icon?: string } & PropsWithChildren;
+type EmptyStateProps = {
+  label: string;
+  icon?: IconName;
+} & PropsWithChildren;
 
 export const EmptyState = ({
   children,

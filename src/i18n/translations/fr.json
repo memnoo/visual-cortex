@@ -3,6 +3,12 @@
     "title": "Memnō",
     "description": "Application d'apprentissage par mémorisation, augmentée par l'IA"
   },
+  "cards": {
+    "word": "{count, plural, =0 {# carte} =1 {# carte} other {# cartes}}"
+  },
+  "decks": {
+    "word": "{count, plural, =0 {# paquet} =1 {# paquet} other {# paquets}}"
+  },
   "reviews": {
     "session": {
       "remaining": "Restant",

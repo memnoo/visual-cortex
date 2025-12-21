@@ -1,17 +1,22 @@
 "use client";
 
-import { ErrorCallout } from "@/app/components/atoms/ErrorCallout";
-import { useParams } from "next/navigation";
-import { useDeckWithCards } from "../../hooks/useDecks";
-import { Loader } from "@/app/components/atoms/Loader";
-import { FlashCardsGrid } from "../components/FlashCardsGrid";
-import Button from "@/app/components/atoms/Button";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
+
+import { useDeckWithCards } from "../../hooks/useDecks";
+
+import { FlashCardsGrid } from "../components/FlashCardsGrid";
+import { ErrorCallout } from "@/app/components/atoms/ErrorCallout";
+import { Loader } from "@/app/components/atoms/Loader";
+import Button from "@/app/components/atoms/Button";
 import { AddCardModal } from "../../cards/components/AddCardModal";
 import { DeckModal } from "../components/DeckModal";
 import { BreadcrumbButton } from "../../components/BreadcrumbButton";
 
 export default function DeckPage() {
+  const t = useTranslations();
+
   const { uuid } = useParams();
   const deckUuid = String(uuid);
 
@@ -76,7 +81,7 @@ export default function DeckPage() {
         <h2 className="text-xl text-center font-bold my-2">
           {deck.topic}{" "}
           <small className="text-medium font-semibold text-gray-400">
-            ({cards.length} cards)
+            ({t("cards.word", { count: cards.length })})
           </small>
         </h2>
         <FlashCardsGrid

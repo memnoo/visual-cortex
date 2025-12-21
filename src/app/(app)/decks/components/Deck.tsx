@@ -1,4 +1,6 @@
+import { useTranslations } from "next-intl";
 import classNames from "classnames";
+
 import { DeckWithCount } from "../../types/types";
 
 interface DeckProps {
@@ -8,6 +10,8 @@ interface DeckProps {
 }
 
 export const Deck = ({ deck, isSelected, onClick }: DeckProps) => {
+  const t = useTranslations();
+
   return (
     <div className="perspective-1000 w-full h-full">
       <button
@@ -30,7 +34,9 @@ export const Deck = ({ deck, isSelected, onClick }: DeckProps) => {
             </span>
           )}
           <p className="text-xl md:text-2xl font-bold">{deck.topic}</p>
-          <p className="md:text-lg font-medium">{deck.count} cards</p>
+          <p className="md:text-lg font-medium">
+            {t("cards.word", { count: deck.count })}
+          </p>
         </div>
       </button>
     </div>

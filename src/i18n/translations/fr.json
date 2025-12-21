@@ -1,0 +1,30 @@
+{
+  "app": {
+    "title": "Memnō",
+    "description": "Application d'apprentissage par mémorisation, augmentée par l'IA"
+  },
+  "reviews": {
+    "session": {
+      "remaining": "Restant",
+      "stats": {
+        "correct": "Correct",
+        "incorrect": "Incorrect",
+        "hintsUsed": "Indices utilisés"
+      },
+      "restart": "Redémarrer",
+      "swipe": {
+        "indicators": {
+          "learnt": "✓ APPRIS",
+          "dunno": "✗ OUBLIÉ",
+          "hint": "💡 INDICE",
+          "pass": "↓ PASSER"
+        }
+      }
+    }
+  },
+  "misc": {
+    "error": "Une erreur s'est produite. Veuillez réessayer.",
+    "loading": "Chargement...",
+    "welcome": "Bienvenue, {name}"
+  }
+}

@@ -1,21 +1,26 @@
 "use client";
 
 import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
+
+import { useTranslations } from "next-intl";
+import { User } from "@supabase/supabase-js";
 
 import { useAuth } from "./hooks/useUser";
-import { Providers } from "../providers";
+
 import LogoutButton from "@/app/(site)/login/components/LogoutButton";
+import { Providers } from "../providers";
+import { BrandName } from "../components/BrandName";
 
 import "../styles/globals.css";
-import { useEffect, useState } from "react";
-import { User } from "@supabase/supabase-js";
-import { BrandName } from "../components/BrandName";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const t = useTranslations();
+
   const [user, setUser] = useState<User>();
   const { getCurrentUser } = useAuth();
   useEffect(() => {
@@ -41,7 +46,7 @@ export default function RootLayout({
               <div>
                 <BrandName />
                 <p className="text-sm text-gray-600">
-                  Welcome, {user?.email ?? "..."}
+                  {t("misc.welcome", { name: user?.email ?? "..." })}
                 </p>
               </div>
               <LogoutButton />

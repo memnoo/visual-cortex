@@ -11,14 +11,14 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   iconPosition?: IconPosition;
 }
 
-export default function Button({
+export const Button = ({
   variant = "primary",
   iconName,
   iconPosition = "left",
   className = "",
   children,
   ...props
-}: Props) {
+}: Props) => {
   const base = "btn";
   const variants: Record<Variant, string> = {
     primary:
@@ -45,4 +45,4 @@ export default function Button({
       {children}
     </button>
   );
-}
+};

@@ -1,16 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import classNames from "classnames";
 
 import { useDeckWithCards } from "../../hooks/useDecks";
+
+import { Button } from "@/app/components/atoms/Button";
 import { Loader } from "@/app/components/atoms/Loader";
 import { BreadcrumbButton } from "../../components/BreadcrumbButton";
 import { EmptyState } from "@/app/components/atoms/EmptyState";
 import { CardSwiper, ReviewSessionState } from "../components/CardSwiper";
-import Button from "@/app/components/atoms/Button";
-import { useState } from "react";
 
 export default function ReviewDeckPage() {
   const { uuid } = useParams();

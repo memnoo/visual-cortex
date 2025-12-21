@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Button from "@/app/components/atoms/Button";
+
+import { Button } from "@/app/components/atoms/Button";
 
 export default function DashboardPage() {
   return (

@@ -1,16 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import { useAuth } from "../../hooks/useUser";
 import { createClient } from "@/lib/database/client";
-import Button from "@/app/components/atoms/Button";
-import Input from "@/app/components/atoms/Input";
+
+import { Button } from "@/app/components/atoms/Button";
+import { Input } from "@/app/components/atoms/Input";
 import { Loader } from "@/app/components/atoms/Loader";
 import { Select } from "@/app/components/atoms/Select";
-import { Deck } from "../../types/types";
-import { useAuth } from "../../hooks/useUser";
-import { useRouter } from "next/navigation";
 import { Icon } from "@/app/components/atoms/Icon";
+
+import { Deck } from "../../types/types";
 
 interface AddDeckModalProps {
   isOpen: boolean;

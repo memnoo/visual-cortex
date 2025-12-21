@@ -6,7 +6,7 @@ import { Card } from "../../types/types";
 
 import { FlashCard } from "../../cards/components/FlashCard";
 import { EmptyState } from "@/app/components/atoms/EmptyState";
-import Button from "@/app/components/atoms/Button";
+import { Button } from "@/app/components/atoms/Button";
 
 interface DeckDetailsViewProps {
   cards: Card[];

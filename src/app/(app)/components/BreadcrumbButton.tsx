@@ -1,6 +1,7 @@
-import Button from "@/app/components/atoms/Button";
-import type { IconName } from "@/app/components/atoms/Icon";
 import Link from "next/link";
+
+import { Button } from "@/app/components/atoms/Button";
+import type { IconName } from "@/app/components/atoms/Icon";
 
 type BreadcrumbButtonProps = {
   path: string;

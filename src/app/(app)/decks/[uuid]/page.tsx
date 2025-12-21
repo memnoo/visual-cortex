@@ -9,7 +9,7 @@ import { useDeckWithCards } from "../../hooks/useDecks";
 import { FlashCardsGrid } from "../components/FlashCardsGrid";
 import { ErrorCallout } from "@/app/components/atoms/ErrorCallout";
 import { Loader } from "@/app/components/atoms/Loader";
-import Button from "@/app/components/atoms/Button";
+import { Button } from "@/app/components/atoms/Button";
 import { AddCardModal } from "../../cards/components/AddCardModal";
 import { DeckModal } from "../components/DeckModal";
 import { BreadcrumbButton } from "../../components/BreadcrumbButton";

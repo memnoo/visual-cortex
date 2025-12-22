@@ -8,6 +8,10 @@
       "notAuthenticated": "User not authenticated"
     }
   },
+  "nav": {
+    "decks": "Go to decks",
+    "review-session": "Review decks"
+  },
   "cards": {
     "word": "{count, plural, =0 {# card} =1 {# card} other {# cards}}",
     "management": {

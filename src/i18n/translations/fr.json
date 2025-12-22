@@ -8,6 +8,10 @@
       "notAuthenticated": "Utilisateur non authentifié"
     }
   },
+  "nav": {
+    "decks": "Parcourir les paquets",
+    "review-session": "Réviser les paquets"
+  },
   "cards": {
     "word": "{count, plural, =0 {# carte} =1 {# carte} other {# cartes}}",
     "management": {

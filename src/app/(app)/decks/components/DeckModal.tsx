@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 
 import { useAuth } from "../../hooks/useUser";
 import { createClient } from "@/lib/database/client";
@@ -11,9 +12,9 @@ import { Button } from "@/app/components/atoms/Button";
 import { Input } from "@/app/components/atoms/Input";
 import { Loader } from "@/app/components/atoms/Loader";
 import { Select } from "@/app/components/atoms/Select";
-import { Icon } from "@/app/components/atoms/Icon";
 
 import { Deck } from "../../types/types";
+import { Modal } from "@/app/components/Modal";
 
 interface AddDeckModalProps {
   isOpen: boolean;
@@ -44,6 +45,7 @@ export const DeckModal = ({
   onClose,
   deckOperation,
 }: AddDeckModalProps) => {
+  const t = useTranslations();
   const authentication = useAuth();
   const { deck, operation } = deckOperation;
   const router = useRouter();
@@ -64,7 +66,7 @@ export const DeckModal = ({
       lang?: string;
     }) => {
       const user = await authentication.getCurrentUser();
-      if (!user) throw new Error("User not authenticated");
+      if (!user) throw new Error(t("auth.errors.notAuthenticated"));
 
       // Generate UUID for the new deck
       const deckUuid = deck?.uuid ?? crypto.randomUUID();
@@ -98,7 +100,7 @@ export const DeckModal = ({
   const deleteDeckMutation = useMutation({
     mutationFn: async (data: { deckUuid: string }) => {
       const user = await authentication.getCurrentUser();
-      if (!user) throw new Error("User not authenticated");
+      if (!user) throw new Error(t("auth.errors.notAuthenticated"));
 
       // TOFIX Make transactional
 
@@ -178,130 +180,108 @@ export const DeckModal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black bg-opacity-50"
-        onClick={onClose}
-      />
+    <Modal isOpen={isOpen} onClose={onClose} title={LABELS[operation].title}>
+      {/* Form */}
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {operation === "DELETE" && (
+          <p>
+            Would you like to delete the deck : <br />
+            <strong>{deck?.topic}</strong>
+          </p>
+        )}
 
-      {/* Modal */}
-      <div className="relative bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-6">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">
-            {LABELS[operation].title}
-          </h2>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
-          >
-            <Icon name="cross" />
-          </button>
-        </div>
-
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {operation === "DELETE" && (
-            <p>
-              Would you like to delete the deck : <br />
-              <strong>{deck?.topic}</strong>
-            </p>
-          )}
-
-          {["ADD", "UPDATE"].includes(operation) && (
-            <>
-              <div>
-                <label
-                  htmlFor="topic"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  Title *
-                </label>
-                <Input
-                  id="topic"
-                  type="text"
-                  value={topic}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setTopic(e.target.value)
-                  }
-                  placeholder="Ex: Maths, History, Language..."
-                  required
-                  disabled={loading}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
-                />
-              </div>
-
-              <Select
-                label="Domain *"
-                values={[
-                  { value: "Languages", label: "Languages" },
-                  { value: "Sciences", label: "Sciences" },
-                  { value: "Health", label: "Health" },
-                  { value: "History", label: "History" },
-                  { value: "Other", label: "Other" },
-                ]}
-                isMultiple
-                isDisabled={loading}
-                onChange={(values) => setDomain(String(values))}
+        {["ADD", "UPDATE"].includes(operation) && (
+          <>
+            <div>
+              <label
+                htmlFor="topic"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Title *
+              </label>
+              <Input
+                id="topic"
+                type="text"
+                value={topic}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setTopic(e.target.value)
+                }
+                placeholder="Ex: Maths, History, Language..."
+                required
+                disabled={loading}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
               />
-
-              <div>
-                <label
-                  htmlFor="lang"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  Language (optional)
-                </label>
-                <Input
-                  id="lang"
-                  type="text"
-                  value={lang}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setLang(e.target.value)
-                  }
-                  placeholder="Ex: fr, en, es..."
-                  disabled={loading}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
-                />
-              </div>
-            </>
-          )}
-          {/* Error Message */}
-          {error && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-md">
-              <p className="text-sm text-red-600">{error}</p>
             </div>
-          )}
-          {/* Actions */}
-          <div className="flex gap-3 pt-4">
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={onClose}
-              disabled={loading}
-              className="flex-1"
-            >
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              variant="primary"
-              disabled={loading}
-              className="flex-1"
-            >
-              {loading ? (
-                <div className="flex items-center justify-center gap-2">
-                  <Loader size="xsmall" fit="content" />
-                  {LABELS[operation].loading}
-                </div>
-              ) : (
-                LABELS[operation].cta
-              )}
-            </Button>
+
+            <Select
+              label="Domain *"
+              values={[
+                { value: "Languages", label: "Languages" },
+                { value: "Sciences", label: "Sciences" },
+                { value: "Health", label: "Health" },
+                { value: "History", label: "History" },
+                { value: "Other", label: "Other" },
+              ]}
+              isMultiple
+              isDisabled={loading}
+              onChange={(values) => setDomain(String(values))}
+            />
+
+            <div>
+              <label
+                htmlFor="lang"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Language (optional)
+              </label>
+              <Input
+                id="lang"
+                type="text"
+                value={lang}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setLang(e.target.value)
+                }
+                placeholder="Ex: fr, en, es..."
+                disabled={loading}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
+              />
+            </div>
+          </>
+        )}
+        {/* Error Message */}
+        {error && (
+          <div className="p-3 bg-red-50 border border-red-200 rounded-md">
+            <p className="text-sm text-red-600">{error}</p>
           </div>
-        </form>
-      </div>
-    </div>
+        )}
+        {/* Actions */}
+        <div className="flex gap-3 pt-4">
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={onClose}
+            disabled={loading}
+            className="flex-1"
+          >
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            variant="primary"
+            disabled={loading}
+            className="flex-1"
+          >
+            {loading ? (
+              <div className="flex items-center justify-center gap-2">
+                <Loader size="xsmall" fit="content" />
+                {LABELS[operation].loading}
+              </div>
+            ) : (
+              LABELS[operation].cta
+            )}
+          </Button>
+        </div>
+      </form>
+    </Modal>
   );
 };

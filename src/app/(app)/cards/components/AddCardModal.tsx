@@ -3,11 +3,13 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createClient } from "@/lib/database/client";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/app/components/atoms/Button";
 import { Input } from "@/app/components/atoms/Input";
 import { Loader } from "@/app/components/atoms/Loader";
 import { Icon } from "@/app/components/atoms/Icon";
+import { Modal } from "@/app/components/Modal";
 
 interface AddCardModalProps {
   isOpen: boolean;
@@ -20,6 +22,8 @@ export const AddCardModal = ({
   onClose,
   deckUuid,
 }: AddCardModalProps) => {
+  const t = useTranslations();
+
   const [front, setFront] = useState("");
   const [back, setBack] = useState("");
   const [content, setContent] = useState("{}");
@@ -40,7 +44,7 @@ export const AddCardModal = ({
       const {
         data: { user },
       } = await supabase.auth.getUser();
-      if (!user) throw new Error("User not authenticated");
+      if (!user) throw new Error(t("auth.errors.notAuthenticated"));
 
       // Create the card
       const cardUuid = crypto.randomUUID();
@@ -78,7 +82,7 @@ export const AddCardModal = ({
       onClose();
     },
     onError: (error: any) => {
-      setError(error.message || "An error occurred");
+      setError(error.message || t("misc.error"));
     },
   });
 
@@ -90,14 +94,14 @@ export const AddCardModal = ({
       JSON.parse(value);
       setJsonError(null);
     } catch (e) {
-      setJsonError("Invalid JSON");
+      setJsonError(t("cards.management.addCard.form.content.error"));
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!front.trim() || !back.trim()) {
-      setError("Front and back of the card are required");
+      setError(t("cards.management.addCard.form.errors.requiredFields"));
       return;
     }
 
@@ -105,7 +109,7 @@ export const AddCardModal = ({
     try {
       json = JSON.parse(content);
     } catch (e) {
-      setError("The JSON content is invalid");
+      setError(t("cards.management.addCard.form.errors.invalidJson"));
       return;
     }
 
@@ -124,131 +128,112 @@ export const AddCardModal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black bg-opacity-50"
-        onClick={onClose}
-      />
-
-      {/* Modal */}
-      <div className="relative bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-6">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">
-            Add a new flash-card
-          </h2>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title={t("cards.management.addCard.title")}
+    >
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Front Input */}
+        <div>
+          <label
+            htmlFor="front"
+            className="block text-sm font-medium text-gray-700 mb-2"
           >
-            <Icon name="cross" />
-          </button>
+            {t("cards.management.addCard.form.front.label")} *
+          </label>
+          <Input
+            id="front"
+            type="text"
+            value={front}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setFront(e.target.value)
+            }
+            placeholder={t("cards.management.addCard.form.front.placeholder")}
+            required
+            disabled={loading}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
+          />
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Front Input */}
-          <div>
-            <label
-              htmlFor="front"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              Front *
-            </label>
-            <Input
-              id="front"
-              type="text"
-              value={front}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setFront(e.target.value)
-              }
-              placeholder="Front of the card"
-              required
-              disabled={loading}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
-            />
-          </div>
-
-          {/* Back Input */}
-          <div>
-            <label
-              htmlFor="back"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              Back *
-            </label>
-            <Input
-              id="back"
-              type="text"
-              value={back}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setBack(e.target.value)
-              }
-              placeholder="What is at the back of the card"
-              required
-              disabled={loading}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
-            />
-          </div>
-          {/* JSON Content Editor */}
-          <div>
-            <label
-              htmlFor="content"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              Content (JSON format)
-            </label>
-            <textarea
-              id="content"
-              value={content}
-              onChange={(e) => handleContentChange(e.target.value)}
-              placeholder='{"key": "value"}'
-              disabled={loading}
-              rows={8}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100 font-mono text-sm"
-            />
-            {jsonError && (
-              <p className="text-sm text-red-600 mt-1">{jsonError}</p>
-            )}
-          </div>
-
-          {/* Error Message */}
-          {error && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-md">
-              <p className="text-sm text-red-600">{error}</p>
-            </div>
+        {/* Back Input */}
+        <div>
+          <label
+            htmlFor="back"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
+            {t("cards.management.addCard.form.back.label")} *
+          </label>
+          <Input
+            id="back"
+            type="text"
+            value={back}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setBack(e.target.value)
+            }
+            placeholder={t("cards.management.addCard.form.back.placeholder")}
+            required
+            disabled={loading}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
+          />
+        </div>
+        {/* JSON Content Editor */}
+        <div>
+          <label
+            htmlFor="content"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
+            {t("cards.management.addCard.form.content.label")} *
+          </label>
+          <textarea
+            id="content"
+            value={content}
+            onChange={(e) => handleContentChange(e.target.value)}
+            placeholder={t("cards.management.addCard.form.content.placeholder")}
+            disabled={loading}
+            rows={8}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100 font-mono text-sm"
+          />
+          {jsonError && (
+            <p className="text-sm text-red-600 mt-1">{jsonError}</p>
           )}
+        </div>
 
-          {/* Actions */}
-          <div className="flex gap-3 pt-4">
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={onClose}
-              disabled={loading}
-              className="flex-1"
-            >
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              variant="primary"
-              disabled={loading || !!jsonError}
-              className="flex-1"
-            >
-              {loading ? (
-                <div className="flex items-center justify-center gap-2">
-                  <Loader size="xsmall" fit="content" />
-                  Adding the card...
-                </div>
-              ) : (
-                "Add flash-card"
-              )}
-            </Button>
+        {/* Error Message */}
+        {error && (
+          <div className="p-3 bg-red-50 border border-red-200 rounded-md">
+            <p className="text-sm text-red-600">{error}</p>
           </div>
-        </form>
-      </div>
-    </div>
+        )}
+
+        {/* Actions */}
+        <div className="flex gap-3 pt-4">
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={onClose}
+            disabled={loading}
+            className="flex-1"
+          >
+            {t("misc.cancel")}
+          </Button>
+          <Button
+            type="submit"
+            variant="primary"
+            disabled={loading || !!jsonError}
+            className="flex-1"
+          >
+            {loading ? (
+              <div className="flex items-center justify-center gap-2">
+                <Loader size="xsmall" fit="content" />
+                {t("cards.management.addCard.form.ctas.addingButton")}
+              </div>
+            ) : (
+              t("cards.management.addCard.form.ctas.addButton")
+            )}
+          </Button>
+        </div>
+      </form>
+    </Modal>
   );
 };

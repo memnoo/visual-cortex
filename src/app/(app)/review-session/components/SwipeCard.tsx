@@ -5,6 +5,7 @@ import type { SwipeDirection } from "../types";
 import { Card } from "../../types/types";
 import { RevealableFlashCard } from "../../cards/components/RevealableFlashCard";
 import classNames from "classnames";
+import { useTranslations } from "next-intl";
 
 type SwipeCardProps = {
   card: Card;
@@ -127,6 +128,8 @@ const SwipeIndicators = ({
 }: {
   dragOffset: { x: number; y: number };
 }) => {
+  const t = useTranslations();
+
   const rightOpacity = Math.min(Math.max(dragOffset.x / 100, 0), 1);
   const leftOpacity = Math.min(Math.max(-dragOffset.x / 100, 0), 1);
   const upOpacity = Math.min(Math.max(-dragOffset.y / 100, 0), 1);
@@ -138,28 +141,28 @@ const SwipeIndicators = ({
         className="absolute left-1/2 -translate-x-1/2 translate-y-8 bg-green-500 text-white px-6 py-3 rounded-xl font-bold text-2xl rotate-12 pointer-events-none"
         style={{ opacity: rightOpacity }}
       >
-        ✓ LEARNT
+        {t("reviews.session.swipe.indicators.learnt")}
       </div>
 
       <div
         className="absolute left-1/2 -translate-x-1/2 translate-y-8 bg-red-500 text-white px-6 py-3 rounded-xl font-bold text-2xl -rotate-12 pointer-events-none"
         style={{ opacity: leftOpacity }}
       >
-        ✗ DUNNO
+        {t("reviews.session.swipe.indicators.dunno")}
       </div>
 
       <div
         className="absolute left-1/2 -translate-x-1/2 translate-y-6 bg-yellow-500 text-white px-6 py-3 rounded-xl font-bold text-xl pointer-events-none"
         style={{ opacity: upOpacity }}
       >
-        💡 HINT
+        {t("reviews.session.swipe.indicators.hint")}
       </div>
 
       <div
         className="absolute left-1/2 -translate-x-1/2 translate-y-6 bg-gray-500 text-white px-6 py-3 rounded-xl font-bold text-xl pointer-events-none"
         style={{ opacity: downOpacity }}
       >
-        ↓ PASS
+        {t("reviews.session.swipe.indicators.pass")}
       </div>
     </>
   );

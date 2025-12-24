@@ -1,64 +1,54 @@
 "use client";
 
 import { useState } from "react";
-import { Card } from "../../types/types";
-import { SwipeDirection } from "../types";
-import { SwipeCard } from "./SwipeCard";
 
-export type ReviewSessionState = {
-  correct: number;
-  incorrect: number;
-  hintUsed: number;
-};
+import { SwipeCard } from "../../components/SwipeCard";
+
+import { Card } from "../../../types/types";
+import { ReviewSessionStats, SwipeDirection } from "../../types";
 
 type CardSwiperProps = {
   cards: Card[];
   onActionPerformed: (
-    action: SwipeDirection,
-    reviewSessionState: ReviewSessionState,
+    reviewSessionStats: ReviewSessionStats,
     remaining: number
   ) => void;
 };
 
-const PREVIEW_STACK_SIZE = 4;
+const PREVIEW_STACK_SIZE = 5;
 
-export const CardSwiper = ({ cards, onActionPerformed }: CardSwiperProps) => {
-  const [stats, setStats] = useState<ReviewSessionState>({
+export const CardStack = ({ cards, onActionPerformed }: CardSwiperProps) => {
+  const [stats, setStats] = useState<ReviewSessionStats>({
     correct: 0,
     incorrect: 0,
     hintUsed: 0,
   });
 
   const [remainingCards, setRemainingCards] = useState<Card[]>(cards);
-  const [reviewedCards, setReviewedCards] = useState<Card[]>([]);
 
   const handleSwipe = (direction: SwipeDirection) => {
     const newStats = { ...stats };
 
     switch (direction) {
       case "right": {
-        const currentCard = remainingCards[0];
-        setReviewedCards([currentCard, ...reviewedCards]);
         const newRemainingCards = remainingCards.slice(1);
         setRemainingCards(newRemainingCards);
 
         newStats.correct = stats.correct + 1;
         setStats(newStats);
 
-        onActionPerformed(direction, newStats, newRemainingCards.length);
+        onActionPerformed(newStats, newRemainingCards.length);
         break;
       }
 
       case "left": {
-        const currentCard = remainingCards[0];
-        setReviewedCards([currentCard, ...reviewedCards]);
         const newRemainingCards = remainingCards.slice(1);
         setRemainingCards(newRemainingCards);
 
         newStats.incorrect = stats.incorrect + 1;
         setStats(newStats);
 
-        onActionPerformed(direction, newStats, newRemainingCards.length);
+        onActionPerformed(newStats, newRemainingCards.length);
         break;
       }
 

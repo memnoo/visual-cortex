@@ -47,12 +47,14 @@
     "word": "{count, plural, =0 {# paquet} =1 {# paquet} other {# paquets}}"
   },
   "reviews": {
+    "header": "Quel paquet voulez-vous réviser ?",
     "session": {
+      "reviewing": "En cours de révision",
       "remaining": "Restant",
       "stats": {
-        "correct": "Correct",
-        "incorrect": "Incorrect",
-        "hintsUsed": "Indices utilisés"
+        "correct": "{count, plural, =0 {# correcte} =1 {# correcte} other {# correctes}}",
+        "incorrect": "{count, plural, =0 {# incorrecte} =1 {# incorrecte} other {# incorrectes}}",
+        "hintsUsed": "{count, plural, =0 {# indice utilisé} =1 {# indice utilisés} other {# indice utilisés}}"
       },
       "restart": "Redémarrer",
       "swipe": {
@@ -62,7 +64,13 @@
           "hint": "💡 INDICE",
           "pass": "↓ PASSER"
         }
+      },
+      "loading": {
+        "bootstrap": "Chargement des cartes à réviser..."
       }
+    },
+    "placeholderState": {
+      "linkText": "← Retour aux paquets"
     }
   },
   "misc": {

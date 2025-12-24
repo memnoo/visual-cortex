@@ -1,19 +1,20 @@
 "use client";
 
 import { useState, useRef } from "react";
+import classNames from "classnames";
+
+import { RevealableFlashCard } from "../../cards/components/RevealableFlashCard";
+import { SwipeIndicators } from "./SwipeIndicators";
+
 import type { SwipeDirection } from "../types";
 import { Card } from "../../types/types";
-import { RevealableFlashCard } from "../../cards/components/RevealableFlashCard";
-import classNames from "classnames";
-import { useTranslations } from "next-intl";
 
 type SwipeCardProps = {
   card: Card;
   isTopCard: boolean;
   hasHintShown: boolean;
   positionInStack?: number;
-  onSwipe?: (direction: SwipeDirection) => void;
-  onShowHint?: () => void;
+  onSwipe: (direction: SwipeDirection) => void;
 };
 
 export const SwipeCard = ({
@@ -30,7 +31,6 @@ export const SwipeCard = ({
 
   const getSwipeDirection = (x: number, y: number): SwipeDirection | null => {
     const threshold = 100;
-    const angle = Math.atan2(y, x) * (180 / Math.PI);
 
     if (Math.abs(y) > Math.abs(x)) {
       if (y < -threshold) return "up";
@@ -95,23 +95,23 @@ export const SwipeCard = ({
     <div
       ref={cardRef}
       className={classNames(
-        "absolute inset-0 user-select-none",
+        "absolute inset-0 user-select-none rounded",
+        isTopCard && "translate-y-1",
         isDragging ? "cursor-grabbing" : "cursor-grab"
       )}
       style={{
         zIndex: isTopCard ? 10 : 10 - positionInStack,
         transform: isTopCard
-          ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${rotation}deg)`
-          : `translate(0px, ${
-              !isTopCard ? `-${(positionInStack + 1) * 10}px` : "0px"
-            }) scale(${1 - positionInStack * 0.1})`,
+          ? `translate(${dragOffset.x}px, ${dragOffset.y}px) scale(1.05) rotate(${rotation}deg)`
+          : `translate(0px, ${`-${positionInStack * 10}px`}) scale(${
+              1 - positionInStack * 0.08
+            })`,
         transition: isDragging ? "none" : "transform 0.3s ease-out",
         touchAction: "none",
       }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
-      data-attribute={card.front}
     >
       <RevealableFlashCard
         card={card}
@@ -120,50 +120,5 @@ export const SwipeCard = ({
 
       {isTopCard && <SwipeIndicators dragOffset={dragOffset} />}
     </div>
-  );
-};
-
-const SwipeIndicators = ({
-  dragOffset,
-}: {
-  dragOffset: { x: number; y: number };
-}) => {
-  const t = useTranslations();
-
-  const rightOpacity = Math.min(Math.max(dragOffset.x / 100, 0), 1);
-  const leftOpacity = Math.min(Math.max(-dragOffset.x / 100, 0), 1);
-  const upOpacity = Math.min(Math.max(-dragOffset.y / 100, 0), 1);
-  const downOpacity = Math.min(Math.max(dragOffset.y / 100, 0), 1);
-
-  return (
-    <>
-      <div
-        className="absolute left-1/2 -translate-x-1/2 translate-y-8 bg-green-500 text-white px-6 py-3 rounded-xl font-bold text-2xl rotate-12 pointer-events-none"
-        style={{ opacity: rightOpacity }}
-      >
-        {t("reviews.session.swipe.indicators.learnt")}
-      </div>
-
-      <div
-        className="absolute left-1/2 -translate-x-1/2 translate-y-8 bg-red-500 text-white px-6 py-3 rounded-xl font-bold text-2xl -rotate-12 pointer-events-none"
-        style={{ opacity: leftOpacity }}
-      >
-        {t("reviews.session.swipe.indicators.dunno")}
-      </div>
-
-      <div
-        className="absolute left-1/2 -translate-x-1/2 translate-y-6 bg-yellow-500 text-white px-6 py-3 rounded-xl font-bold text-xl pointer-events-none"
-        style={{ opacity: upOpacity }}
-      >
-        {t("reviews.session.swipe.indicators.hint")}
-      </div>
-
-      <div
-        className="absolute left-1/2 -translate-x-1/2 translate-y-6 bg-gray-500 text-white px-6 py-3 rounded-xl font-bold text-xl pointer-events-none"
-        style={{ opacity: downOpacity }}
-      >
-        {t("reviews.session.swipe.indicators.pass")}
-      </div>
-    </>
   );
 };

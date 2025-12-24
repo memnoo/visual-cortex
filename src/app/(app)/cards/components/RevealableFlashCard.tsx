@@ -16,7 +16,7 @@ type RevealableFlashCardProps = {
 };
 
 export const FLASH_CARD_STYLE =
-  "flex flex-col content-stretch items-center justify-center w-full h-full rounded-2xl shadow-2xl py-8 px-4";
+  "flex flex-col content-stretch items-center justify-center w-full h-full rounded-2xl shadow-2xl py-8 px-4 inset-shadow-xs inset-shadow-white";
 
 export const RevealableFlashCard = ({
   card,

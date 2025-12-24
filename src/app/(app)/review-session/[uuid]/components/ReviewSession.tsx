@@ -4,21 +4,24 @@ import { PlaceholderStateReview } from "../../components/PlaceholderStateReview"
 import { StatsPanel } from "./StatsPanel";
 import { CardStack } from "./CardStack";
 
-import { ReviewSessionState, ReviewSessionStats } from "../../types";
+import { ReviewSessionStats } from "../../types";
 import { Card } from "@/app/(app)/types/types";
 
 type ReviewSessionProps = {
   cards: Card[];
 };
 
+export const DEFAULT_STATS: Readonly<ReviewSessionStats> = {
+  correct: 0,
+  incorrect: 0,
+  hintUsed: 0,
+};
+
 export const ReviewSession = ({ cards }: ReviewSessionProps) => {
   const [isComplete, setIsComplete] = useState(false);
-  const [stats, setStats] = useState<ReviewSessionStats>({
-    correct: 0,
-    incorrect: 0,
-    hintUsed: 0,
-  });
+  const [stats, setStats] = useState<ReviewSessionStats>(DEFAULT_STATS);
   const [remainingCount, setRemainingCount] = useState((cards ?? []).length);
+  const [sessionKey, setSessionKey] = useState(0);
 
   const onActionPerformed = (stats: ReviewSessionStats, remaining: number) => {
     setStats(stats);
@@ -26,6 +29,13 @@ export const ReviewSession = ({ cards }: ReviewSessionProps) => {
     if (remaining === 0) {
       setIsComplete(true);
     }
+  };
+
+  const onRestartClicked = () => {
+    setIsComplete(false);
+    setStats(DEFAULT_STATS);
+    setRemainingCount((cards ?? []).length);
+    setSessionKey((prev) => prev + 1);
   };
 
   if (!cards || cards.length === 0) {
@@ -37,14 +47,18 @@ export const ReviewSession = ({ cards }: ReviewSessionProps) => {
       <StatsPanel
         stats={stats}
         remainingCount={remainingCount}
-        onRestartClicked={() => alert("Restart not implemented yet!")}
+        onRestartClicked={onRestartClicked}
       />
 
       <div className="w-full flex-1 mt-12">
         {isComplete ? (
           <PlaceholderStateReview label="Review session complete! 🎉" />
         ) : (
-          <CardStack cards={cards} onActionPerformed={onActionPerformed} />
+          <CardStack
+            key={sessionKey}
+            cards={cards}
+            onActionPerformed={onActionPerformed}
+          />
         )}
       </div>
     </div>

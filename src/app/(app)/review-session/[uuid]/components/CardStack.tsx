@@ -6,6 +6,7 @@ import { SwipeCard } from "../../components/SwipeCard";
 
 import { Card } from "../../../types/types";
 import { ReviewSessionStats, SwipeDirection } from "../../types";
+import { DEFAULT_STATS } from "./ReviewSession";
 
 type CardSwiperProps = {
   cards: Card[];
@@ -18,11 +19,7 @@ type CardSwiperProps = {
 const PREVIEW_STACK_SIZE = 5;
 
 export const CardStack = ({ cards, onActionPerformed }: CardSwiperProps) => {
-  const [stats, setStats] = useState<ReviewSessionStats>({
-    correct: 0,
-    incorrect: 0,
-    hintUsed: 0,
-  });
+  const [stats, setStats] = useState<ReviewSessionStats>(DEFAULT_STATS);
 
   const [remainingCards, setRemainingCards] = useState<Card[]>(cards);
 

@@ -143,6 +143,7 @@
     "error": "Une erreur s'est produite. Veuillez réessayer.",
     "loading": "Chargement...",
     "optional": "Optionnel",
+    "select": "Sélectionner...",
     "welcome": "Bienvenue, {name}"
   }
 }

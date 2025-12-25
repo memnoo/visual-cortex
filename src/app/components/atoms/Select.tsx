@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 export type SelectProps = {
@@ -17,6 +18,7 @@ export const Select = ({
   isMultiple = false,
   defaultValue = undefined,
 }: SelectProps) => {
+  const t = useTranslations();
   const [selectedValues, setSelectedValues] = useState<(string | number)[]>([]);
 
   const onValuesChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -56,7 +58,7 @@ export const Select = ({
         disabled={isDisabled}
         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
       >
-        {defaultValue && <option value="">Sélectionner...</option>}
+        {defaultValue && <option value="">{t("misc.select")}</option>}
         {values &&
           values.map(({ label, value }) => (
             <option key={value} value={value}>

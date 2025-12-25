@@ -142,6 +142,7 @@
     "cancel": "Cancel",
     "error": "An error occurred. Please try again.",
     "loading": "Loading...",
+    "select": "Select...",
     "welcome": "Welcome, {name}"
   }
 }

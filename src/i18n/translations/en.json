@@ -44,7 +44,72 @@
     }
   },
   "decks": {
-    "word": "{count, plural, =0 {# deck} =1 {# deck} other {# decks}}"
+    "word": "{count, plural, =0 {# deck} =1 {# deck} other {# decks}}",
+    "management": {
+      "upsertDeck": {
+        "title": "Add a new deck",
+        "form": {
+          "title": {
+            "label": "Title",
+            "placeholder": "i.e Maths, History, Language..."
+          },
+          "domain": {
+            "label": "Domain",
+            "options": {
+              "languages": {
+                "value": "Languages",
+                "label": "Languages"
+              },
+              "sciences": {
+                "value": "Sciences",
+                "label": "Sciences"
+              },
+              "health": {
+                "value": "Health",
+                "label": "Health"
+              },
+              "history": {
+                "value": "History",
+                "label": "History"
+              },
+              "other": {
+                "value": "Other",
+                "label": "Other"
+              }
+            }
+          },
+          "language": {
+            "label": "Language",
+            "placeholder": "i.e fr, en, es..."
+          },
+          "ctas": {
+            "addButton": "Add the deck",
+            "addingButton": "Adding..."
+          },
+          "errors": {
+            "requiredFields": "Title and domain are required."
+          }
+        }
+      },
+      "deleteDeck": {
+        "title": "Would you like to delete the deck:",
+        "ctas": {
+          "deleteButton": "Delete the deck",
+          "deletingButton": "Deleting..."
+        }
+      },
+      "updateDeck": {
+        "title": "Edit the deck:",
+        "ctas": {
+          "updateButton": "Edit deck",
+          "updatingButton": "Editing..."
+        }
+      }
+    },
+    "emptyState": {
+      "label": "No cards in this deck",
+      "cta": "Add your first flash-card"
+    }
   },
   "reviews": {
     "header": "Which deck would you like to review?",

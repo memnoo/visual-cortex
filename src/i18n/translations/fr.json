@@ -44,7 +44,72 @@
     }
   },
   "decks": {
-    "word": "{count, plural, =0 {# paquet} =1 {# paquet} other {# paquets}}"
+    "word": "{count, plural, =0 {# paquet} =1 {# paquet} other {# paquets}}",
+    "management": {
+      "upsertDeck": {
+        "title": "Ajouter un nouveau paquet",
+        "form": {
+          "title": {
+            "label": "Titre",
+            "placeholder": "Ex: Maths, Histoire, Langue..."
+          },
+          "domain": {
+            "label": "Domaine",
+            "options": {
+              "languages": {
+                "value": "Languages",
+                "label": "Langues"
+              },
+              "sciences": {
+                "value": "Sciences",
+                "label": "Sciences"
+              },
+              "health": {
+                "value": "Health",
+                "label": "Santé"
+              },
+              "history": {
+                "value": "History",
+                "label": "Histoire"
+              },
+              "other": {
+                "value": "Other",
+                "label": "Autre"
+              }
+            }
+          },
+          "language": {
+            "label": "Langue",
+            "placeholder": "Ex: fr, en, es..."
+          },
+          "ctas": {
+            "addButton": "Ajouter le paquet",
+            "addingButton": "Ajout en cours..."
+          },
+          "errors": {
+            "requiredFields": "Le titre et le domaine sont obligatoires."
+          }
+        }
+      },
+      "deleteDeck": {
+        "title": "Voulez-vous supprimer le paquet :",
+        "ctas": {
+          "deleteButton": "Supprimer le paquet",
+          "deletingButton": "Suppression..."
+        }
+      },
+      "updateDeck": {
+        "title": "Modifier le paquet :",
+        "ctas": {
+          "updateButton": "Modifier le paquet",
+          "updatingButton": "Modification..."
+        }
+      }
+    },
+    "emptyState": {
+      "label": "Pas de carte dans ce paquet",
+      "cta": "Ajouter une première carte"
+    }
   },
   "reviews": {
     "header": "Quel paquet voulez-vous réviser ?",
@@ -77,6 +142,7 @@
     "cancel": "Annuler",
     "error": "Une erreur s'est produite. Veuillez réessayer.",
     "loading": "Chargement...",
+    "optional": "Optionnel",
     "welcome": "Bienvenue, {name}"
   }
 }

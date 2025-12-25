@@ -7,6 +7,7 @@ import { Card } from "../../types/types";
 import { FlashCard } from "../../cards/components/FlashCard";
 import { EmptyState } from "@/app/components/atoms/EmptyState";
 import { Button } from "@/app/components/atoms/Button";
+import { useTranslations } from "next-intl";
 
 interface DeckDetailsViewProps {
   cards: Card[];
@@ -17,6 +18,7 @@ export const FlashCardsGrid = ({
   cards,
   onAddFlashCardClicked,
 }: DeckDetailsViewProps) => {
+  const t = useTranslations();
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 
   const handleCardSelect = (card: Card) => {
@@ -35,9 +37,9 @@ export const FlashCardsGrid = ({
     <>
       <div className="flex flex-col content-stretch gap-6 flex-1">
         {!cards || cards.length === 0 ? (
-          <EmptyState label="No cards in this deck">
-            <Button variant="ghost" onClick={onAddFlashCardClicked}>
-              Add your first flash-card
+          <EmptyState label={t("decks.emptyState.label")}>
+            <Button variant="transparent" onClick={onAddFlashCardClicked}>
+              {t("decks.emptyState.cta")}
             </Button>
           </EmptyState>
         ) : (

@@ -138,6 +138,120 @@
       "linkText": "← Retour aux paquets"
     }
   },
+  "site": {
+    "homepage": {
+      "subtitle": "Apprenez plus rapidement avec des cartes flash intelligentes générées par IA",
+      "features": {
+        "customisedAi": {
+          "title": "IA personnalisée",
+          "description": "Génération automatique de cartes flash, adaptée à votre niveau"
+        },
+        "smartFollowup": {
+          "title": "Suivi intelligent",
+          "description": "Algorithme de répétition espacée pour optimiser votre mémorisation"
+        },
+        "multiDomains": {
+          "title": "Multi-domaines",
+          "description": "Langues, sciences, santé... Apprenez ce qui vous convient le mieux"
+        }
+      },
+      "cta": {
+        "goToDecks": "Accéder à mes paquets",
+        "login": "Se connecter",
+        "joinWaitlist": "Rejoindre la liste d'attente",
+        "learnMore": "En savoir plus"
+      }
+    },
+    "waitlist": {
+      "incentive": {
+        "title": {
+          "join": "Rejoignez la",
+          "learning": "révolution de",
+          "revolution": "l'apprentissage"
+        },
+        "subtitle": "Soyez le premier à rejoindre <BrandName /> : la nouvelle plateforme d'apprentissage intelligente qui s'adapte à votre rythme.",
+        "features": {
+          "customizedAi": {
+            "title": "IA personnalisée",
+            "description": "Génération automatique de cartes flash personnalisées"
+          },
+          "multiDomains": {
+            "title": "Multi-domaines",
+            "description": "Langues, sciences, santé et bien plus encore"
+          },
+          "smartAlgorithm": {
+            "title": "Algorithme intelligent",
+            "description": "Apprentissage par répétition espacée optimisé par IA"
+          }
+        }
+      },
+      "form": {
+        "success": {
+          "title": "🎉 Vous avez rejoint la liste d'attente !",
+          "message": "Nous vous enverrons un email dès que l'accès à Memnō sera accordé.",
+          "interests": "Nous avons enregistré vos intérêts pour",
+          "email": "Vous recevrez un email à",
+          "back": "← Retour"
+        },
+        "title": "Inscrivez-vous maintenant",
+        "subtitle": "Soyez le premier à obtenir un accès",
+        "email": {
+          "label": "Adresse email *",
+          "placeholder": "votre@email.com"
+        },
+        "interests": {
+          "label": "Que souhaitez-vous apprendre ?",
+          "options": {
+            "languages": "Langues",
+            "sciences": "Sciences",
+            "health": "Santé",
+            "history": "Histoire",
+            "other": "Autre"
+          }
+        },
+        "submit": "Rejoindre la liste d'attente",
+        "alreadyHaveAccount": "J'ai déjà un compte",
+        "terms": "En vous inscrivant, vous acceptez de recevoir des mises à jour sur le lancement",
+        "messages": {
+          "joined": "Liste d'attente rejointe !",
+          "accessGranted": "Votre accès a été accordé le {date}",
+          "alreadyJoined": "Vous avez rejoint la liste d'attente le {date}"
+        }
+      }
+    },
+    "login": {
+      "title": "Connexion",
+      "email": {
+        "label": "Email",
+        "placeholder": "votre@email.com"
+      },
+      "submit": "Envoyer le lien magique",
+      "sending": "Envoi...",
+      "success": "✉️ Le lien magique a été envoyé ! Vérifiez votre boîte mail.",
+      "errors": {
+        "invalidEmail": "Adresse email invalide",
+        "waitingList": "Vous êtes encore dans la liste d'attente",
+        "generic": "Une erreur s'est produite. Réessayez !"
+      },
+      "howItWorks": {
+        "title": "Comment ça marche ?",
+        "steps": {
+          "1": "Saisissez votre adresse email ci-dessus",
+          "2": "Recevez un lien magique de connexion sécurisé par email",
+          "3": "Cliquez sur le lien pour vous connecter automatiquement"
+        }
+      },
+      "noAccount": {
+        "text": "Pas encore inscrit ?",
+        "link": "Rejoignez la liste d'attente !"
+      }
+    },
+    "footer": {
+      "enrolled": "Inscrits",
+      "domains": "Domaines",
+      "cardsGenerated": "Cartes générées"
+    }
+  },
   "misc": {
     "cancel": "Annuler",
     "error": "Une erreur s'est produite. Veuillez réessayer.",

@@ -1,14 +1,24 @@
 import React from "react";
+import Link from "next/link";
+import classNames from "classnames";
+
 import { Icon, type IconName } from "./Icon";
 
-type Variant = "primary" | "secondary" | "ghost" | "danger" | "transparent";
+type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "ghost"
+  | "danger"
+  | "transparent"
+  | "link";
 
 type IconPosition = "left" | "right";
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: Variant;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
   iconName?: IconName;
   iconPosition?: IconPosition;
+  href?: string;
 }
 
 export const Button = ({
@@ -16,11 +26,12 @@ export const Button = ({
   iconName,
   iconPosition = "left",
   className = "",
+  href,
   children,
   ...props
-}: Props) => {
+}: ButtonProps) => {
   const base = "btn";
-  const variants: Record<Variant, string> = {
+  const variants: Record<ButtonVariant, string> = {
     primary:
       "bg-primary-500 text-white shadow-sm-primary hover:shadow-primary disabled:opacity-50",
     secondary:
@@ -29,14 +40,33 @@ export const Button = ({
     transparent:
       "bg-transparent text-gray-900 hover:bg-gray-100 border border-gray-300",
     danger: "bg-danger-500 text-white hover:bg-danger-600",
+    link: "bg-white text-indigo-600 hover:bg-gray-50 border border-indigo-200",
   };
 
-  if (iconPosition === "right") {
-    className += "flex flex-row-reverse";
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className={classNames(
+          "px-8 py-3 font-semibold rounded-lg transition-colors shadow-lg",
+          variants[variant]
+        )}
+      >
+        {children}
+      </Link>
+    );
   }
 
   return (
-    <button className={`${base} ${variants[variant]} ${className}`} {...props}>
+    <button
+      className={classNames(
+        base,
+        variants[variant],
+        className,
+        iconPosition === "right" && "flex flex-row-reverse"
+      )}
+      {...props}
+    >
       {iconName && (
         <span className="ml-auto">
           <Icon name={iconName} />

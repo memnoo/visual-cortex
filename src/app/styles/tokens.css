@@ -100,9 +100,5 @@
 }
 
 .btn {
-  @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-button text-sm font-medium transition-colors duration-200 cursor-pointer;
-}
-
-.card {
-  @apply bg-white shadow-card hover:shadow-card-hover rounded-card p-6 transition-shadow duration-300;
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-200 cursor-pointer;
 }

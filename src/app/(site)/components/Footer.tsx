@@ -1,43 +1,40 @@
 "use client";
 
-import { createClient } from "@/lib/database/client";
+import { useTranslations } from "next-intl";
 
-export default function Footer() {
-  const supabase = createClient();
+import { useFooterCounts } from "../hooks/useFooterCounts";
 
-  // const usersCount = supabase
-  //   .from("Waitlist")
-  //   .select("email", { count: "exact", head: true })
-  //   .then((res) => res.count ?? 0);
+export const Footer = () => {
+  const t = useTranslations();
 
-  // const topicsCount = supabase
-  //   .from("Deck")
-  //   .select("topic", { count: "exact", head: true })
-  //   .then((res) => res.count ?? 0);
+  const { data, isLoading } = useFooterCounts();
 
-  // const cardsCount = supabase
-  //   .from("Card")
-  //   .select("uuid", { count: "exact", head: true })
-  //   .then((res) => res.count ?? 0);
+  const PLACEHOLDER = "...";
 
   return (
     <footer className="bg-white border-t border-gray-200 py-4">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-3 gap-8 text-center">
-          <div>
-            <p className="text-3xl font-bold text-indigo-600">{1}</p>
-            <p className="text-sm text-gray-600">Enrolled</p>
+        <div className="grid grid-cols-3 gap-4 text-center">
+          <div className="flex flex-col content-stretch gap-1">
+            <p className="text-3xl font-bold text-indigo-600">
+              {isLoading ? PLACEHOLDER : data?.users}
+            </p>
+            <p className="text-sm text-gray-600">{t("footer.users")}</p>
           </div>
-          <div>
-            <p className="text-3xl font-bold text-purple-600">{3}</p>
-            <p className="text-sm text-gray-600">Domains</p>
+          <div className="flex flex-col content-stretch gap-1">
+            <p className="text-3xl font-bold text-purple-600">
+              {isLoading ? PLACEHOLDER : data?.decks}
+            </p>
+            <p className="text-sm text-gray-600">{t("footer.decks")}</p>
           </div>
-          <div>
-            <p className="text-3xl font-bold text-pink-600">{31}</p>
-            <p className="text-sm text-gray-600">Cards generated</p>
+          <div className="flex flex-col content-stretch gap-1">
+            <p className="text-3xl font-bold text-pink-600">
+              {isLoading ? PLACEHOLDER : data?.cards}
+            </p>
+            <p className="text-sm text-gray-600">{t("footer.cards")}</p>
           </div>
         </div>
       </div>
     </footer>
   );
-}
+};

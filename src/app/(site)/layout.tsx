@@ -2,7 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { Providers } from "../providers";
-import Footer from "./components/Footer";
+import { Footer } from "./components/Footer";
+
 import brandImg from "@/assets/img/brand-img.svg";
 
 export default function RootLayout({

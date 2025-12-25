@@ -12,6 +12,11 @@
     "decks": "Parcourir les paquets",
     "review-session": "Réviser les paquets"
   },
+  "footer": {
+    "users": "Inscrits",
+    "decks": "Paquets",
+    "cards": "Cartes"
+  },
   "cards": {
     "word": "{count, plural, =0 {# carte} =1 {# carte} other {# cartes}}",
     "management": {
@@ -245,11 +250,6 @@
         "text": "Pas encore inscrit ?",
         "link": "Rejoignez la liste d'attente !"
       }
-    },
-    "footer": {
-      "enrolled": "Inscrits",
-      "domains": "Domaines",
-      "cardsGenerated": "Cartes générées"
     }
   },
   "misc": {

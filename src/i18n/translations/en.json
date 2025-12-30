@@ -255,6 +255,8 @@
     "error": "An error occurred. Please try again.",
     "learnMore": "Learn more",
     "loading": "Loading...",
+    "optional": "optional",
+    "or": "or",
     "select": "Select...",
     "welcome": "Welcome, {name}"
   }

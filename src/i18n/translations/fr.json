@@ -6,7 +6,8 @@
   "auth": {
     "errors": {
       "notAuthenticated": "Utilisateur non authentifié"
-    }
+    },
+    "login": "Se connecter"
   },
   "nav": {
     "decks": "Parcourir les paquets",
@@ -162,7 +163,6 @@
       },
       "cta": {
         "goToDecks": "Accéder à mes paquets",
-        "login": "Se connecter",
         "joinWaitlist": "Rejoindre la liste d'attente",
         "learnMore": "En savoir plus"
       }
@@ -257,6 +257,7 @@
     "error": "Une erreur s'est produite. Veuillez réessayer.",
     "loading": "Chargement...",
     "optional": "Optionnel",
+    "or": "ou",
     "select": "Sélectionner...",
     "welcome": "Bienvenue, {name}"
   }

@@ -8,7 +8,7 @@ import { Button } from "../components/atoms/Button";
 
 export default function HomePage() {
   const t = useTranslations();
-  const user = useUser();
+  const { data: userData } = useUser();
 
   const blockContents = [
     {
@@ -50,24 +50,26 @@ export default function HomePage() {
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">
-        {user ? (
+        {userData ? (
           <Button href="/dashboard" variant="primary">
             {t("site.homepage.cta.goToDecks")}
           </Button>
         ) : (
-          <>
-            <Button href="/login" variant="secondary">
-              {t("site.homepage.cta.login")}
+          <div className="flex flex-col justify-center w-full gap-3">
+            <div className="flex flex-wrap items-center justify-center w-full gap-1">
+              <Button href="/login" variant="secondary">
+                {t("auth.login")}
+              </Button>
+              <b>{t("misc.or")}</b>
+              <Button href="/waitlist" variant="primary">
+                {t("site.homepage.cta.joinWaitlist")}
+              </Button>
+            </div>
+            <Button href="/about" variant="link">
+              {t("misc.learnMore")}
             </Button>
-            <Button href="/waitlist" variant="link">
-              {t("site.homepage.cta.joinWaitlist")}
-            </Button>
-          </>
+          </div>
         )}
-
-        <Button href="/about" variant="link">
-          {t("site.homepage.cta.learnMore")}
-        </Button>
       </div>
     </div>
   );

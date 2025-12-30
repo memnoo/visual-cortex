@@ -36,11 +36,11 @@ export const Button = ({
       "bg-primary-500 text-white shadow-sm-primary hover:shadow-primary disabled:opacity-50",
     secondary:
       "bg-secondary-500 text-white hover:bg-secondary-600 disabled:opacity-50",
-    ghost: "bg-transparent text-gray-900 hover:bg-gray-100",
+    ghost: "bg-transparent shadow-none text-gray-900 hover:bg-gray-100",
     transparent:
       "bg-transparent text-gray-900 hover:bg-gray-100 border border-gray-300",
     danger: "bg-danger-500 text-white hover:bg-danger-600",
-    link: "bg-white text-indigo-600 hover:bg-gray-50 border border-indigo-200",
+    link: "shadow-none text-indigo-600 hover:bg-gray-50 border-none",
   };
 
   if (href) {

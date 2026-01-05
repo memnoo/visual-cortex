@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useTranslations } from "next-intl";
+
 import { useUser } from "../(app)/hooks/useUser";
 import { Card } from "../components/atoms/Card";
 import { Button } from "../components/atoms/Button";
@@ -56,7 +56,7 @@ export default function HomePage() {
           </Button>
         ) : (
           <div className="flex flex-col justify-center w-full gap-3">
-            <div className="flex flex-wrap items-center justify-center w-full gap-1">
+            <div className="flex flex-wrap items-center justify-center w-full gap-6">
               <Button href="/login" variant="secondary">
                 {t("auth.login")}
               </Button>

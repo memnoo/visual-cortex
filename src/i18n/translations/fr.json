@@ -163,8 +163,7 @@
       },
       "cta": {
         "goToDecks": "Accéder à mes paquets",
-        "joinWaitlist": "Rejoindre la liste d'attente",
-        "learnMore": "En savoir plus"
+        "joinWaitlist": "Rejoindre la liste d'attente"
       }
     },
     "waitlist": {
@@ -255,6 +254,7 @@
   "misc": {
     "cancel": "Annuler",
     "error": "Une erreur s'est produite. Veuillez réessayer.",
+    "learnMore": "En savoir plus",
     "loading": "Chargement...",
     "optional": "Optionnel",
     "or": "ou",

@@ -1,5 +1,7 @@
-import { BrandName } from "@/app/components/BrandName";
 import { useTranslations } from "next-intl";
+
+import { Icon } from "@/app/components/atoms/Icon";
+import { BrandName } from "@/app/components/BrandName";
 
 export const WaitlistIncentive = () => {
   const t = useTranslations();
@@ -24,19 +26,7 @@ export const WaitlistIncentive = () => {
 
       <div className="space-y-4 pt-4">
         <div className="flex items-start gap-3">
-          <div className="mt-1 flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-            <svg
-              className="w-4 h-4 text-green-600"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
+          <CircledCheckIcon />
           <div>
             <h3 className="font-semibold text-gray-900">
               {t("site.waitlist.incentive.features.customizedAi.title")}
@@ -48,19 +38,7 @@ export const WaitlistIncentive = () => {
         </div>
 
         <div className="flex items-start gap-3">
-          <div className="mt-1 flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-            <svg
-              className="w-4 h-4 text-green-600"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
+          <CircledCheckIcon />
           <div>
             <h3 className="font-semibold text-gray-900">
               {t("site.waitlist.incentive.features.multiDomains.title")}
@@ -72,19 +50,7 @@ export const WaitlistIncentive = () => {
         </div>
 
         <div className="flex items-start gap-3">
-          <div className="mt-1 flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-            <svg
-              className="w-4 h-4 text-green-600"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
+          <CircledCheckIcon />
           <div>
             <h3 className="font-semibold text-gray-900">
               {t("site.waitlist.incentive.features.smartAlgorithm.title")}
@@ -98,3 +64,9 @@ export const WaitlistIncentive = () => {
     </div>
   );
 };
+
+const CircledCheckIcon = () => (
+  <div className="mt-1 flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+    <Icon name="check" extraClasses="text-green-600" />
+  </div>
+);

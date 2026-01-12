@@ -152,11 +152,13 @@ export const DeckModal = ({
       if (cardDeckAssociationError) throw cardDeckAssociationError;
 
       // Delete cards
-      const { error: cardsError } = await supabase
-        .from("Card")
-        .delete()
-        .eq("uuid", cardUuids);
-      if (cardsError) throw cardsError;
+      if (cardUuids.length > 0) {
+        const { error: cardsError } = await supabase
+          .from("Card")
+          .delete()
+          .eq("uuid", cardUuids);
+        if (cardsError) throw cardsError;
+      }
 
       // Delete the deck
       const { error: deckError } = await supabase

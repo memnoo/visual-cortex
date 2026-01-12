@@ -2,14 +2,18 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+
 import { createClient } from "@/lib/database/client";
 import { Callout } from "@/app/components/atoms/Callout";
 import { useAuth } from "@/app/(app)/hooks/useUser";
 import { Loader } from "@/app/components/atoms/Loader";
 import { useCheckWaitlist } from "../hooks/useWaitlist";
-import Link from "next/link";
 
 export default function LoginPage() {
+  const t = useTranslations();
+
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{
@@ -43,13 +47,13 @@ export default function LoginPage() {
       if (!checkResult) {
         setMessage({
           type: "error",
-          text: "Email address is invalid",
+          text: t("site.login.errors.invalidEmail"),
         });
         return;
       } else if (checkResult.status !== "joined") {
         setMessage({
           type: "error",
-          text: "You are still in the waiting list",
+          text: t("site.login.errors.waitingList"),
         });
         return;
       }
@@ -66,14 +70,14 @@ export default function LoginPage() {
       } else {
         setMessage({
           type: "success",
-          text: "✉️ Magic link has been sent ! Check your mailbox.",
+          text: t("site.login.success"),
         });
         setEmail("");
       }
     } catch (error) {
       setMessage({
         type: "error",
-        text: "An error occurred. Try again!",
+        text: t("site.login.errors.generic"),
       });
     } finally {
       setLoading(false);
@@ -84,7 +88,9 @@ export default function LoginPage() {
     <div className="max-w-md w-full space-y-2">
       {/* Header */}
       <div className="text-center">
-        <h2 className="text-2xl font-semibold text-gray-900">Login</h2>
+        <h2 className="text-2xl font-semibold text-gray-900">
+          {t("site.login.title")}
+        </h2>
       </div>
 
       {/* Card */}
@@ -96,14 +102,14 @@ export default function LoginPage() {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
-              Email
+              {t("site.login.email.label")}
             </label>
             <input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
+              placeholder={t("site.login.email.placeholder")}
               required
               disabled={loading}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100 disabled:cursor-not-allowed"
@@ -119,10 +125,10 @@ export default function LoginPage() {
             {loading ? (
               <span className="flex items-center justify-center">
                 <Loader size="xsmall" fit="content" />
-                Sending...
+                {t("site.login.sending")}
               </span>
             ) : (
-              "Send magic link"
+              t("site.login.submit")
             )}
           </button>
 
@@ -140,7 +146,7 @@ export default function LoginPage() {
           </div>
           <div className="relative flex justify-center text-sm">
             <span className="px-4 bg-white text-gray-500">
-              How does it work?
+              {t("site.login.howItWorks.title")}
             </span>
           </div>
         </div>
@@ -149,15 +155,15 @@ export default function LoginPage() {
         <div className="mt-6 space-y-3 text-sm text-gray-600">
           <div className="flex items-start">
             <span className="text-indigo-600 font-bold mr-2">1.</span>
-            <p>Input your email address above</p>
+            <p>{t("site.login.howItWorks.steps.1")}</p>
           </div>
           <div className="flex items-start">
             <span className="text-indigo-600 font-bold mr-2">2.</span>
-            <p>Receive a secured login magic link by email</p>
+            <p>{t("site.login.howItWorks.steps.2")}</p>
           </div>
           <div className="flex items-start">
             <span className="text-indigo-600 font-bold mr-2">3.</span>
-            <p>Click on the link to log in automatically</p>
+            <p>{t("site.login.howItWorks.steps.3")}</p>
           </div>
         </div>
       </div>
@@ -165,9 +171,9 @@ export default function LoginPage() {
       {/* Footer */}
       <div className="text-center text-sm text-gray-600">
         <p>
-          No yet enrolled?{" "}
+          {t("site.login.noAccount.text")}
           <Link className="text-indigo-600 font-semibold" href="/waitlist">
-            Join the waiting list!
+            <p>{t("site.login.noAccount.link")}</p>
           </Link>
         </p>
       </div>

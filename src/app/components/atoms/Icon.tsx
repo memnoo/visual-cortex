@@ -1,5 +1,8 @@
+import React from "react";
+
 import { BackIcon } from "./icons/BackIcon";
 import { CheckedIcon } from "./icons/CheckedIcon";
+import { CheckIcon } from "./icons/CheckIcon";
 import { ChevronLeftIcon } from "./icons/ChevronLeftIcon";
 import { ChevronRightIcon } from "./icons/ChevronRightIcon";
 import { CrossIcon } from "./icons/CrossIcon";
@@ -14,6 +17,7 @@ export const icons = {
   file: FileIcon,
   menu: MenuIcon,
   checked: CheckedIcon,
+  check: CheckIcon,
   chevron_left: ChevronLeftIcon,
   chevron_right: ChevronRightIcon,
   edit: EditIcon,
@@ -26,6 +30,7 @@ export const icons = {
 
 export type IconName =
   | "back"
+  | "check"
   | "checked"
   | "chevron_left"
   | "chevron_right"
@@ -37,7 +42,17 @@ export type IconName =
   | "menu"
   | "plus";
 
-export const Icon = ({ name }: { name: IconName }) => {
+export const Icon = ({
+  name,
+  extraClasses,
+}: {
+  name: IconName;
+  extraClasses?: string;
+}) => {
   const IconComponent = icons[name];
-  return IconComponent ? <IconComponent /> : null;
+  return IconComponent ? (
+    <i className={extraClasses}>
+      <IconComponent />
+    </i>
+  ) : null;
 };

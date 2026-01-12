@@ -7,7 +7,9 @@
     "errors": {
       "notAuthenticated": "Utilisateur non authentifié"
     },
-    "login": "Se connecter"
+    "login": "Se connecter",
+    "logout": "Se déconnecter",
+    "loggingOut": "Déconnexion..."
   },
   "nav": {
     "decks": "Parcourir les paquets",
@@ -173,7 +175,7 @@
           "learning": "révolution de",
           "revolution": "l'apprentissage"
         },
-        "subtitle": "Soyez le premier à rejoindre <BrandName /> : la nouvelle plateforme d'apprentissage intelligente qui s'adapte à votre rythme.",
+        "subtitle": "Soyez le premier à rejoindre <guidelines>the guidelines</guidelines> : la nouvelle plateforme d'apprentissage intelligente qui s'adapte à votre rythme.",
         "features": {
           "customizedAi": {
             "title": "IA personnalisée",
@@ -252,6 +254,7 @@
     }
   },
   "misc": {
+    "back": "← Retour",
     "cancel": "Annuler",
     "error": "Une erreur s'est produite. Veuillez réessayer.",
     "learnMore": "En savoir plus",

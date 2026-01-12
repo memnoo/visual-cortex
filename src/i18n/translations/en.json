@@ -175,7 +175,7 @@
           "learning": "Learning",
           "revolution": "revolution"
         },
-        "subtitle": "Be the first to join <BrandName /> : the new smart learning platform which adapts to your pace.",
+        "subtitle": "Be the first to join <brandName></brandName> : the new smart learning platform which adapts to your pace.",
         "features": {
           "customizedAi": {
             "title": "Customized AI",

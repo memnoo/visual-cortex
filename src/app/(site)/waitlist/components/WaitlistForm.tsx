@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { format } from "date-fns/format";
+import { useTranslations } from "next-intl";
 
 import { useJoinWaitlist, useCheckWaitlist } from "../../hooks/useWaitlist";
 
@@ -11,6 +12,7 @@ import { Loader } from "@/app/components/atoms/Loader";
 import { useRouter } from "next/navigation";
 
 export const WaitlistForm = () => {
+  const t = useTranslations();
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -122,16 +124,13 @@ export const WaitlistForm = () => {
             </div>
 
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              🎉 You joined the waiting list!
+              {t("site.waitlist.form.success.title")}
             </h2>
 
             <div className="flex flex-col content-stretch gap-1 text-gray-600 text-left">
               {result && <Callout type={result.type}>{result.message}</Callout>}
 
-              <p>
-                We will send you an email as soon as the access to Memnō will be
-                granted.
-              </p>
+              <p>{t("site.waitlist.form.success.message")}</p>
               {createdInvitation && (
                 <div className="flex flex-col content-stretch gap-1">
                   {createdInvitation.interest && (
@@ -162,28 +161,28 @@ export const WaitlistForm = () => {
                 setResult(null);
               }}
             >
-              ← Back
+              {t("misc.back")}
             </button>
           </>
         ) : (
           <>
             <h2 className="text-2xl font-bold text-gray-900">
-              Enroll right now
+              {t("site.waitlist.form.title")}
             </h2>
             <p className="text-gray-500 italic">
-              Be the first to get an access
+              {t("site.waitlist.form.subtitle")}
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Email address *
+                  {t("site.waitlist.form.email.label")}
                 </label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
+                  placeholder={t("site.waitlist.form.email.placeholder")}
                   required
                   disabled={status !== "idle"}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition disabled:bg-gray-100"
@@ -191,13 +190,28 @@ export const WaitlistForm = () => {
               </div>
 
               <Select
-                label="What would you like to learn?"
+                label={t("site.waitlist.form.interests.label")}
                 values={[
-                  { value: "Languages", label: "Languages" },
-                  { value: "Sciences", label: "Sciences" },
-                  { value: "Health", label: "Health" },
-                  { value: "History", label: "History" },
-                  { value: "Other", label: "Other" },
+                  {
+                    value: "Languages",
+                    label: t("site.waitlist.form.interests.options.languages"),
+                  },
+                  {
+                    value: "Sciences",
+                    label: t("site.waitlist.form.interests.options.sciences"),
+                  },
+                  {
+                    value: "Health",
+                    label: t("site.waitlist.form.interests.options.health"),
+                  },
+                  {
+                    value: "History",
+                    label: t("site.waitlist.form.interests.options.history"),
+                  },
+                  {
+                    value: "Other",
+                    label: t("site.waitlist.form.interests.options.other"),
+                  },
                 ]}
                 isMultiple
                 isDisabled={status !== "idle"}
@@ -223,7 +237,7 @@ export const WaitlistForm = () => {
                       {status === "adding" && "Enrolling..."}
                     </span>
                   ) : (
-                    "Join the waiting list"
+                    t("site.waitlist.form.submit")
                   )}
                 </button>
                 <button
@@ -231,13 +245,13 @@ export const WaitlistForm = () => {
                   className="w-full px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:from-indigo-700 hover:to-purple-700 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl cursor-pointer"
                   onClick={() => router.push("/login")}
                 >
-                  I already have an account
+                  {t("site.waitlist.form.alreadyHaveAccount")}
                 </button>
               </div>
             </form>
 
             <p className="text-xs text-gray-500 text-center mt-3">
-              By enrolling, you accept to receive updates about the launch
+              {t("site.waitlist.form.terms")}
             </p>
           </>
         )}

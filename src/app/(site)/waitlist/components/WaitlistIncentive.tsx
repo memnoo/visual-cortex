@@ -17,7 +17,9 @@ export const WaitlistIncentive = () => {
       </h1>
 
       <p className="text-xl text-gray-600 leading-relaxed">
-        {t("site.waitlist.incentive.subtitle")}
+        {t.rich("site.waitlist.incentive.subtitle", {
+          brandName: () => <BrandName />,
+        })}
       </p>
 
       <div className="space-y-4 pt-4">

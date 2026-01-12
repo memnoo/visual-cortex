@@ -1,12 +1,15 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+
 import { useAuth } from "@/app/(app)/hooks/useUser";
 import { Icon } from "@/app/components/atoms/Icon";
 import { Loader } from "@/app/components/atoms/Loader";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 export default function LogoutButton() {
+  const t = useTranslations();
   const router = useRouter();
   const { signOut } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -27,12 +30,12 @@ export default function LogoutButton() {
       {loading ? (
         <div className="flex items-center gap-1">
           <Loader size="xsmall" fit="content" />
-          Logging out...
+          {t("auth.loggingOut")}
         </div>
       ) : (
         <div className="flex items-center gap-2">
           <Icon name="logout" />
-          <span className="hidden md:inline-block">Log out</span>
+          <span className="hidden md:inline-block">{t("auth.logout")}</span>
         </div>
       )}
     </button>

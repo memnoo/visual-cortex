@@ -113,11 +113,18 @@
           "updateButton": "Modifier le paquet",
           "updatingButton": "Modification..."
         }
+      },
+      "ctas": {
+        "addDeck": "Ajouter un paquet"
       }
     },
     "emptyState": {
       "label": "Pas de carte dans ce paquet",
       "cta": "Ajouter une première carte"
+    },
+    "loadingTexts": {
+      "decks": "Chargement des paquets...",
+      "deckAndCards": "Chargement du paquet et de ses cartes..."
     }
   },
   "reviews": {

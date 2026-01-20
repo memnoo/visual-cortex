@@ -113,11 +113,18 @@
           "updateButton": "Edit deck",
           "updatingButton": "Editing..."
         }
+      },
+      "ctas": {
+        "addDeck": "Add a deck"
       }
     },
     "emptyState": {
       "label": "No cards in this deck",
       "cta": "Add your first flash-card"
+    },
+    "loadingTexts": {
+      "decks": "Loading your decks...",
+      "deckAndCards": "Loading the deck and its cards..."
     }
   },
   "reviews": {

@@ -39,7 +39,7 @@ export default function DeckPage() {
   if (isLoading) {
     return (
       <div className="bg-gray-50 flex items-center justify-center w-full">
-        <Loader text="Loading the deck and its cards..." hasAccentColor />
+        <Loader text={t("decks.loadingTexts.decks")} hasAccentColor />
       </div>
     );
   }

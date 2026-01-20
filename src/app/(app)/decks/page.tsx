@@ -22,7 +22,7 @@ export default function DecksPage() {
   if (isLoading) {
     return (
       <div className="bg-gray-50 flex items-center justify-center w-full">
-        <Loader text="Loading your decks..." hasAccentColor />
+        <Loader text={t("decks.loadingTexts.deckAndCards")} hasAccentColor />
       </div>
     );
   }
@@ -38,7 +38,7 @@ export default function DecksPage() {
         <div className="grid grid-cols-2 gap-3 auto-rows-fr">
           <div key="add-deck-button" className="w-full h-full">
             <EmptyStateButton
-              label="Add a deck"
+              label={t("decks.management.ctas.addDeck")}
               onClick={() => setIsModalOpen(true)}
             />
           </div>

@@ -21,7 +21,8 @@
     "cards": "Cartes"
   },
   "cards": {
-    "word": "{count, plural, =0 {# carte} =1 {# carte} other {# cartes}}",
+    "withCount": "{count, plural, =0 {# carte} =1 {# carte} other {# cartes}}",
+    "word": "{count, plural, =0 {carte} =1 {carte} other {cartes}}",
     "management": {
       "addCard": {
         "title": "Ajouter une nouvelle carte",

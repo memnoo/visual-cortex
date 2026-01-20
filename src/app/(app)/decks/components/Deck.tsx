@@ -35,7 +35,7 @@ export const Deck = ({ deck, isSelected, onClick }: DeckProps) => {
           )}
           <p className="text-xl md:text-2xl font-bold">{deck.topic}</p>
           <p className="md:text-lg font-medium">
-            {t("cards.word", { count: deck.count })}
+            {t("cards.withCount", { count: deck.count })}
           </p>
         </div>
       </button>

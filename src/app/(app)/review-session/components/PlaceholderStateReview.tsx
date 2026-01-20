@@ -5,7 +5,7 @@ export const PlaceholderStateReview = ({ label }: { label: string }) => {
   const t = useTranslations();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 flex items-center justify-center">
+    <div className="flex items-center justify-center bg-gray-100 m-4 p-8 rounded-lg">
       <div className="text-center">
         <p className="text-2xl font-semibold text-gray-700 mb-4">{label}</p>
         <Link

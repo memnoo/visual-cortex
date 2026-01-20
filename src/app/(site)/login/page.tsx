@@ -170,12 +170,10 @@ export default function LoginPage() {
 
       {/* Footer */}
       <div className="text-center text-sm text-gray-600">
-        <p>
-          {t("site.login.noAccount.text")}
-          <Link className="text-indigo-600 font-semibold" href="/waitlist">
-            <p>{t("site.login.noAccount.link")}</p>
-          </Link>
-        </p>
+        {t("site.login.noAccount.text")}
+        <Link className="text-indigo-600 font-semibold" href="/waitlist">
+          <p>{t("site.login.noAccount.link")}</p>
+        </Link>
       </div>
     </div>
   );

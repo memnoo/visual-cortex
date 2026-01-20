@@ -45,7 +45,7 @@ export default function DeckPage() {
   }
 
   if (!deckWithCards) {
-    return <ErrorCallout label="No data available" />;
+    return <ErrorCallout label={t("misc.noData")} />;
   }
 
   const { cards, ...deck } = deckWithCards;

@@ -28,7 +28,7 @@ export default function DecksPage() {
   }
 
   if (!decks) {
-    return <ErrorCallout label="No data available" />;
+    return <ErrorCallout label={t("misc.noData")} />;
   }
 
   return (

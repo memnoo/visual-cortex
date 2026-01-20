@@ -54,7 +54,10 @@ export default function DeckPage() {
     <>
       <section className="flex flex-col gap-2 content-stretch text-left w-full">
         <div className="flex items-center align-stretch gap-2">
-          <BreadcrumbButton path="/decks" label="Decks" />
+          <BreadcrumbButton
+            path="/decks"
+            label={t("decks.word", { count: 2 })}
+          />
           <div className="ml-auto">
             <div className="flex gap-1">
               <Button
@@ -81,7 +84,7 @@ export default function DeckPage() {
         <h2 className="text-xl text-center font-bold my-2">
           {deck.topic}{" "}
           <small className="text-medium font-semibold text-gray-400">
-            ({t("cards.word", { count: cards.length })})
+            ({t("cards.withCount", { count: cards.length })})
           </small>
         </h2>
         <FlashCardsGrid

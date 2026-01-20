@@ -15,7 +15,12 @@ export const BreadcrumbButton = ({
   icon = "chevron_left",
 }: BreadcrumbButtonProps) => (
   <Link href={path}>
-    <Button type="button" variant="transparent" iconName={icon}>
+    <Button
+      className="capitalize"
+      type="button"
+      variant="transparent"
+      iconName={icon}
+    >
       {label}
     </Button>
   </Link>

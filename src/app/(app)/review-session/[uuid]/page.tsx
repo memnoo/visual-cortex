@@ -43,7 +43,7 @@ export default function ReviewDeckPage() {
   return (
     <div className="flex flex-col content-stretch gap-2 w-full">
       <div className="flex items-center justify-stretch gap-4">
-        <BreadcrumbButton path="/review-session" label="Back" />
+        <BreadcrumbButton path="/review-session" label={t("misc.back")} />
         <div className="flex flex-col text-end ml-auto">
           <small className="text-gray-500 text-xs">
             {t("reviews.session.reviewing")}

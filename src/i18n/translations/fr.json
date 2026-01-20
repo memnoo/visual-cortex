@@ -52,7 +52,8 @@
     }
   },
   "decks": {
-    "word": "{count, plural, =0 {# paquet} =1 {# paquet} other {# paquets}}",
+    "withCount": "{count, plural, =0 {# paquet} =1 {# paquet} other {# paquets}}",
+    "word": "{count, plural, =0 {paquet} =1 {paquet} other {paquets}}",
     "management": {
       "upsertDeck": {
         "title": "Ajouter un nouveau paquet",
@@ -256,6 +257,7 @@
   "misc": {
     "back": "← Retour",
     "cancel": "Annuler",
+    "dashboard": "Tableau de bord",
     "error": "Une erreur s'est produite. Veuillez réessayer.",
     "learnMore": "En savoir plus",
     "loading": "Chargement...",

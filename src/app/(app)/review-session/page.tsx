@@ -13,7 +13,7 @@ export default function ReviewSessionPage() {
 
   return (
     <section className="flex flex-col gap-3 content-stretch">
-      <BreadcrumbButton path="/dashboard" label="Dashboard" />
+      <BreadcrumbButton path="/dashboard" label={t("misc.dashboard")} />
 
       <h2 className="text-xl text-center font-bold">{t("reviews.header")}</h2>
 

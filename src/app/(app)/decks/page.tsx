@@ -1,16 +1,19 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+
 import { Loader } from "@/app/components/atoms/Loader";
 import { useDecksWithCount } from "../hooks/useDecks";
 import { EmptyStateButton } from "../components/EmptyStateButton";
-import { useState } from "react";
 import { ErrorCallout } from "@/app/components/atoms/ErrorCallout";
-import { useRouter } from "next/navigation";
 import { DeckModal } from "./components/DeckModal";
 import { Deck } from "./components/Deck";
 import { BreadcrumbButton } from "../components/BreadcrumbButton";
 
 export default function DecksPage() {
+  const t = useTranslations();
   const router = useRouter();
   const { data: decks = [], isLoading } = useDecksWithCount();
 
@@ -31,7 +34,7 @@ export default function DecksPage() {
   return (
     <>
       <section className="flex flex-col gap-3 content-stretch w-full">
-        <BreadcrumbButton path="/dashboard" label="Dashboard" />
+        <BreadcrumbButton path="/dashboard" label={t("misc.dashboard")} />
         <div className="grid grid-cols-2 gap-3 auto-rows-fr">
           <div key="add-deck-button" className="w-full h-full">
             <EmptyStateButton

@@ -43,18 +43,18 @@ export const CardModal = ({
   const LABELS = {
     ADD: {
       title: t("cards.management.upsertCard.title"),
-      loading: t("cards.management.upsertCard.form.ctas.addingButton"),
-      cta: t("cards.management.upsertCard.form.ctas.addButton"),
+      loading: t("misc.adding"),
+      cta: t("misc.add"),
     },
     UPDATE: {
       title: t("cards.management.updateCard.title"),
-      loading: t("cards.management.updateCard.ctas.updatingButton"),
-      cta: t("cards.management.updateCard.ctas.updateButton"),
+      loading: t("misc.editing"),
+      cta: t("misc.edit"),
     },
     DELETE: {
       title: t("cards.management.deleteCard.title"),
-      loading: t("cards.management.deleteCard.ctas.deletingButton"),
-      cta: t("cards.management.deleteCard.ctas.deleteButton"),
+      loading: t("misc.deleting"),
+      cta: t("misc.delete"),
     },
   } as const;
 

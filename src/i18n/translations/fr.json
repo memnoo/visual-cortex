@@ -25,7 +25,7 @@
     "word": "{count, plural, =0 {carte} =1 {carte} other {cartes}}",
     "management": {
       "upsertCard": {
-        "title": "Ajouter une nouvelle carte",
+        "title": "Ajouter une carte",
         "form": {
           "front": {
             "label": "Recto",
@@ -40,10 +40,6 @@
             "placeholder": "Champs supplémentaires",
             "error": "Contenu JSON invalide"
           },
-          "ctas": {
-            "addButton": "Ajouter la carte",
-            "addingButton": "Ajout en cours..."
-          },
           "errors": {
             "invalidJson": "Format JSON invalide.",
             "requiredFields": "Le recto et le verso de la carte sont obligatoires."
@@ -51,18 +47,10 @@
         }
       },
       "deleteCard": {
-        "title": "Suppression de carte",
-        "ctas": {
-          "deleteButton": "Supprimer la carte",
-          "deletingButton": "Suppression..."
-        }
+        "title": "Suppression de carte"
       },
       "updateCard": {
-        "title": "Modifier de carte :",
-        "ctas": {
-          "updateButton": "Modifier la carte",
-          "updatingButton": "Modification..."
-        }
+        "title": "Modifier une carte"
       }
     }
   },
@@ -71,7 +59,7 @@
     "word": "{count, plural, =0 {paquet} =1 {paquet} other {paquets}}",
     "management": {
       "upsertDeck": {
-        "title": "Ajouter un nouveau paquet",
+        "title": "Ajouter un paquet",
         "form": {
           "title": {
             "label": "Titre",
@@ -106,28 +94,16 @@
             "label": "Langue",
             "placeholder": "Ex: fr, en, es..."
           },
-          "ctas": {
-            "addButton": "Ajouter le paquet",
-            "addingButton": "Ajout en cours..."
-          },
           "errors": {
             "requiredFields": "Le titre et le domaine sont obligatoires."
           }
         }
       },
       "deleteDeck": {
-        "title": "Voulez-vous supprimer le paquet :",
-        "ctas": {
-          "deleteButton": "Supprimer le paquet",
-          "deletingButton": "Suppression..."
-        }
+        "title": "Supprimer un paquet"
       },
       "updateDeck": {
-        "title": "Modifier le paquet :",
-        "ctas": {
-          "updateButton": "Modifier le paquet",
-          "updatingButton": "Modification..."
-        }
+        "title": "Modifier un paquet"
       },
       "ctas": {
         "addDeck": "Ajouter un paquet"
@@ -277,9 +253,15 @@
     }
   },
   "misc": {
+    "add": "Ajouter",
+    "adding": "Ajout...",
     "back": "← Retour",
     "cancel": "Annuler",
     "dashboard": "Tableau de bord",
+    "delete": "Supprimer",
+    "deleting": "Suppression...",
+    "edit": "Modifier",
+    "editing": "Modification...",
     "error": "Une erreur s'est produite. Veuillez réessayer.",
     "learnMore": "En savoir plus",
     "loading": "Chargement...",

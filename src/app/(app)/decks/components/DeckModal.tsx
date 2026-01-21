@@ -41,18 +41,18 @@ export const DeckModal = ({
   const LABELS = {
     ADD: {
       title: t("decks.management.upsertDeck.title"),
-      loading: t("decks.management.upsertDeck.form.ctas.addingButton"),
-      cta: t("decks.management.upsertDeck.form.ctas.addButton"),
+      loading: t("misc.adding"),
+      cta: t("misc.add"),
     },
     UPDATE: {
       title: t("decks.management.updateDeck.title"),
-      loading: t("decks.management.updateDeck.ctas.updatingButton"),
-      cta: t("decks.management.updateDeck.ctas.updateButton"),
+      loading: t("misc.editing"),
+      cta: t("misc.edit"),
     },
     DELETE: {
       title: t("decks.management.deleteDeck.title"),
-      loading: t("decks.management.deleteDeck.ctas.deletingButton"),
-      cta: t("decks.management.deleteDeck.ctas.deleteButton"),
+      loading: t("misc.deleting"),
+      cta: t("misc.delete"),
     },
   } as const;
 

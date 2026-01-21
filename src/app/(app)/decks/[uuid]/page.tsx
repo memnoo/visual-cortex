@@ -10,9 +10,10 @@ import { FlashCardsGrid } from "../components/FlashCardsGrid";
 import { ErrorCallout } from "@/app/components/atoms/ErrorCallout";
 import { Loader } from "@/app/components/atoms/Loader";
 import { Button } from "@/app/components/atoms/Button";
-import { AddCardModal } from "../../cards/components/AddCardModal";
+import { CardModal } from "../../cards/components/CardModal";
 import { DeckModal } from "../components/DeckModal";
 import { BreadcrumbButton } from "../../components/BreadcrumbButton";
+import { Card } from "../../types/types";
 
 export default function DeckPage() {
   const t = useTranslations();
@@ -21,6 +22,20 @@ export default function DeckPage() {
   const deckUuid = String(uuid);
 
   const [isCardModalOpen, setIsCardModalOpen] = useState(false);
+  const [cardOperation, setCardOperation] = useState<
+    "ADD" | "UPDATE" | "DELETE"
+  >();
+  const [selectedCard, setSelectedCard] = useState<Card>();
+
+  const toggleCardOperation = (
+    operation: "ADD" | "UPDATE" | "DELETE",
+    card?: Card
+  ) => {
+    setSelectedCard(card);
+    setCardOperation(operation);
+    setIsCardModalOpen(true);
+  };
+
   const [isDeckModalOpen, setIsDeckModalOpen] = useState(false);
   const [deckOperation, setDeckOperation] = useState<
     "UPDATE" | "DELETE" | undefined
@@ -64,7 +79,7 @@ export default function DeckPage() {
                 type="button"
                 variant="primary"
                 iconName="plus"
-                onClick={() => setIsCardModalOpen(true)}
+                onClick={() => toggleCardOperation("ADD")}
               />
               <Button
                 type="button"
@@ -89,15 +104,20 @@ export default function DeckPage() {
         </h2>
         <FlashCardsGrid
           cards={cards}
-          onAddFlashCardClicked={() => setIsCardModalOpen(true)}
+          onCreateClicked={() => toggleCardOperation("ADD")}
+          onEditClicked={(c) => toggleCardOperation("UPDATE", c)}
+          onDeleteClicked={(c) => toggleCardOperation("DELETE", c)}
         />
       </section>
 
-      <AddCardModal
-        isOpen={isCardModalOpen}
-        onClose={() => setIsCardModalOpen(false)}
-        deckUuid={deck.uuid}
-      />
+      {cardOperation && (
+        <CardModal
+          isOpen={isCardModalOpen}
+          onClose={() => setIsCardModalOpen(false)}
+          cardOperation={{ card: selectedCard, operation: cardOperation }}
+          deckUuid={deck.uuid}
+        />
+      )}
 
       {deckOperation && (
         <DeckModal

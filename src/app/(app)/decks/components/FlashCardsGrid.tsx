@@ -11,12 +11,16 @@ import { useTranslations } from "next-intl";
 
 interface DeckDetailsViewProps {
   cards: Card[];
-  onAddFlashCardClicked?: () => void;
+  onCreateClicked?: () => void;
+  onEditClicked: (card: Card) => void;
+  onDeleteClicked: (card: Card) => void;
 }
 
 export const FlashCardsGrid = ({
   cards,
-  onAddFlashCardClicked,
+  onCreateClicked,
+  onEditClicked,
+  onDeleteClicked,
 }: DeckDetailsViewProps) => {
   const t = useTranslations();
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
@@ -38,7 +42,7 @@ export const FlashCardsGrid = ({
       <div className="flex flex-col content-stretch gap-6 flex-1">
         {!cards || cards.length === 0 ? (
           <EmptyState label={t("decks.emptyState.label")}>
-            <Button variant="transparent" onClick={onAddFlashCardClicked}>
+            <Button variant="transparent" onClick={onCreateClicked}>
               {t("decks.emptyState.cta")}
             </Button>
           </EmptyState>
@@ -63,9 +67,24 @@ export const FlashCardsGrid = ({
                           {renderKindProperty(card)}
                         </div>
                       </div>
+
                       <div className="text-sm text-gray-500 truncate">
                         {card.back}
                       </div>
+                    </div>
+                    <div className="ml-auto flex items-center">
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        iconName="edit"
+                        onClick={() => onEditClicked(card)}
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        iconName="delete"
+                        onClick={() => onDeleteClicked(card)}
+                      />
                     </div>
                   </div>
                 </div>

@@ -21,7 +21,7 @@ export const ReviewSession = ({ cards }: ReviewSessionProps) => {
   const [isComplete, setIsComplete] = useState(false);
   const [stats, setStats] = useState<ReviewSessionStats>(DEFAULT_STATS);
   const [remainingCount, setRemainingCount] = useState((cards ?? []).length);
-  const [sessionKey, setSessionKey] = useState(0);
+  const [sessionKey, setSessionKey] = useState(crypto.randomUUID());
 
   const onActionPerformed = (stats: ReviewSessionStats, remaining: number) => {
     setStats(stats);
@@ -35,7 +35,7 @@ export const ReviewSession = ({ cards }: ReviewSessionProps) => {
     setIsComplete(false);
     setStats(DEFAULT_STATS);
     setRemainingCount((cards ?? []).length);
-    setSessionKey((prev) => prev + 1);
+    setSessionKey(() => crypto.randomUUID());
   };
 
   if (!cards || cards.length === 0) {
@@ -56,7 +56,7 @@ export const ReviewSession = ({ cards }: ReviewSessionProps) => {
         ) : (
           <CardStack
             key={sessionKey}
-            cards={cards}
+            cards={cards.sort(() => Math.random() - 0.5)}
             onActionPerformed={onActionPerformed}
           />
         )}
